@@ -7,16 +7,19 @@ public class PlayerController : MonoBehaviour {
     private float moveSpeed;
 
     private PlayerInput playerInput;
+    private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
 
-    void Awake () {
+    void Awake ()
+    {
         playerInput = new PlayerInput();
     }
 
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        shot = GetComponent<Shot>();
     }
 
     void Update () {
@@ -25,9 +28,10 @@ public class PlayerController : MonoBehaviour {
         Move();
 
         if (playerInput.SecondTap)
-            Debug.Log("SHOT");
+            shot.ShotBullet();
     }
 
+    //移動
     private void Move()
     {
         velocity = Vector2.zero;

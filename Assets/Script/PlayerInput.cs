@@ -33,6 +33,7 @@ public class PlayerInput
     public void Update()
     {
         HasTouch = false;
+        PhaseTouch[1] = TouchPhase.Canceled;
 
         if (Application.isEditor)
             MouseInput();
@@ -58,32 +59,32 @@ public class PlayerInput
     //マウスインプット
     private void MouseInput()
     {
-        #region left click
-        if (Input.GetMouseButton(0))
+        #region right click
+        if (Input.GetMouseButton(1))
         {
             PhaseTouch[0] = TouchPhase.Moved;
             HasTouch = true;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             PhaseTouch[0] = TouchPhase.Began;
             HasTouch = true;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
         {
             PhaseTouch[0] = TouchPhase.Ended;
             HasTouch = true;
         }
         #endregion
 
-        #region right click
-        if (Input.GetMouseButtonDown(1))
+        #region left click
+        if (Input.GetMouseButtonDown(0))
         {
             PhaseTouch[1] = TouchPhase.Began;
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
         {
             PhaseTouch[1] = TouchPhase.Ended;
         }
@@ -115,13 +116,14 @@ public class PlayerInput
 
         HasTouch = true;
 
-        if (HasSwipe(touch[0]))
+        if (HasQuickSwipe(touch[0]))
             QuickSwipe = true;
         else
             QuickSwipe = false;
     }
 
-    private bool HasSwipe(Touch touch)
+    //早いスワイプ
+    private bool HasQuickSwipe(Touch touch)
     {
         if (touch.deltaPosition.magnitude >= minMoveDis)
             return true;
