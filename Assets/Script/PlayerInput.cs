@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerInput
 {
+    //最初の入力
+    public delegate void OnFirstTap();
+    public event OnFirstTap onFirstTap;
+
     public bool HasTouch { get; private set; } //タップされてるか
-    public bool SecondTap { get; private set; } //同時押ししてるか
+    public bool SameTimeTap { get; private set; } //同時押ししてるか
     public bool QuickSwipe { get; private set; } //早いスワイプなのか
     public int TouchCount { get; private set; } //何タップあるのか
     public TouchPhase[] PhaseTouch { get; private set; } //タップのフェース
@@ -14,11 +18,13 @@ public class PlayerInput
     private const int maxTouch = 2;
     private const float minMoveDis = 20f;
 
-    public Vector2 touchPosition; //タップした位置
+    private Vector2 touchPosition; //タップした位置
     private Vector2 oldPosition;
+    private bool firstTapDone;
 
     public PlayerInput()
     {
+        firstTapDone = false;
         HasTouch = false;
         PhaseTouch = new TouchPhase[maxTouch];
 
@@ -45,7 +51,7 @@ public class PlayerInput
 
         if (HasTouch)
         {
-            SecondTap = HasSecondTap();
+            SameTimeTap = HasSecondTap();
             Direction = CalcDirection();
             oldPosition = touchPosition;
         }
@@ -92,6 +98,7 @@ public class PlayerInput
 
         if (HasTouch)
         {
+            FirstTapDone();
             TouchCount = 1;
             touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -116,10 +123,22 @@ public class PlayerInput
 
         HasTouch = true;
 
+        FirstTapDone();
+
         if (HasQuickSwipe(touch[0]))
             QuickSwipe = true;
         else
             QuickSwipe = false;
+    }
+
+    //最初の入力
+    private void FirstTapDone()
+    {
+        if (firstTapDone)
+            return;
+
+        firstTapDone = true;
+        onFirstTap();
     }
 
     //早いスワイプ

@@ -1,15 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    private float moveSpeed;
+    private float moveSpeed = 1500;
 
-    private PlayerInput playerInput;
+    private static PlayerInput playerInput;
+
+    private RecordController recordController;
+    private SpriteRenderer playerSprite;
     private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
+
+    public static PlayerInput GetPlayerInput()
+    {
+        return playerInput;
+    }
 
     void Awake ()
     {
@@ -18,20 +27,28 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
+        recordController = GetComponent<RecordController>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
+        playerSprite = GetComponentInChildren<SpriteRenderer>();
+
+        playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
     }
 
     void Update () {
         playerInput.Update();
 
-        Move();
-
-        if (playerInput.SecondTap)
+        //弾を撃つ
+        if (playerInput.SameTimeTap)
             shot.ShotBullet();
     }
 
-    //移動
+    void FixedUpdate()
+    {
+        Move();
+    }
+
+    //移動メソッド
     private void Move()
     {
         velocity = Vector2.zero;
@@ -51,5 +68,12 @@ public class PlayerController : MonoBehaviour {
             rigid.velocity = Vector2.zero;
 
         rigid.AddForce(velocity, ForceMode2D.Force);
+    }
+
+    private void OnDestroy()
+    {
+        recordController.StopRecord();//記録を止める
+        playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.5f);
+        gameObject.SetActive(false);
     }
 }
