@@ -17,6 +17,6 @@ public class CameraController : MonoBehaviour {
 
     public void CameraRotate()
     {
-        transform.DORotate(new Vector3(0, 0, transform.rotation.z + 180), 1);
+        transform.DORotate(new Vector3(0, 0, transform.eulerAngles.z + 180), 1);
     }
 }

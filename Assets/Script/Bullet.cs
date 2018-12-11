@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Bullet : MonoBehaviour {
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private Vector2 direction;
+    [SerializeField]
+    private float deadDelayTime;
+
     private const float angleOffset = 90;
 
     private Vector3 velocity;
@@ -14,16 +21,11 @@ public class Bullet : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         bulletSprite = GetComponentInChildren<SpriteRenderer>();
     }
-	
-    public void Init(Vector3 direction, float speed, Sprite sprite)
+
+    void Start()
     {
         velocity = direction * speed * Time.fixedDeltaTime;
         rigid.AddForce(velocity, ForceMode2D.Impulse);
-        bulletSprite.sprite = sprite;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
+        Destroy(gameObject, deadDelayTime);
     }
 }

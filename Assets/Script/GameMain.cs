@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour {
 
-    //private List<GameObject> players;
+    [SerializeField]
+    private Vector3[] startBlackPlayerPos;
+    [SerializeField]
+    private Vector3[] startWhitePlayerPos;
 
-    private List<GameObject> black;
-    private List<GameObject> white;
+    public static readonly int BLACK = 1;
+    public static readonly int WHITE = -1;
 
-    //操作しているキャラ
-    private GameObject activePlayer;
+    private static int currentState = BLACK;
+    public static int GetCurrentState()
+    {
+        return currentState;
+    }
 
     [SerializeField]
     private GameObject blackPlayerPrefab;
@@ -18,24 +24,15 @@ public class GameMain : MonoBehaviour {
     [SerializeField]
     private GameObject whitePlayerPrefab;
 
-    [SerializeField]
-    private Vector3 startPlayerPos;
+    private List<GameObject> black;
+    private List<GameObject> white;
 
-    [SerializeField]
-    private Vector3 startEnemyPos;
-
+    //操作しているキャラ
+    private GameObject activePlayer;
     private int enemyCount = 1;
-
-
-    const int BLACK = 1;
-    const int WHITE = -1;
-
-    public int currentState=BLACK;
 
     private void Start()
     {
-        //players = new List<GameObject>();
-
         currentState = BLACK;
 
         black = new List<GameObject>();
@@ -45,91 +42,59 @@ public class GameMain : MonoBehaviour {
         //初期プレイヤー作成
         activePlayer = Instantiate(blackPlayerPrefab);
 
-        activePlayer.transform.position = startPlayerPos;
+        activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
 
 
-        //最初敵の生成　こいつはListに入れない
-        var enemy =Instantiate(whitePlayerPrefab, startEnemyPos, whitePlayerPrefab.transform.rotation);
-        white.Add(enemy);
+        //最初敵の生成　こいつはListに入れない予定
+        var enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
+        enemy.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
+        //white.Add(enemy);
     }
 
     //これをイベント化してPlayerにlistにAddする前に埋め込む予定
-    public void WhiteEnemyHitHandler()
+    private void WhiteEnemyHitHandler()
     {
         if (currentState == WHITE)
             return;
         
-        foreach (GameObject enemy in white)
-        {
-            if ( enemy.activeSelf)
-            {
-                enemy.SetActive(false);
-                break;
-            }
-        }
         enemyCount--;
 
         if (enemyCount <= 0)
-            ResetGame();
+            StartCoroutine("NextGame");
     }
-    public void BlackEnemyHitHandler()
+    private void BlackEnemyHitHandler()
     {
         if (currentState == BLACK)
             return;
         
-        foreach (GameObject enemy in black)
-        {
-            if (enemy.activeSelf)
-            {
-                enemy.SetActive(false);
-                break;
-            }
-        }
-
         enemyCount--;
 
         if (enemyCount <= 0)
-            ResetGame();
+            StartCoroutine("NextGame");
     }
 
     private void Update()//UpdateにはPouseくらいしか書かない予定
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartGame();
-        }
-
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            WhiteEnemyHitHandler();
-        }
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            BlackEnemyHitHandler();
-        }
     }
 
     private void ResetGame()
     {
-        activePlayer.SetActive(false);
         Destroy(activePlayer.GetComponent<PlayerController>());
-
-        //ここでPlayerのTrigerで呼ばれるイベントを追加したい
-        //そのあとに敵として保存する
-        
 
         if (currentState == BLACK)
         {
+            activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => BlackEnemyHitHandler();
             black.Add(activePlayer);
-            activePlayer = Instantiate(whitePlayerPrefab);
-            enemyCount = white.Count;
+            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
+            enemyCount = black.Count;
         }
         else
         {
+            activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
             white.Add(activePlayer);
-            activePlayer = Instantiate(blackPlayerPrefab);
-            enemyCount = black.Count;
+            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
+            enemyCount = white.Count;
         }
 
         activePlayer.SetActive(false);
@@ -155,7 +120,18 @@ public class GameMain : MonoBehaviour {
         
         //PlayerControllerにOnTriggerで終了判定をつける予定
         activePlayer.AddComponent<PlayerController>();
-
         activePlayer.SetActive(true);
+    }
+
+    IEnumerator NextGame()
+    {
+        yield return new WaitForSeconds(1f);
+
+        ResetGame();
+        Camera.main.GetComponent<CameraController>().CameraRotate();
+
+        yield return new WaitForSeconds(1f);
+
+        StartGame();
     }
 }
