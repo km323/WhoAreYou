@@ -9,14 +9,17 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        startPosition = transform.position;
+        //startPosition = transform.position;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnEnable()
+    {
         transform.position = startPosition;
-        if (Input.GetKeyDown(KeyCode.D))
-            Destroy(gameObject);
+    }
+
+    // Update is called once per frame
+    void Update () {
+        startPosition = transform.position;
 	}
 }

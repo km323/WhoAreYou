@@ -307,10 +307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9407016029e62f4fb8d756a633e8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackObject: {fileID: 1633713712789580, guid: 9ec1b337356420d49b7bd2dacbd43755,
+  blackPlayerPrefab: {fileID: 1633713712789580, guid: 9ec1b337356420d49b7bd2dacbd43755,
     type: 2}
-  whiteObject: {fileID: 1679208675334730, guid: 5333cf93267a6bf418eb6971e3b5d687,
+  whitePlayerPrefab: {fileID: 1679208675334730, guid: 5333cf93267a6bf418eb6971e3b5d687,
     type: 2}
+  startPlayerPos: {x: -2, y: -3, z: 0}
+  startEnemyPos: {x: -2, y: 3, z: 0}
+  currentState: 0
 --- !u!4 &462295784
 Transform:
   m_ObjectHideFlags: 0

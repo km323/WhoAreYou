@@ -4,142 +4,158 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour {
 
+    //private List<GameObject> players;
+
+    private List<GameObject> black;
+    private List<GameObject> white;
+
+    //操作しているキャラ
+    private GameObject activePlayer;
+
+    [SerializeField]
+    private GameObject blackPlayerPrefab;
+
+    [SerializeField]
+    private GameObject whitePlayerPrefab;
+
+    [SerializeField]
+    private Vector3 startPlayerPos;
+
+    [SerializeField]
+    private Vector3 startEnemyPos;
+
+    private int enemyCount = 1;
+
+
     const int BLACK = 1;
     const int WHITE = -1;
 
-    private int currentState;
+    public int currentState=BLACK;
 
-    public int GetCurrentState { get { return currentState; } }
-
-    private List<Player> players;
-
-    private List<Player> black;
-    private List<Player> white;
-
-    bool clearStage = false;
-
-    [SerializeField]
-    private GameObject blackObject;
-    [SerializeField]
-    private GameObject whiteObject;
-
-    private GameObject activePlayer;
-
-
-
-    // Use this for initialization
-    void Start()
-    { 
-        black = new List<Player>();
-        white = new List<Player>();
+    private void Start()
+    {
+        //players = new List<GameObject>();
 
         currentState = BLACK;
 
-        activePlayer = Instantiate(blackObject);
-        activePlayer.GetComponent<Player>().startPosition = new Vector3(0, -3);
+        black = new List<GameObject>();
+        white = new List<GameObject>();
+
+
+        //初期プレイヤー作成
+        activePlayer = Instantiate(blackPlayerPrefab);
+
+        activePlayer.transform.position = startPlayerPos;
         activePlayer.AddComponent<PlayerController>();
+
+
+        //最初敵の生成　こいつはListに入れない
+        var enemy =Instantiate(whitePlayerPrefab, startEnemyPos, whitePlayerPrefab.transform.rotation);
+        white.Add(enemy);
     }
 
-    private void StartGame()
+    //これをイベント化してPlayerにlistにAddする前に埋め込む予定
+    public void WhiteEnemyHitHandler()
     {
+        if (currentState == WHITE)
+            return;
+        
+        foreach (GameObject enemy in white)
+        {
+            if ( enemy.activeSelf)
+            {
+                enemy.SetActive(false);
+                break;
+            }
+        }
+        enemyCount--;
 
+        if (enemyCount <= 0)
+            ResetGame();
     }
-    
+    public void BlackEnemyHitHandler()
+    {
+        if (currentState == BLACK)
+            return;
+        
+        foreach (GameObject enemy in black)
+        {
+            if (enemy.activeSelf)
+            {
+                enemy.SetActive(false);
+                break;
+            }
+        }
+
+        enemyCount--;
+
+        if (enemyCount <= 0)
+            ResetGame();
+    }
+
+    private void Update()//UpdateにはPouseくらいしか書かない予定
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGame();
+        }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            WhiteEnemyHitHandler();
+        }
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            BlackEnemyHitHandler();
+        }
+    }
+
     private void ResetGame()
     {
-        Debug.Log(black[0]);
+        activePlayer.SetActive(false);
+        Destroy(activePlayer.GetComponent<PlayerController>());
+
+        //ここでPlayerのTrigerで呼ばれるイベントを追加したい
+        //そのあとに敵として保存する
+        
 
         if (currentState == BLACK)
-            activePlayer = Instantiate(blackObject);
-        else
-            activePlayer = Instantiate(whiteObject);
-
-        activePlayer.AddComponent<PlayerController>();
-
-
-        GameObject G;
-
-        foreach (Player p in black)
         {
-            
-            G = Instantiate(blackObject, p.startPosition, blackObject.transform.rotation);
-            Player tmp = G.GetComponent<Player>();
-            tmp = p;
+            black.Add(activePlayer);
+            activePlayer = Instantiate(whitePlayerPrefab);
+            enemyCount = white.Count;
+        }
+        else
+        {
+            white.Add(activePlayer);
+            activePlayer = Instantiate(blackPlayerPrefab);
+            enemyCount = black.Count;
         }
 
-        foreach (Player p in white)
-        {
-            G = Instantiate(whiteObject, p.startPosition, whiteObject.transform.rotation);
-            Player tmp = G.GetComponent<Player>();
-            tmp = p;
-        }
-    }
+        activePlayer.SetActive(false);
 
-    private void NextGame()
-    {
-        if (currentState == BLACK)
-            black.Add(activePlayer.GetComponent<Player>().list);
-        else
-            white.Add(activePlayer.GetComponent<Player>());
-
-        Destroy(activePlayer.gameObject);
         currentState = -currentState;
 
-        GameObject.Find("Main Camera").GetComponent<Camera>().CameraRotate();
+        foreach (GameObject enemy in black)
+            enemy.SetActive(false);
+        foreach (GameObject enemy in white)
+            enemy.SetActive(false);
+
+        //Camera.main.GetComponent<CameraController>().CameraRotate();
     }
 
-    private void GameOver()
+    private void StartGame()//回転or反転が終わったら呼ぶ
     {
+        //PlayerのOnEnableでRecordPlayをここで呼ぶ
+        foreach (GameObject enemy in black)
+            enemy.SetActive(true);
+        foreach (GameObject enemy in white)
+            enemy.SetActive(true);
+
         
-    }
+        //PlayerControllerにOnTriggerで終了判定をつける予定
+        activePlayer.AddComponent<PlayerController>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (black.Count > 0)
-        {
-            if (black[0] != null)
-                Debug.Log(black[0]);
-        }
-
-        if ( Input.GetKeyDown(KeyCode.Q))
-        {
-            EnemyDestroy();
-            NextGame();
-
-            //StartCoroutine("GameSetting");
-            ResetGame();
-        }
-    }
-
-    private void EnemyDestroy()
-    {
-        
-        foreach (Player p in white)
-            Destroy(p.gameObject);
-        foreach (Player p in black)
-        {
-            Debug.Log(black[0]);
-            Destroy(p.gameObject);
-        }
-
-        //if (currentState==BLACK)
-        //{
-        //    foreach (Player p in white)
-        //        Destroy(p.gameObject);
-        //}
-        //else
-        //{
-        //    foreach (Player p in black)
-        //        Destroy(p.gameObject);
-        //}
-    }
-
-    IEnumerator GameSetting()
-    {
-        yield return new WaitForSeconds(1);
-
-        ResetGame();
-        
+        activePlayer.SetActive(true);
     }
 }
