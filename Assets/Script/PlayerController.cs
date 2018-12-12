@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    private float moveSpeed = 1500;
+    private float moveSpeed = 2000;
 
     private static PlayerInput playerInput;
 

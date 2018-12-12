@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114743428142921734}
   - component: {fileID: 114908931785497834}
   - component: {fileID: 114868271003697960}
+  - component: {fileID: 114822156474074588}
   m_Layer: 9
   m_Name: PlayerBlack
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -133,6 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddbf38d56a21ac04e8f238071167b698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114822156474074588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592875330346722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595793f5efd968f4392196d00eb766e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadEffectPrefab: {fileID: 1007213754426022, guid: 8b7af6aeecc2b8c45ab662bdf06f41b7,
+    type: 2}
 --- !u!114 &114868271003697960
 MonoBehaviour:
   m_ObjectHideFlags: 1
