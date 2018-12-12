@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour {
 
+    //プレーヤーの初期位置　ランダムにするかこっちで指定するか
     [SerializeField]
     private Vector3[] startBlackPlayerPos;
     [SerializeField]
     private Vector3[] startWhitePlayerPos;
 
+
+    //現在の自分の色
     public static readonly int BLACK = 1;
     public static readonly int WHITE = -1;
 
@@ -20,14 +23,14 @@ public class GameMain : MonoBehaviour {
 
     [SerializeField]
     private GameObject blackPlayerPrefab;
-
     [SerializeField]
     private GameObject whitePlayerPrefab;
 
+    //前回の自分のリスト
     private List<GameObject> black;
     private List<GameObject> white;
-
-    //操作しているキャラ
+    
+    //操作してるプレイヤー
     private GameObject activePlayer;
     private int enemyCount = 1;
 
@@ -37,22 +40,19 @@ public class GameMain : MonoBehaviour {
 
         black = new List<GameObject>();
         white = new List<GameObject>();
-
-
-        //初期プレイヤー作成
+        
+        //プレイヤーの初期化
         activePlayer = Instantiate(blackPlayerPrefab);
-
         activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
-
-
-        //最初敵の生成　こいつはListに入れない予定
+        
+        
         var enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
-        //white.Add(enemy);
+        
     }
 
-    //これをイベント化してPlayerにlistにAddする前に埋め込む予定
+    //敵の当たり判定のイベント
     private void WhiteEnemyHitHandler()
     {
         if (currentState == WHITE)
@@ -74,51 +74,55 @@ public class GameMain : MonoBehaviour {
             StartCoroutine("NextGame");
     }
 
-    private void Update()//UpdateにはPouseくらいしか書かない予定
+    private void Update()
     {
     }
 
     private void ResetGame()
     {
         Destroy(activePlayer.GetComponent<PlayerController>());
+        
 
         if (currentState == BLACK)
         {
             activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => BlackEnemyHitHandler();
             black.Add(activePlayer);
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
             enemyCount = black.Count;
+
+            //WhitePrefabで初期化
+            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
         }
         else
         {
             activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
             white.Add(activePlayer);
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
             enemyCount = white.Count;
+
+            //BlackPrefabで初期化
+            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
+
         }
 
         activePlayer.SetActive(false);
 
         currentState = -currentState;
-
+        
         foreach (GameObject enemy in black)
             enemy.SetActive(false);
         foreach (GameObject enemy in white)
             enemy.SetActive(false);
-
-        //Camera.main.GetComponent<CameraController>().CameraRotate();
+        
     }
 
-    private void StartGame()//回転or反転が終わったら呼ぶ
+    private void StartGame()
     {
-        //PlayerのOnEnableでRecordPlayをここで呼ぶ
+        //すべての敵の初期化
         foreach (GameObject enemy in black)
             enemy.SetActive(true);
         foreach (GameObject enemy in white)
             enemy.SetActive(true);
 
-        
-        //PlayerControllerにOnTriggerで終了判定をつける予定
+        //プレイヤーの初期化
         activePlayer.AddComponent<PlayerController>();
         activePlayer.SetActive(true);
     }
