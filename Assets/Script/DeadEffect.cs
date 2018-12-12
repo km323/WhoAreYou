@@ -8,11 +8,6 @@ public class DeadEffect : MonoBehaviour {
 
     private GameObject effect;
 
-    private void OnDisable()
-    {
-
-    }
-
     void Start () {
         GetComponent<PlayerCollision>().onBulletHit += () => PlayDeadEffect();
     }
