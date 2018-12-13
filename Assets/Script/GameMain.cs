@@ -34,6 +34,10 @@ public class GameMain : MonoBehaviour {
     private GameObject activePlayer;
     private int enemyCount = 1;
 
+    //NextGameのイベント
+    public delegate void NextGameHandler();
+    public static event NextGameHandler OnNextGame;
+
     private void Start()
     {
         currentState = BLACK;
@@ -46,10 +50,8 @@ public class GameMain : MonoBehaviour {
         activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
         
-        
-        var enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
-        enemy.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
-        
+        GameObject enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
+        enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
     }
 
     //敵の当たり判定のイベント
@@ -85,7 +87,7 @@ public class GameMain : MonoBehaviour {
 
         if (currentState == BLACK)
         {
-            activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => BlackEnemyHitHandler();
+            activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => BlackEnemyHitHandler();
             black.Add(activePlayer);
             enemyCount = black.Count;
 
@@ -94,7 +96,7 @@ public class GameMain : MonoBehaviour {
         }
         else
         {
-            activePlayer.GetComponent<PlayerCollision>().onBulletHit += () => WhiteEnemyHitHandler();
+            activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
             white.Add(activePlayer);
             enemyCount = white.Count;
 
@@ -131,8 +133,8 @@ public class GameMain : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
 
+        OnNextGame();
         ResetGame();
-        Camera.main.GetComponent<CameraController>().CameraRotate();
 
         yield return new WaitForSeconds(1f);
 

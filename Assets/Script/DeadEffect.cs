@@ -9,11 +9,17 @@ public class DeadEffect : MonoBehaviour {
     private GameObject effect;
 
     void Start () {
-        GetComponent<PlayerCollision>().onBulletHit += () => PlayDeadEffect();
+        GetComponent<PlayerCollision>().OnBulletHit += () => PlayDeadEffect();
+        GameMain.OnNextGame += () => DestroyEffect();
     }
 	
     private void PlayDeadEffect()
     {
         effect = Instantiate(deadEffectPrefab,transform.position,Quaternion.identity);
+    }
+
+    private void DestroyEffect()
+    {
+        Destroy(effect);
     }
 }

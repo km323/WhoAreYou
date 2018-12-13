@@ -7,15 +7,10 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        GameMain.OnNextGame += () => CameraRotate();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void CameraRotate()
+    private void CameraRotate()
     {
         transform.DORotate(new Vector3(0, 0, transform.eulerAngles.z + 180), 1);
     }
