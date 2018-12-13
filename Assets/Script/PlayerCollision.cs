@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCollision  : MonoBehaviour {
-    public delegate void OnBulletHit();
-    public event OnBulletHit onBulletHit;
+    public delegate void BulletHitHandler();
+    public event BulletHitHandler OnBulletHit;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //bulletにtagつける？
-
-
         //弾を消す
-        Destroy(collision.gameObject);
-        if (onBulletHit != null)
-            onBulletHit();
+        if(collision.tag == "Bullet")
+            Destroy(collision.gameObject);
+
+        if (OnBulletHit != null)
+            OnBulletHit();
 
         gameObject.SetActive(false);
     }
