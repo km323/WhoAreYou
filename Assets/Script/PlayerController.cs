@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    private float moveSpeed = 2000;
+    private float moveSpeed = 250/*2000*/;
 
     private static PlayerInput playerInput;
 
@@ -65,23 +65,25 @@ public class PlayerController : MonoBehaviour {
         if (playerInput.HasTouch)
         {
             velocity.x = playerInput.Direction.x * moveSpeed * Time.fixedDeltaTime;
-            velocity.y = playerInput.Direction.y * moveSpeed / 2 * Time.fixedDeltaTime;
+            velocity.y = playerInput.Direction.y * moveSpeed /*/ 2*/ * Time.fixedDeltaTime;
         }
 
         //早いスワイプがあったら、すぐに方向を切り替え
-        if (playerInput.QuickSwipe)
-            rigid.AddForce(new Vector2(playerInput.Direction.x, 0), ForceMode2D.Impulse);
+        //if (playerInput.QuickSwipe)
+        //    rigid.AddForce(new Vector2(playerInput.Direction.x, 0), ForceMode2D.Impulse);
 
         //慣性をなくす
-        if (!playerInput.HasTouch || playerInput.TouchCount <= 0)
-            rigid.velocity = Vector2.zero;
+        //if (!playerInput.HasTouch || playerInput.TouchCount <= 0)
+        //    rigid.velocity = Vector2.zero;
 
-        rigid.AddForce(velocity, ForceMode2D.Force);
+        //rigid.AddForce(velocity, ForceMode2D.Force);
+        rigid.velocity = velocity;
     }
 
     private void OnDestroy()
     {
         Time.timeScale = 1;
+        rigid.velocity = Vector2.zero;
         recordController.StopRecord();//記録を止める 
     }
 }

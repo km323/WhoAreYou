@@ -125,10 +125,10 @@ public class PlayerInput
 
         FirstTapDone();
 
-        if (HasQuickSwipe(touch[0]))
-            QuickSwipe = true;
-        else
-            QuickSwipe = false;
+        //if (HasQuickSwipe(touch[0]))
+        //    QuickSwipe = true;
+        //else
+        //    QuickSwipe = false;
     }
 
     //最初の入力
