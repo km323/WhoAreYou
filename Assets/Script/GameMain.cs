@@ -80,8 +80,8 @@ public class GameMain : MonoBehaviour {
 
     private void ResetGame()
     {
-        Destroy(activePlayer.GetComponent<PlayerController>());
-        
+        SpriteRenderer sprite = activePlayer.GetComponentInChildren<SpriteRenderer>();
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.4f);
 
         if (currentState == BLACK)
         {
@@ -129,6 +129,7 @@ public class GameMain : MonoBehaviour {
 
     IEnumerator NextGame()
     {
+        Destroy(activePlayer.GetComponent<PlayerController>());
         yield return new WaitForSeconds(1f);
 
         ResetGame();

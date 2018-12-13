@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
     private static PlayerInput playerInput;
 
     private RecordController recordController;
-    private SpriteRenderer playerSprite;
     private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
@@ -30,13 +29,14 @@ public class PlayerController : MonoBehaviour {
         recordController = GetComponent<RecordController>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
-        playerSprite = GetComponentInChildren<SpriteRenderer>();
 
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
     }
 
     void Update () {
         playerInput.Update();
+
+        StopGameTime();
 
         //弾を撃つ
         if (playerInput.SameTimeTap)
@@ -46,6 +46,15 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         Move();
+    }
+
+    //タップしてない時はゲーム時間を止める
+    private void StopGameTime()
+    {
+        if (playerInput.HasTouch)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
     }
 
     //移動メソッド
@@ -72,8 +81,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnDestroy()
     {
-        recordController.StopRecord();//記録を止める
-        playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
-        gameObject.SetActive(false);
+        Time.timeScale = 1;
+        recordController.StopRecord();//記録を止める 
     }
 }

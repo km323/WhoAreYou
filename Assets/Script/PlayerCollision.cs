@@ -10,7 +10,6 @@ public class PlayerCollision  : MonoBehaviour {
     {
         //bulletにtagつける？
 
-
         //弾を消す
         Destroy(collision.gameObject);
         if (onBulletHit != null)
