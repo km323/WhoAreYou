@@ -6,16 +6,27 @@ using DG.Tweening;
 public class ScrollBackground : MonoBehaviour {
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private GameObject pixelWhite;
+    [SerializeField]
+    private GameObject pixelBlack;
 
     private Vector3 initPosition;
     private Vector3 direction;
     private bool canScroll;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        pixelWhite.SetActive(false);
+        pixelBlack.SetActive(false);
+    }
+
+    // Use this for initialization
+    void Start () {
         initPosition = transform.position;
         canScroll = true;
         UpdateDirection();
+        ChangePixelEffect();
 
         GameMain.OnNextGame += () => StartCoroutine("ResetScroll");
     }
@@ -29,12 +40,29 @@ public class ScrollBackground : MonoBehaviour {
     IEnumerator ResetScroll()
     {
         canScroll = false;
+        ChangePixelEffect();
         transform.DOMoveY(initPosition.y, 1);
 
         yield return new WaitForSeconds(1);
         canScroll = true;
     }
 
+    //current state に合うピクセルエフェクトを変える
+    private void ChangePixelEffect()
+    {
+        if(GameMain.GetCurrentState() == GameMain.BLACK)
+        {
+            pixelWhite.SetActive(true);
+            pixelBlack.SetActive(false);
+        }
+        else
+        {
+            pixelWhite.SetActive(false);
+            pixelBlack.SetActive(true);
+        }
+    }
+
+    //背景のスクロール
     private void Scroll()
     {
         if (!canScroll)
@@ -44,6 +72,7 @@ public class ScrollBackground : MonoBehaviour {
         transform.position += direction * speed * Time.fixedDeltaTime;
     }
 
+    //スクロールする方向を決める
     private void UpdateDirection()
     {
         direction = Vector3.Scale(Camera.main.transform.up, -transform.up);

@@ -49,12 +49,17 @@ public class GameMain : MonoBehaviour {
         activePlayer = Instantiate(blackPlayerPrefab);
         activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
-        
+
         GameObject enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
     }
 
     //敵の当たり判定のイベント
+    private void GameOver()
+    {
+        Debug.Log("Gameover");
+        //StartCoroutine("CallGameEnd");
+    }
     private void WhiteEnemyHitHandler()
     {
         if (currentState == WHITE)
@@ -83,7 +88,6 @@ public class GameMain : MonoBehaviour {
     private void ResetGame()
     {
         Destroy(activePlayer.GetComponent<PlayerController>());
-        
 
         if (currentState == BLACK)
         {
@@ -139,5 +143,13 @@ public class GameMain : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         StartGame();
+    }
+
+    IEnumerator CallGameEnd()
+    {
+        Debug.Log("Call end");
+        yield return new WaitForSeconds(1);
+
+        //SceneController.Instance.Change(Scene.Result);
     }
 }

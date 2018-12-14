@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour {
         rigid.AddForce(velocity, ForceMode2D.Force);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("controller trigger");
+        //SceneController.Instance.Change(Scene.Result);
+    }
+
     private void OnDestroy()
     {
         recordController.StopRecord();//記録を止める
