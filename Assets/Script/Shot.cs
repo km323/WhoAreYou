@@ -11,6 +11,6 @@ public class Shot : MonoBehaviour {
 
     public void ShotBullet()
     {
-        GameObject shot = Instantiate(bulletPrefab, transform.position + shotOffset, Quaternion.identity);
+        Instantiate(bulletPrefab, transform.position + shotOffset, Quaternion.identity);
     }
 }

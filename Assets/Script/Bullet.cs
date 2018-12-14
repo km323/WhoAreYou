@@ -15,11 +15,9 @@ public class Bullet : MonoBehaviour {
 
     private Vector3 velocity;
     private Rigidbody2D rigid;
-    private SpriteRenderer bulletSprite;
 
 	void Awake () {
         rigid = GetComponent<Rigidbody2D>();
-        bulletSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Start()
