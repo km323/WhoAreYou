@@ -38,7 +38,7 @@ Shader "Custom/BurnRevealEffect"
 		_DistortionLevel ("Distortion Level", Range(0, 0.5)) = 0.01
 		_TexCutoff ("Texture Cutoff", Range(0, 1)) = 0.5
 		_GlowAmount ("Glow Amount", Range(0, 1)) = 0.5
-		_AlphaAmount("Alpha Amount", Range(0.4, 1)) = 1
+		_AlphaAmount("Alpha Amount", Range(0.35, 1)) = 1
 		[Toggle(ENABLE_PIXELIZATION)] _EnablePixel ("Pixelate?", Float) = 0
 		[IntRange]_PixelLevel ("Pixelization Level", Range(0, 256)) = 80
 	}

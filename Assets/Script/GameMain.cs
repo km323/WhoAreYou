@@ -55,11 +55,11 @@ public class GameMain : MonoBehaviour {
     }
 
     //敵の当たり判定のイベント
-    private void GameOver()
-    {
-        Debug.Log("Gameover");
-        //StartCoroutine("CallGameEnd");
-    }
+    //private void GameOver()
+    //{
+    //    Debug.Log("Gameover");
+    //    //StartCoroutine("CallGameEnd");
+    //}
     private void WhiteEnemyHitHandler()
     {
         if (currentState == WHITE)
@@ -106,7 +106,6 @@ public class GameMain : MonoBehaviour {
 
             //BlackPrefabで初期化
             activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
-
         }
 
         activePlayer.SetActive(false);
@@ -116,8 +115,7 @@ public class GameMain : MonoBehaviour {
         foreach (GameObject enemy in black)
             enemy.SetActive(false);
         foreach (GameObject enemy in white)
-            enemy.SetActive(false);
-        
+            enemy.SetActive(false);     
     }
 
     private void StartGame()
@@ -145,11 +143,11 @@ public class GameMain : MonoBehaviour {
         StartGame();
     }
 
-    IEnumerator CallGameEnd()
-    {
-        Debug.Log("Call end");
-        yield return new WaitForSeconds(1);
+    //IEnumerator CallGameEnd()
+    //{
+    //    Debug.Log("Call end");
+    //    yield return new WaitForSeconds(1);
 
-        //SceneController.Instance.Change(Scene.Result);
-    }
+    //    SceneController.Instance.Change(Scene.Result);
+    //}
 }

@@ -72,8 +72,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("controller trigger");
-        //SceneController.Instance.Change(Scene.Result);
+        SceneController.Instance.Change(Scene.Game);
     }
 
     private void OnDestroy()

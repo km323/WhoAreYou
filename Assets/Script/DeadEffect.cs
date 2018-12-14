@@ -17,6 +17,9 @@ public class DeadEffect : MonoBehaviour {
     private void PlayDeadEffect()
     {
         effect = Instantiate(deadEffectPrefab,transform.position,Quaternion.identity);
+
+        if(GetComponent<PlayerController>() != null)
+            effect.GetComponent<SpriteRenderer>().material.SetFloat("_AlphaAmount", 1f);
     }
 
     private void DestroyEffect()

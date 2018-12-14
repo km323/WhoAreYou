@@ -23,10 +23,8 @@ public class DeadEffectAnim : MonoBehaviour {
         StartCoroutine("DeadEffect");
     }
 
-
     IEnumerator DeadEffect()
     {
-        renderer.material.SetFloat("_AlphaAmount", 0.4f);
         float radius = renderer.material.GetFloat("_EffectRadius");
         while (radius > 0)
         {
