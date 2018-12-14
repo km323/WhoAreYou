@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ArenaFloor
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION
-  m_LightmapFlags: 1
+  m_Name: DeadEffectWhite
+  m_Shader: {fileID: 4800000, guid: c5ffe3cf8aa384611805a68b7db574fb, type: 3}
+  m_ShaderKeywords: ENABLE_PIXELIZATION ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -42,6 +42,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 0064cdd6a5b93874c8640c5f3ac0eb78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 7ea8081d0c8c64303a5ce1de6a787ca5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -50,27 +58,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistortionLevel: 0.5
     - _DstBlend: 0
+    - _EffectRadius: 2
+    - _EnablePixel: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.075
+    - _Glossiness: 0
     - _GlossyReflections: 1
+    - _GlowAmount: 0.359
+    - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PixelLevel: 15
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TexCutoff: 0.61
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.94117653, g: 0.94117653, b: 0.94117653, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.058823533, g: 0.058823533, b: 0.058823533, a: 1}
+    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}

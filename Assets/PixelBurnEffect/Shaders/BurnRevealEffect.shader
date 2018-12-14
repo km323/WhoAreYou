@@ -38,6 +38,7 @@ Shader "Custom/BurnRevealEffect"
 		_DistortionLevel ("Distortion Level", Range(0, 0.5)) = 0.01
 		_TexCutoff ("Texture Cutoff", Range(0, 1)) = 0.5
 		_GlowAmount ("Glow Amount", Range(0, 1)) = 0.5
+		_AlphaAmount("Alpha Amount", Range(0.4, 1)) = 1
 		[Toggle(ENABLE_PIXELIZATION)] _EnablePixel ("Pixelate?", Float) = 0
 		[IntRange]_PixelLevel ("Pixelization Level", Range(0, 256)) = 80
 	}
@@ -67,6 +68,7 @@ Shader "Custom/BurnRevealEffect"
 		float _PixelLevel;
 		float _EnablePixel;
 		float _GlowAmount;
+		float _AlphaAmount;
 
 		struct Input 
 		{
@@ -95,7 +97,7 @@ Shader "Custom/BurnRevealEffect"
 			// Grab brightness value from noise texture
 			float noise_tex_alpha = tex_brightness(tex2D(_NoiseTex, noise_uv));
 		
-			float brightness = clamp(noise_tex_alpha * _DistortionLevel + dot_product - (1 - _EffectRadius), 0, 1);
+			float brightness = clamp(noise_tex_alpha * _DistortionLevel + (-dot_product) - (1 - _EffectRadius), 0, 1);
 			float glow_cutoff_alpha = tex_alpha_cutoff - _GlowAmount * brightness;
 			
 			// Putting it all together
@@ -103,7 +105,7 @@ Shader "Custom/BurnRevealEffect"
 			float glow_visible = (1 - tex_visible) * step(glow_cutoff_alpha, brightness);
 			
 			o.Albedo = tex2D(_MainTex, IN.uv_MainTex) * _Color * (1 - glow_visible);
-			o.Alpha = clamp(tex_visible + glow_visible, 0, 1);
+			o.Alpha = clamp(tex_visible + glow_visible, 0, _AlphaAmount);
 			o.Smoothness = _Glossiness;
 			o.Metallic = _Metallic;
 			o.Emission = _GlowColor * glow_visible;
