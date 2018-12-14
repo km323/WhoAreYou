@@ -15,6 +15,6 @@ public class PlayerCollision  : MonoBehaviour {
         if (OnBulletHit != null)
             OnBulletHit();
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

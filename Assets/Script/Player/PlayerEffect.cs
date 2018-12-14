@@ -5,10 +5,6 @@ using UnityEngine;
 public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private float speed;
-    //[SerializeField]
-    //private GameObject effectPrefab;
-    //[SerializeField]
-    //private GameObject startEffectPrefab;
 
     private SpriteRenderer spriteRenderer;
 
@@ -40,7 +36,7 @@ public class PlayerEffect : MonoBehaviour {
         spriteRenderer.material.SetFloat("_EffectRadius", 0);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
 
-        while (radius <= 2)
+        while (radius < 2)
         {
             radius += Time.fixedDeltaTime * speed;
 
@@ -54,8 +50,8 @@ public class PlayerEffect : MonoBehaviour {
     //dead effect
     private void PlayDeadEffect()
     {
-        //if (GetComponent<PlayerController>() != null)
-        //    deadEffect.GetComponent<SpriteRenderer>().material.SetFloat("_AlphaAmount", 1f);
+        if (GetComponent<PlayerController>() != null)
+            spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
         StartCoroutine("DeadEffect");
     }
@@ -63,7 +59,8 @@ public class PlayerEffect : MonoBehaviour {
     {
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
-        while (radius >= 0)
+
+        while (radius > 0)
         {
             radius -= Time.fixedDeltaTime * speed;
 
