@@ -97,6 +97,7 @@ Shader "Custom/BurnRevealEffect"
 			// Grab brightness value from noise texture
 			float noise_tex_alpha = tex_brightness(tex2D(_NoiseTex, noise_uv));
 		
+
 			float brightness = clamp(noise_tex_alpha * _DistortionLevel + (-dot_product) - (1 - _EffectRadius), 0, 1);
 			float glow_cutoff_alpha = tex_alpha_cutoff - _GlowAmount * brightness;
 			

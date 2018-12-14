@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114468634900795912}
   - component: {fileID: 114925572475402936}
   - component: {fileID: 114286490170697422}
-  - component: {fileID: 114319468554951696}
+  - component: {fileID: 114969302938601106}
   m_Layer: 10
   m_Name: PlayerWhite
   m_TagString: Untagged
@@ -134,19 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ad898e871268640aa7611c7e1ced7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114319468554951696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583261223142556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595793f5efd968f4392196d00eb766e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deadEffectPrefab: {fileID: 1586094533068446, guid: ee12609ac4d80c443a9e8c99a1c479ce,
-    type: 2}
 --- !u!114 &114468634900795912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,6 +159,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1458985857778898, guid: 4449980579d307243a53ea4ae5257332,
     type: 2}
   shotOffset: {x: 0, y: -2, z: 0}
+--- !u!114 &114969302938601106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583261223142556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595793f5efd968f4392196d00eb766e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
 --- !u!212 &212323242695424858
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -187,7 +186,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: aae8f9a5fdb83b644b1ef97b9737c571, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

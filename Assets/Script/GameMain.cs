@@ -38,6 +38,11 @@ public class GameMain : MonoBehaviour {
     public delegate void NextGameHandler();
     public static event NextGameHandler OnNextGame;
 
+    private void Awake()
+    {
+        OnNextGame = null;
+    }
+
     private void Start()
     {
         currentState = BLACK;
@@ -111,11 +116,11 @@ public class GameMain : MonoBehaviour {
         activePlayer.SetActive(false);
 
         currentState = -currentState;
-        
+
         foreach (GameObject enemy in black)
             enemy.SetActive(false);
         foreach (GameObject enemy in white)
-            enemy.SetActive(false);     
+            enemy.SetActive(false);
     }
 
     private void StartGame()
