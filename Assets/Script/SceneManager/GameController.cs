@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 
     public void Awake()
     {
+        Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
     }
 }

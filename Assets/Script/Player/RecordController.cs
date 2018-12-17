@@ -44,8 +44,13 @@ public class RecordController : MonoBehaviour {
     //プレイヤーの動きを再生するメソッド
     IEnumerator PlayRecord()
     {
-        int index = 0;
+        int index = 1;
         bool goForward = true;
+
+        //最初の一回
+        transform.position = new Vector3(recordList[0].x, recordList[0].y, transform.position.z);
+
+        yield return new WaitForSeconds(1f);
 
         while(true)
         {
@@ -67,7 +72,7 @@ public class RecordController : MonoBehaviour {
             else if (index == 0)
                 goForward = true;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 
@@ -83,7 +88,7 @@ public class RecordController : MonoBehaviour {
 
             recordList.Add(recordTmp);
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 }

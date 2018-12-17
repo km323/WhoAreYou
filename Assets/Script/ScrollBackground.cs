@@ -24,7 +24,7 @@ public class ScrollBackground : MonoBehaviour {
     // Use this for initialization
     void Start () {
         initPosition = transform.position;
-        canScroll = true;
+        StartCoroutine("ResetScroll");
         UpdateDirection();
         ChangePixelEffect();
 
@@ -43,7 +43,7 @@ public class ScrollBackground : MonoBehaviour {
         ChangePixelEffect();
         transform.DOMoveY(initPosition.y, 1);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         canScroll = true;
     }
 

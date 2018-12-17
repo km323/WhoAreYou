@@ -117,13 +117,13 @@ public class GameMain : MonoBehaviour {
 
         currentState = -currentState;
 
-        foreach (GameObject enemy in black)
-            enemy.SetActive(false);
-        foreach (GameObject enemy in white)
-            enemy.SetActive(false);
+        //foreach (GameObject enemy in black)
+        //    enemy.SetActive(false);
+        //foreach (GameObject enemy in white)
+        //    enemy.SetActive(false);
     }
 
-    private void StartGame()
+    private void ShowAllCharacter()
     {
         //すべての敵の初期化
         foreach (GameObject enemy in black)
@@ -131,9 +131,12 @@ public class GameMain : MonoBehaviour {
         foreach (GameObject enemy in white)
             enemy.SetActive(true);
 
-        //プレイヤーの初期化
-        activePlayer.AddComponent<PlayerController>();
         activePlayer.SetActive(true);
+    }
+
+    private void ActivePlayerInput()
+    {
+        activePlayer.AddComponent<PlayerController>();
     }
 
     IEnumerator NextGame()
@@ -141,11 +144,15 @@ public class GameMain : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         OnNextGame();
-        ResetGame();
 
         yield return new WaitForSeconds(1f);
+        ResetGame();
+        yield return new WaitForSeconds(0.3f);
+        ShowAllCharacter();
 
-        StartGame();
+        yield return new WaitForSeconds(0.5f);
+
+        ActivePlayerInput();
     }
 
     //IEnumerator CallGameEnd()

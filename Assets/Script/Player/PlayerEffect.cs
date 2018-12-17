@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private GameObject deadParticle;
 
     private SpriteRenderer spriteRenderer;
+    private PolygonCollider2D collider;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        collider = GetComponent<PolygonCollider2D>();
     }
 
     private void OnEnable()
@@ -19,8 +23,24 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     void Start () {
-        GetComponent<PlayerCollision>().OnBulletHit += () => PlayDeadEffect();
-        //GameMain.OnNextGame += () => DestroyEffect();
+        //GetComponent<PlayerCollision>().OnBulletHit += () => PlayDeadEffect();
+        GetComponent<PlayerCollision>().OnBulletHit += () => SetDeadParticle();
+
+        GameMain.OnNextGame += () => PlayVanishEffect();
+        GameMain.OnNextGame += () => DestroyDeadParticle();
+    }
+
+    private void SetDeadParticle()
+    {
+        collider.enabled = false;
+        Instantiate(deadParticle, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+    }
+
+    private void DestroyDeadParticle()
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("DeadEffect"))
+            Destroy(obj);
     }
 
     //start effect
@@ -43,19 +63,24 @@ public class PlayerEffect : MonoBehaviour {
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
         }
+
         if (GetComponent<PlayerController>() != null)
             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
+
+        collider.enabled = true;
     }
 
-    //dead effect
-    private void PlayDeadEffect()
+    //vanish effect
+    private void PlayVanishEffect()
     {
+        if (!gameObject.activeSelf)
+            return;
         if (GetComponent<PlayerController>() != null)
             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
-        StartCoroutine("DeadEffect");
+        StartCoroutine("VanishEffect");
     }
-    IEnumerator DeadEffect()
+    IEnumerator VanishEffect()
     {
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
@@ -69,32 +94,4 @@ public class PlayerEffect : MonoBehaviour {
         }
         gameObject.SetActive(false);
     }
-
-    //private void DisableMonoBehaviour()
-    //{
-    //    foreach (MonoBehaviour m in GetComponents<MonoBehaviour>())
-    //    {
-    //        if (m.GetType().Name == "PlayerEffect")
-    //            continue;
-    //        m.enabled = false;
-    //    }
-    //}
-    //private void EnableMonoBehaviour()
-    //{
-    //    foreach (MonoBehaviour m in GetComponents<MonoBehaviour>())
-    //    {
-    //        if (m.name == "PlayerEffect")
-    //            continue;
-    //        m.enabled = true;
-    //    }
-    //}
-
-    //private void DestroyEffect()
-    //{
-    //    if(deadEffect != null)
-    //        Destroy(deadEffect);
-
-    //    if (startEffect != null)
-    //        Destroy(startEffect);
-    //}
 }

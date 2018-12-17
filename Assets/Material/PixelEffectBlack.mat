@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: PixelEffectBlack
   m_Shader: {fileID: 4800000, guid: b6fb08f1401584f7daa87225d9c6e657, type: 3}
-  m_ShaderKeywords: ENABLE_PIXELIZATION
+  m_ShaderKeywords: ENABLE_PIXELIZATION ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -79,7 +79,7 @@ Material:
     - _MoveMainTex: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PixelLevel: 37
+    - _PixelLevel: 512
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 9
