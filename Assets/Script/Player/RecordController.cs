@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RecordController : MonoBehaviour {
-    private List<Vector3> recordList;
+    public List<Vector3> recordList;
     private Shot shot;
 
     void Awake () {
@@ -79,7 +79,7 @@ public class RecordController : MonoBehaviour {
             //弾撃ったかどうかをvector3のzとして保存する
             //撃つと1、そうじゃないと0
             int z = PlayerController.GetPlayerInput().SameTimeTap ? 1 : 0;
-            Vector3 recordTmp = new Vector3(transform.position.x, transform.position.y, z);
+            Vector3 recordTmp = new Vector3(-transform.position.x, -transform.position.y, z);
 
             recordList.Add(recordTmp);
 

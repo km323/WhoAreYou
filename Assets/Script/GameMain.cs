@@ -96,26 +96,29 @@ public class GameMain : MonoBehaviour {
 
         if (currentState == BLACK)
         {
-            activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => BlackEnemyHitHandler();
-            black.Add(activePlayer);
-            enemyCount = black.Count;
-
-            //WhitePrefabで初期化
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
-        }
-        else
-        {
-            activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
-            white.Add(activePlayer);
+            var KariPlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
+            KariPlayer.GetComponent<RecordController>().recordList = activePlayer.GetComponent<RecordController>().recordList;
+            KariPlayer.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
+            white.Add(KariPlayer);
             enemyCount = white.Count;
 
-            //BlackPrefabで初期化
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
+            //WhitePrefabで初期化
+            
+            
         }
+        //else
+        //{
+        //    activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
+        //    white.Add(activePlayer);
+        //    enemyCount = white.Count;
 
+        //    //BlackPrefabで初期化
+        //    activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
+        //}
+        activePlayer = Instantiate(blackPlayerPrefab, startBlackPlayerPos[white.Count], blackPlayerPrefab.transform.rotation);
         activePlayer.SetActive(false);
 
-        currentState = -currentState;
+        //currentState = -currentState;
 
         foreach (GameObject enemy in black)
             enemy.SetActive(false);

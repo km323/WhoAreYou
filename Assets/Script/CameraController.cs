@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameMain.OnNextGame += () => CameraRotate();
+        //GameMain.OnNextGame += () => CameraRotate();
 	}
 	
     private void CameraRotate()
