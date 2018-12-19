@@ -189,6 +189,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1458985857778898, guid: 4449980579d307243a53ea4ae5257332,
     type: 2}
   shotOffset: {x: 0, y: -2, z: 0}
+  laserPrefab: {fileID: 1459190833604208, guid: 2c6bc2abfdfdc9842a05c3fd7495c4e3,
+    type: 2}
 --- !u!114 &114969302938601106
 MonoBehaviour:
   m_ObjectHideFlags: 1
