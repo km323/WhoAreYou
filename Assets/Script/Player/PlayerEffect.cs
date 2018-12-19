@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private float speed;
     [SerializeField]
     private GameObject deadParticle;
+    [SerializeField]
+    private SpriteRenderer frameObjRenderer;
+    [SerializeField]
+    private Sprite recSprite;
+    [SerializeField]
+    private Sprite playSprite;
 
     private SpriteRenderer spriteRenderer;
     private PolygonCollider2D collider;
+
 
     private void Awake()
     {
@@ -19,7 +27,7 @@ public class PlayerEffect : MonoBehaviour {
 
     private void OnEnable()
     {
-        PlayStartEffect();
+        PlayStartEffect();    
     }
 
     void Start () {
@@ -28,8 +36,31 @@ public class PlayerEffect : MonoBehaviour {
 
         GameMain.OnNextGame += () => PlayVanishEffect();
         GameMain.OnNextGame += () => DestroyDeadParticle();
+        GameMain.OnNextGame += () => ChageFrameObjSprite();
+        GameMain.OnNextGame += () => DeadMove();
+
+        CreateFrameObj();
     }
 
+    private void DeadMove()
+    {
+
+        transform.DOMove(GetComponent<RecordController>().GetStartPos(), 1);
+    }
+
+    private void CreateFrameObj()
+    {
+        if (Camera.main.transform.up.y == 1)
+            frameObjRenderer.gameObject.transform.rotation = Quaternion.identity;
+        else
+            frameObjRenderer.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
+        frameObjRenderer.sprite = recSprite;
+    }
+    private void ChageFrameObjSprite()
+    {
+        frameObjRenderer.sprite = playSprite;
+    }
+   
     private void SetDeadParticle()
     {
         collider.enabled = false;
@@ -92,6 +123,6 @@ public class PlayerEffect : MonoBehaviour {
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
         }
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

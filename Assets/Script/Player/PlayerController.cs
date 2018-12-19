@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update () {
         playerInput.Update();
-
+        
         //弾を撃つ
         if (playerInput.SameTimeTap)
             shot.ShotBullet();
@@ -80,6 +80,5 @@ public class PlayerController : MonoBehaviour {
     {
         recordController.StopRecord();//記録を止める
         playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
-        gameObject.SetActive(false);
     }
 }

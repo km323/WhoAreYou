@@ -6,9 +6,18 @@ public class RecordController : MonoBehaviour {
     private List<Vector3> recordList;
     private Shot shot;
 
+    public Vector3 GetStartPos()
+    {
+        if (recordList != null && recordList.Count > 0)
+            return recordList[0];
+
+        return Vector3.zero;
+    }
+
     void Awake () {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
+        GameMain.OnNextGame += () => StopPlayRecord();
     }
 
     private void OnEnable()
@@ -60,7 +69,7 @@ public class RecordController : MonoBehaviour {
                 shot.ShotBullet();
 
             if (/*index == 0 || */index == recordList.Count - 1)
-                yield return new WaitForSeconds(0.8f);
+                yield return new WaitForSeconds(0.5f);
 
             if (goForward)
                 index++;

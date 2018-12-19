@@ -92,8 +92,6 @@ public class GameMain : MonoBehaviour {
 
     private void ResetGame()
     {
-        Destroy(activePlayer.GetComponent<PlayerController>());
-
         if (currentState == BLACK)
         {
             activePlayer.GetComponent<PlayerCollision>().OnBulletHit += () => BlackEnemyHitHandler();
@@ -117,10 +115,10 @@ public class GameMain : MonoBehaviour {
 
         currentState = -currentState;
 
-        //foreach (GameObject enemy in black)
-        //    enemy.SetActive(false);
-        //foreach (GameObject enemy in white)
-        //    enemy.SetActive(false);
+        foreach (GameObject enemy in black)
+            enemy.SetActive(false);
+        foreach (GameObject enemy in white)
+            enemy.SetActive(false);
     }
 
     private void ShowAllCharacter()
@@ -143,11 +141,12 @@ public class GameMain : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
 
+        Destroy(activePlayer.GetComponent<PlayerController>());
         OnNextGame();
 
         yield return new WaitForSeconds(1f);
         ResetGame();
-        yield return new WaitForSeconds(0.3f);
+        yield return null;
         ShowAllCharacter();
 
         yield return new WaitForSeconds(0.5f);
