@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  deadParticle: {fileID: 1007213754426022, guid: 8b7af6aeecc2b8c45ab662bdf06f41b7,
+  deadParticle: {fileID: 1903798012491294, guid: 1033039d465df5e40958d1bace1abff5,
     type: 2}
   frameObjRenderer: {fileID: 212548656378518426}
   recSprite: {fileID: 21300000, guid: 4dd6bb1766d47ee428ba69541e12607b, type: 3}

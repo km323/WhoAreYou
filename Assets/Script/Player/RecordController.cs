@@ -17,6 +17,8 @@ public class RecordController : MonoBehaviour {
     void Awake () {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
+
+        GetComponent<PlayerCollision>().OnBulletHit += () => StopPlayRecord();
         GameMain.OnNextGame += () => StopPlayRecord();
     }
 

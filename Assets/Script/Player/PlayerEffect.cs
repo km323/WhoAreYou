@@ -16,13 +16,13 @@ public class PlayerEffect : MonoBehaviour {
     private Sprite playSprite;
 
     private SpriteRenderer spriteRenderer;
-    private PolygonCollider2D collider;
+    private PolygonCollider2D polygonCollider;
 
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        collider = GetComponent<PolygonCollider2D>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
     }
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     void Start () {
-        //GetComponent<PlayerCollision>().OnBulletHit += () => PlayDeadEffect();
+        GetComponent<PlayerCollision>().OnBulletHit += () => PlayVanishEffect();
         GetComponent<PlayerCollision>().OnBulletHit += () => SetDeadParticle();
 
         GameMain.OnNextGame += () => PlayVanishEffect();
@@ -63,9 +63,9 @@ public class PlayerEffect : MonoBehaviour {
    
     private void SetDeadParticle()
     {
-        collider.enabled = false;
-        Instantiate(deadParticle, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        polygonCollider.enabled = false;
+        //Instantiate(deadParticle, transform.position, Quaternion.identity,transform);
+        //gameObject.SetActive(false);
     }
 
     private void DestroyDeadParticle()
@@ -98,7 +98,7 @@ public class PlayerEffect : MonoBehaviour {
         if (GetComponent<PlayerController>() != null)
             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
-        collider.enabled = true;
+        polygonCollider.enabled = true;
     }
 
     //vanish effect
@@ -123,6 +123,6 @@ public class PlayerEffect : MonoBehaviour {
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
         }
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

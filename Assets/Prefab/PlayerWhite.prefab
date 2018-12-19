@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  deadParticle: {fileID: 1007213754426022, guid: 819bd899682810a4b8d2a7d20d6450e4,
+  deadParticle: {fileID: 1984125953717390, guid: ad0b8e74903bdaf4087ad56b0c39228b,
     type: 2}
   frameObjRenderer: {fileID: 212690807856243714}
   recSprite: {fileID: 21300000, guid: 4dd6bb1766d47ee428ba69541e12607b, type: 3}
