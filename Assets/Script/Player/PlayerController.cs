@@ -40,8 +40,11 @@ public class PlayerController : MonoBehaviour {
         playerInput.Update();
         
         //弾を撃つ
-        if (playerInput.SameTimeTap)
-            shot.ShotBullet();
+        //if (playerInput.SameTimeTap)
+        //    shot.ShotBullet();
+        if (playerInput.TouchTime > 0)
+            shot.ChargeShotBullet(playerInput.TouchTime);
+
     }
 
     void FixedUpdate()
