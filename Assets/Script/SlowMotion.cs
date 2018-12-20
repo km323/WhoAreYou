@@ -40,7 +40,6 @@ public class SlowMotion : MonoBehaviour {
         if (collision.tag == "Bullet")
         {
             Time.timeScale = timeScale;
-            Invoke("DelayResetTime", 1f);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
