@@ -5,7 +5,6 @@ using UnityEngine;
 public class RecordController : MonoBehaviour {
     private List<Vector3> recordList;
     private Shot shot;
-    private List<bool> signalList;
 
     private int[] signalArray;
 
@@ -18,6 +17,9 @@ public class RecordController : MonoBehaviour {
     [SerializeField]
     private int signalFrame;
 
+    private const int beforSignal = 1;
+    private const int afterSignal = -1;
+
     public Vector3 GetStartPos()
     {
         if (recordList != null && recordList.Count > 0)
@@ -29,7 +31,6 @@ public class RecordController : MonoBehaviour {
     void Awake () {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
-        signalList = new List<bool>();
 
         GetComponent<PlayerCollision>().OnBulletHit += () => StopPlayRecord();
         GameMain.OnNextGame += () => StopPlayRecord();
@@ -66,7 +67,7 @@ public class RecordController : MonoBehaviour {
         StopCoroutine("PlayRecord");
     }
 
-    private void CreateSignalArray()
+    private void CreateSignalArray()//予備動作のための配列を作る
     {
         signalArray = new int[recordList.Count];
         
@@ -74,15 +75,15 @@ public class RecordController : MonoBehaviour {
         {
             if (recordList[i].z == 1)
             {
-                if (i - signalFrame >= 0)
-                    signalArray[i - signalFrame] = 1;
+                if (i - signalFrame >= 0)//配列外の時の例外処理
+                    signalArray[i - signalFrame] = beforSignal;
                 else
-                    signalArray[0] = 1;
+                    signalArray[0] = beforSignal;
 
                 if (i + signalFrame < recordList.Count - 2)
-                    signalArray[i + signalFrame] = -1;
+                    signalArray[i + signalFrame] = afterSignal;
                 else
-                    signalArray[recordList.Count - 2] = -1;
+                    signalArray[recordList.Count - 2] = afterSignal;
             }
         }
     }
@@ -115,10 +116,8 @@ public class RecordController : MonoBehaviour {
             if (recordList[index].z == 1)
             {
                 shot.ShotBullet();
-                PlaySprite();
+                PlaySprite();//通常のspriteに変える
             }
-
-            
             
 
             if (/*index == 0 || */index == recordList.Count - 1)
@@ -126,13 +125,13 @@ public class RecordController : MonoBehaviour {
 
             if (goForward)
             {
-                if (signalArray[index] == 1)
+                if (signalArray[index] == beforSignal)//予備動作のspriteに変える
                     SignalSprite();
                 index++;
             }
             else
             {
-                if (signalArray[index] == -1)
+                if (signalArray[index] == afterSignal)
                     SignalSprite();
                 index--;
             }
@@ -154,24 +153,10 @@ public class RecordController : MonoBehaviour {
             //弾撃ったかどうかをvector3のzとして保存する
             //撃つと1、そうじゃないと0
             int z = PlayerController.GetPlayerInput().SameTimeTap ? 1 : 0;
-            
-            //if (z != 0)//打たれたときにsignalFlame前までListを変更する
-            //{
-            //    signal = true;
-            //    int s = signalList.Count;
-            //    for (int i = 1; i <= signalFlame; i++)
-            //    {
-            //        if (s - i >= 0)
-            //            signalList[s - i] = true;
-            //        else
-            //            break;
-            //    }
-            //}
 
             Vector3 recordTmp = new Vector3(transform.position.x, transform.position.y, z);
 
             recordList.Add(recordTmp);
-            //signalList.Add(signal);
 
             yield return null;
         }
