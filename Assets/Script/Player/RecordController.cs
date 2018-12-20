@@ -5,6 +5,18 @@ using UnityEngine;
 public class RecordController : MonoBehaviour {
     private List<Vector3> recordList;
     private Shot shot;
+    private List<bool> signalList;
+
+    private int[] signalArray;
+
+    [SerializeField]
+    private SpriteRenderer frameObjRenderer;
+    [SerializeField]
+    private Sprite playSprite;
+    [SerializeField]
+    private Sprite signalSprite;
+    [SerializeField]
+    private int signalFrame;
 
     public Vector3 GetStartPos()
     {
@@ -17,6 +29,7 @@ public class RecordController : MonoBehaviour {
     void Awake () {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
+        signalList = new List<bool>();
 
         GetComponent<PlayerCollision>().OnBulletHit += () => StopPlayRecord();
         GameMain.OnNextGame += () => StopPlayRecord();
@@ -42,6 +55,7 @@ public class RecordController : MonoBehaviour {
     public void StopRecord()
     {
         StopCoroutine("Record");
+        CreateSignalArray();
     }
     public void StartPlayRecord()
     {
@@ -50,6 +64,36 @@ public class RecordController : MonoBehaviour {
     public void StopPlayRecord()
     {
         StopCoroutine("PlayRecord");
+    }
+
+    private void CreateSignalArray()
+    {
+        signalArray = new int[recordList.Count];
+        
+        for(int i=0;i<recordList.Count;i++)
+        {
+            if (recordList[i].z == 1)
+            {
+                if (i - signalFrame >= 0)
+                    signalArray[i - signalFrame] = 1;
+                else
+                    signalArray[0] = 1;
+
+                if (i + signalFrame < recordList.Count - 2)
+                    signalArray[i + signalFrame] = -1;
+                else
+                    signalArray[recordList.Count - 2] = -1;
+            }
+        }
+    }
+
+    private void SignalSprite()
+    {
+        frameObjRenderer.sprite = signalSprite;
+    }
+    private void PlaySprite()
+    {
+        frameObjRenderer.sprite = playSprite;
     }
 
     //プレイヤーの動きを再生するメソッド
@@ -67,16 +111,31 @@ public class RecordController : MonoBehaviour {
         {
             transform.position = new Vector3(recordList[index].x, recordList[index].y, transform.position.z);
 
+
             if (recordList[index].z == 1)
+            {
                 shot.ShotBullet();
+                PlaySprite();
+            }
+
+            
+            
 
             if (/*index == 0 || */index == recordList.Count - 1)
                 yield return new WaitForSeconds(0.5f);
 
             if (goForward)
+            {
+                if (signalArray[index] == 1)
+                    SignalSprite();
                 index++;
+            }
             else
+            {
+                if (signalArray[index] == -1)
+                    SignalSprite();
                 index--;
+            }
 
             if (index == recordList.Count - 1)
                 goForward = false;
@@ -95,9 +154,24 @@ public class RecordController : MonoBehaviour {
             //弾撃ったかどうかをvector3のzとして保存する
             //撃つと1、そうじゃないと0
             int z = PlayerController.GetPlayerInput().SameTimeTap ? 1 : 0;
+            
+            //if (z != 0)//打たれたときにsignalFlame前までListを変更する
+            //{
+            //    signal = true;
+            //    int s = signalList.Count;
+            //    for (int i = 1; i <= signalFlame; i++)
+            //    {
+            //        if (s - i >= 0)
+            //            signalList[s - i] = true;
+            //        else
+            //            break;
+            //    }
+            //}
+
             Vector3 recordTmp = new Vector3(transform.position.x, transform.position.y, z);
 
             recordList.Add(recordTmp);
+            //signalList.Add(signal);
 
             yield return null;
         }

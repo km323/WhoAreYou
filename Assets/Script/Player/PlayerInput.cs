@@ -164,7 +164,7 @@ public class PlayerInput
     //同時押し
     private bool HasSecondTap()
     {
-        if (PhaseTouch[1] == TouchPhase.Began)
+        if (PhaseTouch[1] == TouchPhase.Ended)
             return true;
 
         return false;
