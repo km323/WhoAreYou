@@ -99,7 +99,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = black.Count;
 
             //WhitePrefabで初期化
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count],whitePlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count % 10],whitePlayerPrefab.transform.rotation);
         }
         else
         {
@@ -108,7 +108,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = white.Count;
 
             //BlackPrefabで初期化
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count],blackPlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count % 10],blackPlayerPrefab.transform.rotation);
         }
 
         activePlayer.SetActive(false);

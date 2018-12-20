@@ -59,6 +59,7 @@ public class PlayerEffect : MonoBehaviour {
     private void ChageFrameObjSprite()
     {
         frameObjRenderer.sprite = playSprite;
+        frameObjRenderer.sortingLayerName = "Default";
     }
    
     private void SetDeadParticle()

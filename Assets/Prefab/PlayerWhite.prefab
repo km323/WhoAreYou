@@ -178,7 +178,7 @@ MonoBehaviour:
   frameObjRenderer: {fileID: 212690807856243714}
   playSprite: {fileID: 21300000, guid: 0a3f29bf9b34f6d4aaa087b3c148eb03, type: 3}
   signalSprite: {fileID: 21300000, guid: 91a2136800a060e4884181c75881754a, type: 3}
-  signalFrame: 20
+  signalFrame: 30
 --- !u!114 &114925572475402936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,9 +290,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingLayerID: -318698189
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
