@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     private RecordController recordController;
     private SpriteRenderer playerSprite;
+    private Dodge dodge;
     private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
@@ -31,8 +32,8 @@ public class PlayerController : MonoBehaviour {
         recordController = GetComponent<RecordController>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
+        dodge = GetComponent<Dodge>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
-
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
     }
 
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
         if (playerInput.TouchTime > 0)
             shot.ChargeShotBullet(playerInput.TouchTime);
 
+        Slide();
     }
 
     void FixedUpdate()
@@ -74,8 +76,21 @@ public class PlayerController : MonoBehaviour {
         rigid.AddForce(velocity, ForceMode2D.Force);
     }
 
+    private void Slide()
+    {
+        if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
+        {
+            dodge.DodgeAttack();
+            velocity.x = playerInput.Direction.x * 10f;
+            velocity.y = playerInput.Direction.y * 10f;
+            rigid.velocity = velocity;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //if (collision.tag == "Bullet")
+        //    Time.timeScale = 0.2f;
         //SceneController.Instance.Change(Scene.Game);
     }
 

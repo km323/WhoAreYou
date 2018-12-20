@@ -8,6 +8,9 @@ public class PlayerCollision  : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "SlowMotion")
+            return;
+
         //弾を消す
         if(collision.tag == "Bullet")
             Destroy(collision.gameObject);

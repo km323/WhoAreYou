@@ -82,7 +82,6 @@ public class RecordController : MonoBehaviour {
                 goForward = false;
             else if (index == 0)
                 goForward = true;
-
             yield return null;
         }
     }
@@ -98,7 +97,6 @@ public class RecordController : MonoBehaviour {
             Vector3 recordTmp = new Vector3(transform.position.x, transform.position.y, z);
 
             recordList.Add(recordTmp);
-
             yield return null;
         }
     }

@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour {
 
     void Start()
     {
-        velocity = direction * speed * Time.fixedDeltaTime;
+        velocity = direction * speed;
         rigid.AddForce(velocity, ForceMode2D.Impulse);
         Destroy(gameObject, deadDelayTime);
     }
