@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114908931785497834}
   - component: {fileID: 114868271003697960}
   - component: {fileID: 114638026623456732}
+  - component: {fileID: 114806615273811340}
   m_Layer: 9
   m_Name: PlayerBlack
   m_TagString: Untagged
@@ -185,6 +186,23 @@ MonoBehaviour:
   playSprite: {fileID: 21300000, guid: 0a3f29bf9b34f6d4aaa087b3c148eb03, type: 3}
   signalSprite: {fileID: 21300000, guid: 68433f05396c40f4e842a3b03c9b7f59, type: 3}
   signalFrame: 20
+--- !u!114 &114806615273811340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592875330346722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e41575d701256a4c976fa78da4b85f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargePrefab: {fileID: 1432943293481754, guid: 314626abe54ed1e418ec9d5896dd9608,
+    type: 2}
+  shotOffset: {x: 0, y: 2, z: 0}
+  chargeStartTime: 0.5
+  laserPrefab: {fileID: 1080214111931094, guid: f4ec9136a5ac8804a8ef4a903cb87495,
+    type: 2}
 --- !u!114 &114868271003697960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,8 +228,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1458985857778898, guid: fe721cc7c37368840ad792cf7ed7c270,
     type: 2}
   shotOffset: {x: 0, y: 2, z: 0}
-  laserPrefab: {fileID: 1410058341666696, guid: 646898e3e759d75479bb740e73000caa,
-    type: 2}
 --- !u!212 &212403271220189894
 SpriteRenderer:
   m_ObjectHideFlags: 1

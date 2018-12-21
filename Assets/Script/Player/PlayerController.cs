@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rigid;
     private Vector2 velocity;
 
+    private ChargeShot chargeShot;
+
     public static PlayerInput GetPlayerInput()
     {
         return playerInput;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         recordController = GetComponent<RecordController>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
+        chargeShot = GetComponent<ChargeShot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
 
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
@@ -40,10 +43,14 @@ public class PlayerController : MonoBehaviour {
         playerInput.Update();
 
         //弾を撃つ
+        //if (playerInput.SameTimeTap)
+        //    shot.ShotBullet();
+
+        if (playerInput.SameTimeTapBegan)
+            chargeShot.ChargeBullet();
+
         if (playerInput.SameTimeTap)
-            shot.ShotBullet();
-        //if (playerInput.TouchTime > 0)
-        //    shot.ChargeShotBullet(playerInput.TouchTime);
+            chargeShot.ShotBullet();
 
     }
 

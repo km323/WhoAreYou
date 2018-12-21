@@ -10,30 +10,35 @@ public class Laser : MonoBehaviour {
     private Vector2 direction;
     [SerializeField]
     private float deadDelayTime;
-    [SerializeField]
-    private float scaleSpeed;
-
-    private const float angleOffset = 90;
-
+    
+    
     private Vector3 velocity;
     private Rigidbody2D rigid;
 
-    private Vector3 scale;
-
+    LineRenderer renderer;
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<LineRenderer>();
+
+        renderer.enabled = false;
     }
 
-    void Start()
+    public void Shot(float width)
     {
+        renderer.enabled = true;
         velocity = direction * speed * Time.fixedDeltaTime / 2;
         rigid.AddForce(velocity, ForceMode2D.Impulse);
         Destroy(gameObject, deadDelayTime);
+
+        renderer.SetPosition(0, transform.position);
+        renderer.SetPosition(1, transform.position);
+        renderer.widthMultiplier = width;
     }
 
     private void Update()
     {
-        transform.localScale += new Vector3(0, Time.fixedDeltaTime*scaleSpeed, 0);
+        renderer.SetPosition(1, transform.position);
     }
 }
