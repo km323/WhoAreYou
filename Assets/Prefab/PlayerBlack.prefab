@@ -201,7 +201,7 @@ MonoBehaviour:
     type: 2}
   shotOffset: {x: 0, y: 2, z: 0}
   chargeStartTime: 0.5
-  laserPrefab: {fileID: 1080214111931094, guid: f4ec9136a5ac8804a8ef4a903cb87495,
+  laserPrefab: {fileID: 1712381644284766, guid: c71b527fc0ae8f744aa4b517348df0f3,
     type: 2}
 --- !u!114 &114868271003697960
 MonoBehaviour:

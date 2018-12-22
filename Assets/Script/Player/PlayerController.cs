@@ -46,10 +46,10 @@ public class PlayerController : MonoBehaviour {
         //if (playerInput.SameTimeTap)
         //    shot.ShotBullet();
 
-        if (playerInput.SameTimeTapBegan)
+        if (playerInput.SameTimeTapBegan || Input.GetKeyDown(KeyCode.Space))
             chargeShot.ChargeBullet();
 
-        if (playerInput.SameTimeTap)
+        if (playerInput.SameTimeTap||Input.GetKeyDown(KeyCode.Space))
             chargeShot.ShotBullet();
 
     }

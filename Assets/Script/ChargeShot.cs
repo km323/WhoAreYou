@@ -34,6 +34,7 @@ public class ChargeShot : MonoBehaviour {
     public void ChargeBullet()
     {
         //StartCoroutine("Laser");
+        Instantiate(laserPrefab, transform.position + shotOffset, Quaternion.identity);
     }
     
 
