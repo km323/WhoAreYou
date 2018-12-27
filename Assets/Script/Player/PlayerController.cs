@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Slide()
     {
-        if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
+        if (playerInput.QuickSwipe)
         {
             dodge.DodgeAttack();
             velocity.x = playerInput.Direction.x * 10f;
