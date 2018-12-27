@@ -12,13 +12,15 @@ public class RecordController : MonoBehaviour {
     private SpriteRenderer frameObjRenderer;
     [SerializeField]
     private Sprite playSprite;
-    [SerializeField]
-    private Sprite signalSprite;
+
     [SerializeField]
     private int signalFrame;
 
     private const int beforSignal = 1;
     private const int afterSignal = -1;
+
+    private StageManager stageManager;
+    private Sprite signalSprite;
 
     public Vector3 GetStartPos()
     {
@@ -31,9 +33,22 @@ public class RecordController : MonoBehaviour {
     void Awake () {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        signalSprite = SetPlayerPlaySprite();
 
         GetComponent<PlayerCollision>().OnBulletHit += () => StopPlayRecord();
         GameMain.OnNextGame += () => StopPlayRecord();
+    }
+
+    private Sprite SetPlayerPlaySprite()
+    {
+        Sprite sprite = null;
+        if (gameObject.layer == 9)
+            sprite = stageManager.GetPlayerBlackPlay();
+        if (gameObject.layer == 10)
+            sprite = stageManager.GetPlayerWhitePlay();
+
+        return sprite;
     }
 
     private void OnEnable()

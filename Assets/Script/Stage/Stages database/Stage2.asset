@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a7c1ac824836649bf50abfc44e1290, type: 3}
+  m_Name: Stage2
+  m_EditorClassIdentifier: 
+  playerBlackRec: {fileID: 21300000, guid: 6a6aa602cfbb4b240acffbc9848b4613, type: 3}
+  playerWhiteRec: {fileID: 21300000, guid: 9a50f2a22fb1d3248887cf05af681ef1, type: 3}
+  playerBlackPlay: {fileID: 21300000, guid: 6a6aa602cfbb4b240acffbc9848b4613, type: 3}
+  playerWhitePlay: {fileID: 21300000, guid: 6231ae3be877e074e95acbfe64e94e08, type: 3}

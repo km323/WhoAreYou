@@ -11,9 +11,10 @@ public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer frameObjRenderer;
     [SerializeField]
-    private Sprite recSprite;
-    [SerializeField]
     private Sprite playSprite;
+
+    private StageManager stageManager;
+    private Sprite recSprite;
 
     private SpriteRenderer spriteRenderer;
     private PolygonCollider2D polygonCollider;
@@ -23,6 +24,7 @@ public class PlayerEffect : MonoBehaviour {
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
     }
 
     private void OnEnable()
@@ -55,13 +57,27 @@ public class PlayerEffect : MonoBehaviour {
         else
             frameObjRenderer.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
         frameObjRenderer.sprite = recSprite;
+
+        frameObjRenderer.sprite = SetPlayerRecSprite();
     }
+
+    private Sprite SetPlayerRecSprite()
+    {
+        Sprite sprite = null;
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+            sprite = stageManager.GetPlayerBlackRec();
+        if (GameMain.GetCurrentState() == GameMain.WHITE)
+            sprite = stageManager.GetPlayerWhiteRec();
+
+        return sprite;
+    }
+
     private void ChageFrameObjSprite()
     {
         frameObjRenderer.sprite = playSprite;
         frameObjRenderer.sortingLayerName = "Default";
     }
-   
+
     private void SetDeadParticle()
     {
         polygonCollider.enabled = false;

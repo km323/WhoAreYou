@@ -21,6 +21,12 @@ public class GameMain : MonoBehaviour {
         return currentState;
     }
 
+    private int turn = 0;
+    public int GetTurn()
+    {
+        return turn;
+    }
+
     [SerializeField]
     private GameObject blackPlayerPrefab;
     [SerializeField]
@@ -142,6 +148,7 @@ public class GameMain : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         Destroy(activePlayer.GetComponent<PlayerController>());
+        turn++;
         OnNextGame();
 
         yield return new WaitForSeconds(1f);
@@ -150,6 +157,9 @@ public class GameMain : MonoBehaviour {
         ShowAllCharacter();
 
         yield return new WaitForSeconds(0.5f);
+
+
+
 
         ActivePlayerInput();
     }

@@ -7,8 +7,10 @@ using DG.Tweening;
 public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = 2000;
+    
 
     private static PlayerInput playerInput;
+
 
     private RecordController recordController;
     private SpriteRenderer playerSprite;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     void Awake ()
     {
         playerInput = new PlayerInput();
+        
     }
 
     void Start()
@@ -32,7 +35,6 @@ public class PlayerController : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
-
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
     }
 
