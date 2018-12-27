@@ -201,7 +201,9 @@ MonoBehaviour:
     type: 2}
   shotOffset: {x: 0, y: 2, z: 0}
   chargeStartTime: 0.5
-  laserPrefab: {fileID: 1712381644284766, guid: c71b527fc0ae8f744aa4b517348df0f3,
+  missilePrefab: {fileID: 1712381644284766, guid: c71b527fc0ae8f744aa4b517348df0f3,
+    type: 2}
+  rockonPrefab: {fileID: 1744779429319742, guid: 318cfe7bba54e434084815109401969e,
     type: 2}
 --- !u!114 &114868271003697960
 MonoBehaviour:

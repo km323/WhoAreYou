@@ -12,7 +12,11 @@ public class ChargeShot : MonoBehaviour {
     private float chargeStartTime;
 
     [SerializeField]
-    private GameObject laserPrefab;
+    private GameObject missilePrefab;
+    [SerializeField]
+    private GameObject rockonPrefab;
+
+    private GameObject rockon;
 
     private float scale;
 
@@ -25,18 +29,54 @@ public class ChargeShot : MonoBehaviour {
 
     public void ShotBullet()
     {
-        //StopCoroutine("Laser");
-
+        StopCoroutine("Missile");
+        Instantiate(missilePrefab, transform.position + shotOffset, Quaternion.identity);
         //Destroy(charge);
         //laser.GetComponent<Laser>().Shot(scale);
-
+        Destroy(rockon);
     }
     public void ChargeBullet()
     {
-        //StartCoroutine("Laser");
-        Instantiate(laserPrefab, transform.position + shotOffset, Quaternion.identity);
+        rockon = Instantiate(rockonPrefab);
+        StartCoroutine("Missile");
+        
+        //Instantiate(laserPrefab, transform.position + shotOffset, Quaternion.identity);
+        
     }
-    
+
+    IEnumerator Missile()
+    {
+        int layer = 1 << 10;
+        while (true)
+        {
+            RaycastHit2D hit = RaycastAndDraw(transform.position + shotOffset, Vector2.up, 20, layer);
+            
+            yield return null;
+        }
+    }
+
+    public RaycastHit2D RaycastAndDraw(Vector2 origin, Vector2 direction, float maxDistance, int layerMask)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
+
+        //衝突時のRayを画面に表示
+        if (hit.collider)
+        {
+            rockon.SetActive(true);
+            rockon.transform.position = hit.collider.gameObject.transform.position;
+            Debug.DrawRay(origin, hit.point - origin, Color.yellow);
+            //Debug.DrawRay(origin, hit.point - origin, Color.blue, RAY_DISPLAY_TIME, false);
+        }
+        //非衝突時のRayを画面に表示
+        else
+        {
+            rockon.SetActive(false);
+            Debug.DrawRay(origin, direction * maxDistance, Color.green);
+            //Debug.DrawRay(origin, direction * maxDistance, Color.green, RAY_DISPLAY_TIME, false);
+        }
+
+        return hit;
+    }
 
     IEnumerator Laser()
     {
@@ -54,7 +94,7 @@ public class ChargeShot : MonoBehaviour {
                 if (first == false)
                 {
                     charge=Instantiate(chargePrefab, transform.position + shotOffset, Quaternion.identity);
-                    laser=Instantiate(laserPrefab, transform.position + shotOffset, Quaternion.identity);
+                    laser=Instantiate(missilePrefab, transform.position + shotOffset, Quaternion.identity);
                     first = true;
                 }
 

@@ -194,7 +194,8 @@ MonoBehaviour:
   chargePrefab: {fileID: 0}
   shotOffset: {x: 0, y: -2, z: 0}
   chargeStartTime: 0
-  laserPrefab: {fileID: 0}
+  missilePrefab: {fileID: 0}
+  rockonPrefab: {fileID: 0}
 --- !u!114 &114925572475402936
 MonoBehaviour:
   m_ObjectHideFlags: 1
