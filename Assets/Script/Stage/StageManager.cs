@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour {
-    private const int stageMax = 6;
-    private const int resetTurn = 11;
+    private const int stageMax = 5;
+    private const int resetTurn = 3;
+    public const float EffectWaitInterval = 2f;
 
     [SerializeField]
     private StageDataBase stageDataBase;
@@ -21,8 +22,17 @@ public class StageManager : MonoBehaviour {
         return needToReset;
     }
 
+    private bool turnAfterReset;
+    public bool GetTurnAfterReset()
+    {
+        return turnAfterReset;
+    }
+
     private GameMain gameMain;
     private int turn;
+    private int previousTurn;
+    private int randomStage;
+    private int previousStage;
 
 	// Use this for initialization
 	void Start () {
@@ -33,40 +43,82 @@ public class StageManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         UpdateStage();
-
     }
 
     private void UpdateStage()
     {
+        turn = gameMain.GetTurn();
+
+        if (turn == previousTurn)
+            return;
+
         needToReset = false;
-        if (turn != 0 && turn % resetTurn == 0)
+        turnAfterReset = false;
+
+        if (turn % resetTurn == 0)
         {
             needToReset = true;
-            curStageNum++;
+            previousStage = curStageNum;
+
+            if (curStageNum <= stageMax)
+                curStageNum++;
+            if (curStageNum > stageMax)
+                randomStage = GetRandomStage();
         }
+
+        if (turn != 1 && turn % resetTurn == 1)
+            turnAfterReset = true;
+
+        previousTurn = turn;
+    }
+
+    private int GetRandomStage()
+    {
+        int tmpStage = Random.Range(1, stageMax);
+
+        while (tmpStage == randomStage)
+            tmpStage = Random.Range(1, stageMax);
+
+        return tmpStage;
+    }
+
+    private StageTable GetStageTable()
+    {
+        int num = 0;
+        if (curStageNum > stageMax)
+            num = randomStage;
+        else
+            num = curStageNum;
+        return stageDataBase.GetStageList()[num - 1];
+    }
+
+    public Sprite GetPreviousBlackRec()
+    {
+        return stageDataBase.GetStageList()[previousStage - 1].GetBlackRec();
+    }
+
+    public Sprite GetPreviousWhiteRec()
+    {
+        return stageDataBase.GetStageList()[previousStage - 1].GetWhiteRec();
     }
 
     public Sprite GetPlayerBlackRec()
     {
-        StageTable stage = stageDataBase.GetStageList()[curStageNum - 1];
-        return stage.GetBlackRec();
+        return GetStageTable().GetBlackRec();
     }
 
     public Sprite GetPlayerWhiteRec()
     {
-        StageTable stage = stageDataBase.GetStageList()[curStageNum - 1];
-        return stage.GetWhiteRec();
+        return GetStageTable().GetWhiteRec();
     }
 
     public Sprite GetPlayerBlackPlay()
     {
-        StageTable stage = stageDataBase.GetStageList()[curStageNum - 1];
-        return stage.GetBlackPlay();
+        return GetStageTable().GetBlackPlay();
     }
 
     public Sprite GetPlayerWhitePlay()
     {
-        StageTable stage = stageDataBase.GetStageList()[curStageNum - 1];
-        return stage.GetWhitePlay();
+        return GetStageTable().GetWhitePlay();
     }
 }

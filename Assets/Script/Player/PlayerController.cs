@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
 
     private static PlayerInput playerInput;
 
-
     private RecordController recordController;
     private SpriteRenderer playerSprite;
     private Shot shot;

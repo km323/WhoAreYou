@@ -11,11 +11,11 @@ public class TurnText : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
-        GameMain.OnNextGame += () => ShowTurn();
+        GameMain.OnNextGame += ShowTurn;
 
         gameObject.SetActive(false);
     }
-	
+
     private void ShowTurn()
     {
         gameObject.SetActive(true);

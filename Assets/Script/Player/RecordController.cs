@@ -36,8 +36,15 @@ public class RecordController : MonoBehaviour {
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         signalSprite = SetPlayerPlaySprite();
 
-        GetComponent<PlayerCollision>().OnBulletHit += () => StopPlayRecord();
-        GameMain.OnNextGame += () => StopPlayRecord();
+        GetComponent<PlayerCollision>().OnBulletHit += StopPlayRecord;
+        GameMain.OnNextGame += StopPlayRecord;
+
+    }
+
+    private void OnDestroy()
+    {
+        GetComponent<PlayerCollision>().OnBulletHit -= StopPlayRecord;
+        GameMain.OnNextGame -=  StopPlayRecord;
     }
 
     private Sprite SetPlayerPlaySprite()
@@ -121,9 +128,12 @@ public class RecordController : MonoBehaviour {
         //最初の一回
         transform.position = new Vector3(recordList[0].x, recordList[0].y, transform.position.z);
 
+        if (stageManager.GetNeedToReset())
+            yield return new WaitForSeconds(StageManager.EffectWaitInterval);
+        
         yield return new WaitForSeconds(1f);
 
-        while(true)
+        while (true)
         {
             transform.position = new Vector3(recordList[index].x, recordList[index].y, transform.position.z);
 

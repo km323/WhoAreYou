@@ -42,11 +42,16 @@ public class GameMain : MonoBehaviour {
 
     //NextGameのイベント
     public delegate void NextGameHandler();
-    public static event NextGameHandler OnNextGame;
+    public static NextGameHandler OnNextGame;
+
+    private StageManager stageManager;
+    private CameraEffect cameraEffect;
 
     private void Awake()
     {
         OnNextGame = null;
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        cameraEffect = new CameraEffect();
     }
 
     private void Start()
@@ -105,7 +110,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = black.Count;
 
             //WhitePrefabで初期化
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[white.Count % 10],whitePlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[turn % 10],whitePlayerPrefab.transform.rotation);
         }
         else
         {
@@ -114,7 +119,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = white.Count;
 
             //BlackPrefabで初期化
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[black.Count % 10],blackPlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[turn % 10],blackPlayerPrefab.transform.rotation);
         }
 
         activePlayer.SetActive(false);
@@ -131,11 +136,39 @@ public class GameMain : MonoBehaviour {
     {
         //すべての敵の初期化
         foreach (GameObject enemy in black)
+        {
+            if (enemy == null)
+                continue;
             enemy.SetActive(true);
+        }
         foreach (GameObject enemy in white)
+        {
+            if (enemy == null)
+                continue;
             enemy.SetActive(true);
-
+        }
         activePlayer.SetActive(true);
+    }
+
+    private void ChangeStage()
+    {
+        cameraEffect.Play();
+        Invoke("DestroyCharacter", + StageManager.EffectWaitInterval / 2);
+    }
+    private void DestroyCharacter()
+    {
+        if (currentState == BLACK)
+        {
+            foreach (GameObject enemy in black)
+                Destroy(enemy);
+            black.Clear();
+        }
+        else
+        {
+            foreach (GameObject enemy in white)
+                Destroy(enemy);
+            white.Clear();
+        }
     }
 
     private void ActivePlayerInput()
@@ -152,16 +185,28 @@ public class GameMain : MonoBehaviour {
         OnNextGame();
 
         yield return new WaitForSeconds(1f);
+
         ResetGame();
+
+        if (stageManager.GetTurnAfterReset())
+            DestroyCharacter();
         yield return null;
+
         ShowAllCharacter();
 
+        if (stageManager.GetNeedToReset())
+        {
+            ChangeStage();
+            yield return new WaitForSeconds(StageManager.EffectWaitInterval);
+        }
+
         yield return new WaitForSeconds(0.5f);
-
-
-
-
         ActivePlayerInput();
+    }
+
+    private void OnDestroy()
+    {
+        OnNextGame = null;
     }
 
     //IEnumerator CallGameEnd()

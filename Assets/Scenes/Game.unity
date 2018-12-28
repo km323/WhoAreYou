@@ -153,7 +153,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 181092431}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52d362b8f740f354f94e50ffcaeaf4d6, type: 3}
   m_Name: 
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scanLineJitter: 0
   _verticalJump: 0
-  _horizontalShake: 0.05
+  _horizontalShake: 0
   _colorDrift: 0
   _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
 --- !u!1 &591509016
@@ -650,6 +650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947ed354895802d43a2bddc213998b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  digitalGlitch: {fileID: 0}
+  analogGlitch: {fileID: 0}
 --- !u!1 &1226386283
 GameObject:
   m_ObjectHideFlags: 0

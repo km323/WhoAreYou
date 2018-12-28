@@ -33,20 +33,30 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     void Start () {
-        GetComponent<PlayerCollision>().OnBulletHit += () => PlayVanishEffect();
-        GetComponent<PlayerCollision>().OnBulletHit += () => SetDeadParticle();
+        GetComponent<PlayerCollision>().OnBulletHit += PlayVanishEffect;
+        GetComponent<PlayerCollision>().OnBulletHit += SetDeadParticle;
 
-        GameMain.OnNextGame += () => PlayVanishEffect();
-        GameMain.OnNextGame += () => DestroyDeadParticle();
-        GameMain.OnNextGame += () => ChageFrameObjSprite();
-        GameMain.OnNextGame += () => DeadMove();
+        GameMain.OnNextGame += PlayVanishEffect;
+        GameMain.OnNextGame += DestroyDeadParticle;
+        GameMain.OnNextGame += ChageFrameObjSprite;
+        GameMain.OnNextGame += DeadMove;
 
         CreateFrameObj();
     }
 
+    private void OnDestroy()
+    {
+        GetComponent<PlayerCollision>().OnBulletHit -= PlayVanishEffect;
+        GetComponent<PlayerCollision>().OnBulletHit -= SetDeadParticle;
+
+        GameMain.OnNextGame -= PlayVanishEffect;
+        GameMain.OnNextGame -= DestroyDeadParticle;
+        GameMain.OnNextGame -= ChageFrameObjSprite;
+        GameMain.OnNextGame -= DeadMove;
+    }
+
     private void DeadMove()
     {
-
         transform.DOMove(GetComponent<RecordController>().GetStartPos(), 1);
     }
 
@@ -56,9 +66,24 @@ public class PlayerEffect : MonoBehaviour {
             frameObjRenderer.gameObject.transform.rotation = Quaternion.identity;
         else
             frameObjRenderer.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
-        frameObjRenderer.sprite = recSprite;
 
-        frameObjRenderer.sprite = SetPlayerRecSprite();
+
+        recSprite = SetPlayerRecSprite();
+
+        if (stageManager.GetNeedToReset())
+        {
+            frameObjRenderer.sprite = SetPreviousRecSprite();
+            Invoke("SetCurStageRecSprite", StageManager.EffectWaitInterval / 2);
+        }
+        else
+            frameObjRenderer.sprite = recSprite;
+
+        //preRecSprite = curRecSprite;
+        //recSprite = frameObjRenderer.sprite;
+    }
+    private void SetCurStageRecSprite()
+    {
+        frameObjRenderer.sprite = recSprite;
     }
 
     private Sprite SetPlayerRecSprite()
@@ -68,6 +93,16 @@ public class PlayerEffect : MonoBehaviour {
             sprite = stageManager.GetPlayerBlackRec();
         if (GameMain.GetCurrentState() == GameMain.WHITE)
             sprite = stageManager.GetPlayerWhiteRec();
+
+        return sprite;
+    }
+    private Sprite SetPreviousRecSprite()
+    {
+        Sprite sprite = null;
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+            sprite = stageManager.GetPreviousBlackRec();
+        if (GameMain.GetCurrentState() == GameMain.WHITE)
+            sprite = stageManager.GetPreviousWhiteRec();
 
         return sprite;
     }
