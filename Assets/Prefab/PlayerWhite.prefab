@@ -177,7 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frameObjRenderer: {fileID: 212690807856243714}
   playSprite: {fileID: 21300000, guid: 0a3f29bf9b34f6d4aaa087b3c148eb03, type: 3}
-  signalSprite: {fileID: 21300000, guid: 91a2136800a060e4884181c75881754a, type: 3}
   signalFrame: 30
 --- !u!114 &114925572475402936
 MonoBehaviour:
@@ -192,7 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1458985857778898, guid: 4449980579d307243a53ea4ae5257332,
     type: 2}
-  shotOffset: {x: 0, y: -2, z: 0}
+  shotOffset: {x: 0.5, y: -2, z: 0}
+  shotOffset2: {x: -0.5, y: -2, z: 0}
   laserPrefab: {fileID: 1459190833604208, guid: 2c6bc2abfdfdc9842a05c3fd7495c4e3,
     type: 2}
 --- !u!114 &114969302938601106
@@ -210,7 +210,6 @@ MonoBehaviour:
   deadParticle: {fileID: 1984125953717390, guid: ad0b8e74903bdaf4087ad56b0c39228b,
     type: 2}
   frameObjRenderer: {fileID: 212690807856243714}
-  recSprite: {fileID: 21300000, guid: 4dd6bb1766d47ee428ba69541e12607b, type: 3}
   playSprite: {fileID: 21300000, guid: 0a3f29bf9b34f6d4aaa087b3c148eb03, type: 3}
 --- !u!212 &212323242695424858
 SpriteRenderer:

@@ -9,7 +9,7 @@ public class PlayerCollision  : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //弾を消す
-        if(collision.tag == "Bullet")
+        if (collision.tag == "Bullet")
             Destroy(collision.gameObject);
         if (OnBulletHit != null)
             OnBulletHit();
