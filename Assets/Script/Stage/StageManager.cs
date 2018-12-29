@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private const int stageMax = 5;
-    private const int resetTurn = 3;
+    private const int resetTurn = 11;
     public const float EffectWaitInterval = 2f;
 
     [SerializeField]
@@ -20,6 +20,12 @@ public class StageManager : MonoBehaviour {
     public bool GetNeedToReset()
     {
         return needToReset;
+    }
+
+    private bool clearLastStage;
+    public bool getClearLastStage()
+    {
+        return clearLastStage;
     }
 
     private bool turnAfterReset;
@@ -38,6 +44,8 @@ public class StageManager : MonoBehaviour {
 	void Start () {
         gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
         needToReset = false;
+        clearLastStage = false;
+        turnAfterReset = false;
     }
 	
 	// Update is called once per frame
@@ -66,6 +74,9 @@ public class StageManager : MonoBehaviour {
                 randomStage = GetRandomStage();
         }
 
+        if (!clearLastStage && curStageNum > stageMax)
+            clearLastStage = true;
+
         if (turn != 1 && turn % resetTurn == 1)
             turnAfterReset = true;
 
@@ -81,7 +92,6 @@ public class StageManager : MonoBehaviour {
 
         return tmpStage;
     }
-
     private StageTable GetStageTable()
     {
         int num = 0;
@@ -96,7 +106,6 @@ public class StageManager : MonoBehaviour {
     {
         return stageDataBase.GetStageList()[previousStage - 1].GetBlackRec();
     }
-
     public Sprite GetPreviousWhiteRec()
     {
         return stageDataBase.GetStageList()[previousStage - 1].GetWhiteRec();
@@ -106,19 +115,21 @@ public class StageManager : MonoBehaviour {
     {
         return GetStageTable().GetBlackRec();
     }
-
     public Sprite GetPlayerWhiteRec()
     {
         return GetStageTable().GetWhiteRec();
     }
-
     public Sprite GetPlayerBlackPlay()
     {
         return GetStageTable().GetBlackPlay();
     }
-
     public Sprite GetPlayerWhitePlay()
     {
         return GetStageTable().GetWhitePlay();
+    }
+
+    public float GetBgScrollSpeed()
+    {
+        return stageDataBase.GetStageList()[curStageNum - 1].GetBgScrollSpeed();
     }
 }

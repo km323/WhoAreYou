@@ -7,7 +7,6 @@ using DG.Tweening;
 public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = 2000;
-    
 
     private static PlayerInput playerInput;
 
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour {
     void Awake ()
     {
         playerInput = new PlayerInput();
-        
     }
 
     void Start()
@@ -38,6 +36,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update () {
+#if UNITY_EDITOR
+        if(GetComponent<PolygonCollider2D>().enabled)
+            GetComponent<PolygonCollider2D>().enabled = false;
+#endif
         playerInput.Update();
 
         //弾を撃つ

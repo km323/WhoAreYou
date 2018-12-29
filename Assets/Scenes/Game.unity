@@ -153,12 +153,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 181092431}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52d362b8f740f354f94e50ffcaeaf4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speedUpAmount: 0.02
   pixelWhite: {fileID: 481594960}
   pixelBlack: {fileID: 1095727321}
 --- !u!1 &232891868
@@ -650,8 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947ed354895802d43a2bddc213998b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digitalGlitch: {fileID: 0}
-  analogGlitch: {fileID: 0}
 --- !u!1 &1226386283
 GameObject:
   m_ObjectHideFlags: 0

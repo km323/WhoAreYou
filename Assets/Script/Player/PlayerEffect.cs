@@ -72,14 +72,17 @@ public class PlayerEffect : MonoBehaviour {
 
         if (stageManager.GetNeedToReset())
         {
-            frameObjRenderer.sprite = SetPreviousRecSprite();
-            Invoke("SetCurStageRecSprite", StageManager.EffectWaitInterval / 2);
+            if (!stageManager.getClearLastStage())
+            {
+                frameObjRenderer.sprite = SetPreviousRecSprite();
+                Invoke("SetCurStageRecSprite", StageManager.EffectWaitInterval / 2);
+            }
+            else
+                SetCurStageRecSprite();
         }
         else
             frameObjRenderer.sprite = recSprite;
 
-        //preRecSprite = curRecSprite;
-        //recSprite = frameObjRenderer.sprite;
     }
     private void SetCurStageRecSprite()
     {
@@ -141,7 +144,7 @@ public class PlayerEffect : MonoBehaviour {
 
         while (radius < 2)
         {
-            radius += Time.fixedDeltaTime * speed;
+            radius += Time.deltaTime * speed;
 
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
@@ -170,7 +173,7 @@ public class PlayerEffect : MonoBehaviour {
 
         while (radius > 0)
         {
-            radius -= Time.fixedDeltaTime * speed;
+            radius -= Time.deltaTime * speed;
 
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;

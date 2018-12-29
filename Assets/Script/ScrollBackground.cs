@@ -5,15 +5,17 @@ using DG.Tweening;
 
 public class ScrollBackground : MonoBehaviour {
     [SerializeField]
-    private float speed;
+    private float speedUpAmount;
     [SerializeField]
     private GameObject pixelWhite;
     [SerializeField]
     private GameObject pixelBlack;
 
+    private StageManager stageManager;
     private Vector3 initPosition;
     private Vector3 direction;
     private bool canScroll;
+    private float scrollSpeed;
 
     private void Awake()
     {
@@ -23,12 +25,16 @@ public class ScrollBackground : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         initPosition = transform.position;
         StartCoroutine("ResetScroll");
         UpdateDirection();
-        ChangePixelEffect();
 
         GameMain.OnNextGame += () => StartCoroutine("ResetScroll");
+
+        pixelWhite.SetActive(false);
+        pixelBlack.SetActive(true);
+        scrollSpeed = 0f;
     }
 	
 	// Update is called once per frame
@@ -40,10 +46,11 @@ public class ScrollBackground : MonoBehaviour {
     IEnumerator ResetScroll()
     {
         canScroll = false;
-        ChangePixelEffect();
         transform.DOMoveY(initPosition.y, 1);
-
+        ChangePixelEffect();
+        
         yield return new WaitForSeconds(1.5f);
+        SetScrollSpeed();
         canScroll = true;
     }
 
@@ -52,13 +59,24 @@ public class ScrollBackground : MonoBehaviour {
     {
         if(GameMain.GetCurrentState() == GameMain.BLACK)
         {
-            pixelWhite.SetActive(true);
-            pixelBlack.SetActive(false);
+            pixelWhite.SetActive(false);
+            pixelBlack.SetActive(true);
         }
         else
         {
-            pixelWhite.SetActive(false);
-            pixelBlack.SetActive(true);
+            pixelWhite.SetActive(true);
+            pixelBlack.SetActive(false);
+        }
+    }
+
+    private void SetScrollSpeed()
+    {
+        if (stageManager.GetNeedToReset())
+        {
+            if(stageManager.getClearLastStage())
+                scrollSpeed += speedUpAmount;
+            else
+                scrollSpeed = stageManager.GetBgScrollSpeed();
         }
     }
 
@@ -69,7 +87,7 @@ public class ScrollBackground : MonoBehaviour {
             return;
 
         UpdateDirection();
-        transform.position += direction * speed * Time.fixedDeltaTime;
+        transform.position += direction * scrollSpeed * Time.deltaTime;
     }
 
     //スクロールする方向を決める

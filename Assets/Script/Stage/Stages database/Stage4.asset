@@ -15,3 +15,4 @@ MonoBehaviour:
   playerWhiteRec: {fileID: 21300000, guid: 6ae31add6c3d0de4e8e39f084408feeb, type: 3}
   playerBlackPlay: {fileID: 21300000, guid: 60a0c4e2253315c41ac79a8896eabb1c, type: 3}
   playerWhitePlay: {fileID: 21300000, guid: a56456072992d0f45b5a044e510b0ce7, type: 3}
+  bgScrollSpeed: 0.3

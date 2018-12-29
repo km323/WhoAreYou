@@ -19,6 +19,9 @@ public class StageTable : ScriptableObject
     [SerializeField]
     private Sprite playerWhitePlay;
 
+    [SerializeField]
+    private float bgScrollSpeed;
+
     public Sprite GetBlackRec()
     {
         return playerBlackRec;
@@ -39,4 +42,8 @@ public class StageTable : ScriptableObject
         return playerWhitePlay;
     }
 
+    public float GetBgScrollSpeed()
+    {
+        return bgScrollSpeed;
+    }
 }

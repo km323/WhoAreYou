@@ -83,7 +83,7 @@ public class GameMain : MonoBehaviour {
         
         enemyCount--;
 
-        if (enemyCount <= 0)
+        if (enemyCount == 0)
             StartCoroutine("NextGame");
     }
     private void BlackEnemyHitHandler()
@@ -93,7 +93,7 @@ public class GameMain : MonoBehaviour {
         
         enemyCount--;
 
-        if (enemyCount <= 0)
+        if (enemyCount == 0)
             StartCoroutine("NextGame");
     }
 
@@ -110,7 +110,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = black.Count;
 
             //WhitePrefabで初期化
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[turn % 10],whitePlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[black.Count % 6],whitePlayerPrefab.transform.rotation);
         }
         else
         {
@@ -119,7 +119,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = white.Count;
 
             //BlackPrefabで初期化
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[turn % 10],blackPlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[white.Count % 6],blackPlayerPrefab.transform.rotation);
         }
 
         activePlayer.SetActive(false);
@@ -182,6 +182,7 @@ public class GameMain : MonoBehaviour {
 
         Destroy(activePlayer.GetComponent<PlayerController>());
         turn++;
+
         OnNextGame();
 
         yield return new WaitForSeconds(1f);
