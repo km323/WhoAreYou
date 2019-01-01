@@ -70,12 +70,6 @@ public class GameMain : MonoBehaviour {
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
     }
 
-    //敵の当たり判定のイベント
-    //private void GameOver()
-    //{
-    //    Debug.Log("Gameover");
-    //    //StartCoroutine("CallGameEnd");
-    //}
     private void WhiteEnemyHitHandler()
     {
         if (currentState == WHITE)
@@ -83,7 +77,7 @@ public class GameMain : MonoBehaviour {
         
         enemyCount--;
 
-        if (enemyCount == 0)
+        if (enemyCount == 0 && gameObject != null)
             StartCoroutine("NextGame");
     }
     private void BlackEnemyHitHandler()
@@ -93,12 +87,19 @@ public class GameMain : MonoBehaviour {
         
         enemyCount--;
 
-        if (enemyCount == 0)
+        if (enemyCount == 0 && gameObject != null)
             StartCoroutine("NextGame");
+    }
+
+    public void DisableWhenActiveDie()
+    {
+        GameController.CurrentScore = turn;
+        gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        
     }
 
     private void ResetGame()
@@ -209,12 +210,4 @@ public class GameMain : MonoBehaviour {
     {
         OnNextGame = null;
     }
-
-    //IEnumerator CallGameEnd()
-    //{
-    //    Debug.Log("Call end");
-    //    yield return new WaitForSeconds(1);
-
-    //    SceneController.Instance.Change(Scene.Result);
-    //}
 }

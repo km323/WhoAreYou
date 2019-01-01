@@ -9,17 +9,22 @@ public class PlayerController : MonoBehaviour {
     private float moveSpeed = 2000;
 
     private static PlayerInput playerInput;
+    public static PlayerInput GetPlayerInput()
+    {
+        return playerInput;
+    }
+
+    private bool wasDead;
+    public bool GetWasDead()
+    {
+        return wasDead;
+    }
 
     private RecordController recordController;
     private SpriteRenderer playerSprite;
     private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
-
-    public static PlayerInput GetPlayerInput()
-    {
-        return playerInput;
-    }
 
     void Awake ()
     {
@@ -33,12 +38,14 @@ public class PlayerController : MonoBehaviour {
         shot = GetComponent<Shot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
+
+        wasDead = false;
     }
 
     void Update () {
 #if UNITY_EDITOR
-        if(GetComponent<PolygonCollider2D>().enabled)
-            GetComponent<PolygonCollider2D>().enabled = false;
+        //if(GetComponent<PolygonCollider2D>().enabled)
+        //    GetComponent<PolygonCollider2D>().enabled = false;
 #endif
         playerInput.Update();
 
@@ -79,7 +86,12 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //SceneController.Instance.Change(Scene.Game);
+        wasDead = true;
+
+        GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
+        gameMain.DisableWhenActiveDie();
+
+        SceneController.Instance.Additive(Scene.Result);
     }
 
     private void OnDestroy()

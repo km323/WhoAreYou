@@ -6,16 +6,6 @@ TagManager:
   tags:
   - DeadEffect
   - Bullet
-  - Flammable
-  - Flamer
-  - Conductor
-  - Freezable
-  - Grass
-  - NoForcePDM
-  - FlameThrow
-  - PPaint
-  - Butter
-  - Enemy
   layers:
   - Default
   - TransparentFX
