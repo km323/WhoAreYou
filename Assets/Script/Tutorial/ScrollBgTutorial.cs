@@ -17,8 +17,9 @@ public class ScrollBgTutorial : MonoBehaviour {
 		
 	}
 
-    private void ScrollToBottom()
+    public void ScrollToBottom()
     {
-        transform.DOMoveY(-Camera.main.orthographicSize, 1.5f);
+        centerWall.SetActive(false);
+        transform.DOMoveY(-Camera.main.orthographicSize, 1f).SetDelay(1f);
     }
 }

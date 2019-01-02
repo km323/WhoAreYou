@@ -16,7 +16,7 @@ public class PlayerInput
     public Vector2 Direction { get; private set; } //移動した方向
 
     private const int maxTouch = 2;
-    private const float minMoveDis = 2f;
+    private const float minMoveDis = 0.5f;
 
     private Vector2 touchPosition; //タップした位置
     private Vector2 oldPosition;

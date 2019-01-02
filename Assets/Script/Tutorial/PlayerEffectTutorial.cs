@@ -42,6 +42,10 @@ public class PlayerEffectTutorial : MonoBehaviour {
         hasStart = true;
     }
 
+    public void DieEffect()
+    {
+        StartCoroutine("VanishEffect");
+    }
     IEnumerator VanishEffect()
     {
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
@@ -54,5 +58,7 @@ public class PlayerEffectTutorial : MonoBehaviour {
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
         }
+        yield return new WaitForSeconds(1f);
+        SceneController.Instance.Change(Scene.Title);
     }
 }

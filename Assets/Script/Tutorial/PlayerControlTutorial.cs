@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerControlTutorial : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = 2000;
+    [SerializeField]
+    private PlayerEffectTutorial effect;
 
+    private Dodge dodge;
     private PlayerInput playerInput;
     private Shot shot;
     private Rigidbody2D rigid;
@@ -13,28 +16,55 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     public bool EnableMove { get; set; }
     public bool EnableShot { get; set; }
+    public bool EnableDodge { get; set; }
 
+    public bool HasStart { get; private set; }
     public bool HasMove { get; private set; }
     public bool HasShot { get; private set; }
-    public bool HasDoge { get; private set; }
+    public bool HasDodge { get; private set; }
 
     // Use this for initialization
     void Start () {
         playerInput = new PlayerInput();
 
+        dodge = GetComponent<Dodge>();
         shot = GetComponent<Shot>();
         rigid = GetComponent<Rigidbody2D>();
+
+        effect.StartEffect();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (!HasStart && effect.GetHasStart())
+            HasStart = true;
+
         if (!EnableMove)
             return;
 
         playerInput.Update();
+        Shot();
+        Dodge();
+    }
 
-        //if (playerInput.SameTimeTap)
-        //    shot.ShotBullet();
+    private void Shot()
+    {
+        if (EnableShot && playerInput.SameTimeTap)
+        {
+            shot.ShotBullet();
+            if (!HasShot)
+                HasShot = true;
+        }
+    }
+
+    private void Dodge()
+    {
+        if (EnableDodge && (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe))
+        {
+            dodge.DodgeAttack();
+            if (!HasDodge)
+                HasDodge = true;
+        }
     }
 
     private void FixedUpdate()
@@ -42,7 +72,6 @@ public class PlayerControlTutorial : MonoBehaviour {
         Move();
     }
 
-    //移動メソッド
     private void Move()
     {
         velocity = Vector2.zero;
@@ -65,5 +94,11 @@ public class PlayerControlTutorial : MonoBehaviour {
             rigid.velocity = Vector2.zero;
 
         rigid.AddForce(velocity, ForceMode2D.Force);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        effect.DieEffect();
+        Destroy(this);
     }
 }
