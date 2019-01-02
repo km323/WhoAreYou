@@ -14,13 +14,8 @@ public class PlayerController : MonoBehaviour {
         return playerInput;
     }
 
-    private bool wasDead;
-    public bool GetWasDead()
-    {
-        return wasDead;
-    }
-
     private RecordController recordController;
+    private Dodge dodge;
     private SpriteRenderer playerSprite;
     private Shot shot;
     private Rigidbody2D rigid;
@@ -34,12 +29,11 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         recordController = GetComponent<RecordController>();
+        dodge = GetComponent<Dodge>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
-
-        wasDead = false;
     }
 
     void Update () {
@@ -48,6 +42,10 @@ public class PlayerController : MonoBehaviour {
         //    GetComponent<PolygonCollider2D>().enabled = false;
 #endif
         playerInput.Update();
+
+        //回避
+        if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
+            dodge.DodgeAttack();
 
         //弾を撃つ
         if (playerInput.SameTimeTap)
@@ -86,7 +84,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        wasDead = true;
+        if (collision.tag == "SlowMotion")
+            return;
 
         GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
         gameMain.DisableWhenActiveDie();
