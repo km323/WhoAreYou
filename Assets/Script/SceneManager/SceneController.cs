@@ -7,6 +7,7 @@ public enum Scene
 {
     None = -1,
     Title,
+    Tutorial,
     Game,
     Result,
 }
@@ -17,6 +18,7 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
     {
         {Scene.None,""},
         {Scene.Title,"Title" },
+        {Scene.Tutorial, "Tutorial" },
         {Scene.Game,"Game"},
         {Scene.Result,"Result"}
     };
@@ -43,7 +45,7 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
     private Scene additiveScene = Scene.None;
 
     //フェイド
-    private const float fadeInterval = 1f;
+    private const float fadeInterval = 0.8f;
     private bool isFading;
     private float fadeAlpha;
     private Color fadeColor;

@@ -149,7 +149,8 @@ public class PlayerInput
             return;
 
         firstTapDone = true;
-        onFirstTap();
+        if (onFirstTap != null)
+            onFirstTap();
     }
 
     //早いスワイプ

@@ -20,13 +20,14 @@ public class PlayerEffect : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
     private PolygonCollider2D polygonCollider;
-
+    private bool isPlaying;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        isPlaying = false;
     }
 
     private void OnEnable()
@@ -137,10 +138,12 @@ public class PlayerEffect : MonoBehaviour {
         if (GetComponent<PlayerController>() == null)
             spriteRenderer.material.SetFloat("_AlphaAmount", 0.35f);
 
-        StartCoroutine("StartEffect");
+        if(!isPlaying)
+            StartCoroutine("StartEffect");
     }
     IEnumerator StartEffect()
     {
+        isPlaying = false;
         spriteRenderer.material.SetFloat("_EffectRadius", 0);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
 
@@ -156,6 +159,7 @@ public class PlayerEffect : MonoBehaviour {
             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
         polygonCollider.enabled = true;
+        isPlaying = false;
     }
 
     //vanish effect
@@ -166,10 +170,12 @@ public class PlayerEffect : MonoBehaviour {
         if (GetComponent<PlayerController>() != null)
             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
-        StartCoroutine("VanishEffect");
+        if (!isPlaying)
+            StartCoroutine("VanishEffect");
     }
     private IEnumerator VanishEffect()
     {
+        isPlaying = true;
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
         bool showActiveDeadEffect = false;
@@ -188,5 +194,6 @@ public class PlayerEffect : MonoBehaviour {
             yield return null;
         }
         gameObject.SetActive(false);
+        isPlaying = false;
     }
 }
