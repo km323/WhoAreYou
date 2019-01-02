@@ -10,9 +10,15 @@ public class SlowMotion : MonoBehaviour {
 
     private GameObject activePlayer;
     private int oldCurrentState;
+    private StageManager stageManager;
+    private BoxCollider2D boxCollider;
+    private int touchTimes = 0; //弾がslow motion 範囲に触れた回数
+
     // Use this for initialization
     void Start()
     {
+        boxCollider = GetComponent<BoxCollider2D>();
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         oldCurrentState = GameMain.GetCurrentState();
         ChangeActivePlayer();
     }
@@ -24,10 +30,15 @@ public class SlowMotion : MonoBehaviour {
         {
             oldCurrentState = GameMain.GetCurrentState();
             ChangeActivePlayer();
+            touchTimes = 0;
+            boxCollider.enabled = true;
         }
 
         if (activePlayer == null)
             return;
+
+        if (touchTimes > stageManager.GetSlowMotionTimes())
+            boxCollider.enabled = false;
 
         transform.position = activePlayer.transform.position + offset * oldCurrentState;
     }
@@ -39,6 +50,7 @@ public class SlowMotion : MonoBehaviour {
 
         if (collision.tag == "Bullet")
         {
+            touchTimes++;
             Time.timeScale = timeScale;
         }
     }
