@@ -31,6 +31,8 @@ public class GameMain : MonoBehaviour {
     private GameObject blackPlayerPrefab;
     [SerializeField]
     private GameObject whitePlayerPrefab;
+    [SerializeField]
+    private GameObject slowMotionPrefab;
 
     //前回の自分のリスト
     private List<GameObject> black;
@@ -38,6 +40,7 @@ public class GameMain : MonoBehaviour {
     
     //操作してるプレイヤー
     private GameObject activePlayer;
+    public GameObject GetActivePlayer() { return activePlayer; }
     private int enemyCount = 1;
 
     //NextGameのイベント
@@ -65,6 +68,8 @@ public class GameMain : MonoBehaviour {
         activePlayer = Instantiate(blackPlayerPrefab);
         activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
+
+        Instantiate(slowMotionPrefab,activePlayer.transform.position,Quaternion.identity);
 
         GameObject enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
