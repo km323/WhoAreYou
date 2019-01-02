@@ -16,6 +16,8 @@ TagManager:
   - PPaint
   - Butter
   - Enemy
+  - Item
+  - CenterLine
   layers:
   - Default
   - TransparentFX

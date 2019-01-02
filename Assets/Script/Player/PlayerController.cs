@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rigid;
     private Vector2 velocity;
 
+    private Item item;
+
     public static PlayerInput GetPlayerInput()
     {
         return playerInput;
@@ -37,17 +39,15 @@ public class PlayerController : MonoBehaviour {
 
     void Update () {
 #if UNITY_EDITOR
-        if(GetComponent<PolygonCollider2D>().enabled)
-            GetComponent<PolygonCollider2D>().enabled = false;
+        //if(GetComponent<PolygonCollider2D>().enabled)
+        //    GetComponent<PolygonCollider2D>().enabled = false;
 #endif
         playerInput.Update();
+        
 
         //弾を撃つ
         if (playerInput.SameTimeTap)
             shot.ShotBullet();
-        //if (playerInput.TouchTime > 0)
-        //    shot.ChargeShotBullet(playerInput.TouchTime);
-
     }
 
     void FixedUpdate()
@@ -79,7 +79,29 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Item")
+        {
+            UseItem();
+            Destroy(collision.gameObject);
+        }
+
         //SceneController.Instance.Change(Scene.Game);
+    }
+
+    private void UseItem()
+    {
+        Item item = GameObject.Find("ItemManager").GetComponent<ItemManager>().GetItem();
+        switch (item.GetKindOfItem())
+        {
+            case Item.KindOfItem.Attack:
+                shot.SetBulletPrefab(item.GetItemEffect());
+                break;
+            case Item.KindOfItem.Defence:
+
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnDestroy()

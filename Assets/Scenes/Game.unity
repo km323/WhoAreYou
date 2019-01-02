@@ -1239,6 +1239,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1858459968
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1894150295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8b7f038f1dc0242b5408c26d3cad0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemPrefab: {fileID: 1723114650565038, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+  ItemPrefab: {fileID: 1701509449927370, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
+  itemDataBase: {fileID: 11400000, guid: 21f223af03bcfc04591aa4caca96e979, type: 2}
   ItemPopProbability: 1
   ItemPopStartNum: 1
 --- !u!4 &1981964473
