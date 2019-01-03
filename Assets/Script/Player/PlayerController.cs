@@ -94,8 +94,6 @@ public class PlayerController : MonoBehaviour {
             return;
         }
 
-        wasDead = true;
-
         GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
         gameMain.DisableWhenActiveDie();
 

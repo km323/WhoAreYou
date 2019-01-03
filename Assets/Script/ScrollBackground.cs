@@ -32,8 +32,8 @@ public class ScrollBackground : MonoBehaviour {
 
         GameMain.OnNextGame += () => StartCoroutine("ResetScroll");
 
-        pixelWhite.SetActive(false);
-        pixelBlack.SetActive(true);
+        pixelWhite.SetActive(true);
+        pixelBlack.SetActive(false);
         scrollSpeed = 0f;
     }
 	

@@ -12,11 +12,19 @@ public class ResultManager : MonoBehaviour {
     private GameObject normalScoreObj;
     [SerializeField]
     private GameObject bestScoreObj;
+    [SerializeField]
+    private GameObject retryButton;
+    [SerializeField]
+    private GameObject returnButton;
+    [SerializeField]
+    private float targetPosY;
 
     private void Awake()
     {
         normalScoreObj.SetActive(false);
         bestScoreObj.SetActive(false);
+        retryButton.SetActive(false);
+        returnButton.SetActive(false);
         canvasGroup.alpha = 0f;
     }
 
@@ -30,6 +38,7 @@ public class ResultManager : MonoBehaviour {
         else
         {
             CanvasFadeIn();
+            ActiveButton();
         }
 
         if (GameController.CurrentScore > GameController.BestScore)
@@ -64,6 +73,18 @@ public class ResultManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
         CanvasFadeIn();
+
+        yield return new WaitForSeconds(1f);
+        ActiveButton();
+    }
+
+    private void ActiveButton()
+    {
+        retryButton.SetActive(true);
+        returnButton.SetActive(true);
+
+        retryButton.GetComponent<RectTransform>().DOAnchorPosY(targetPosY, 0.2f);
+        returnButton.GetComponent<RectTransform>().DOAnchorPosY(targetPosY, 0.2f);
     }
 
     private void CanvasFadeIn()

@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -931, y: 445}
+  m_AnchoredPosition: {x: -931, y: -280}
   m_SizeDelta: {x: 412.30005, y: 412.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29421042
@@ -756,7 +756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1000, y: 445}
+  m_AnchoredPosition: {x: 1000, y: -280}
   m_SizeDelta: {x: 412.3, y: 412.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &906498803
@@ -1064,6 +1064,9 @@ MonoBehaviour:
   canvasGroup: {fileID: 895033827}
   normalScoreObj: {fileID: 1382337115}
   bestScoreObj: {fileID: 1744991714}
+  retryButton: {fileID: 906498801}
+  returnButton: {fileID: 29421040}
+  targetPosY: 445
 --- !u!4 &1604941749
 Transform:
   m_ObjectHideFlags: 0
