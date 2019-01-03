@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bullet : MonoBehaviour {
+public class DefaultBullet : MonoBehaviour {
     [SerializeField]
     private float speed;
     [SerializeField]
