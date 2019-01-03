@@ -13,7 +13,12 @@ public class Shot : MonoBehaviour {
 
     private GameObject bulletPrefab;
 
-    private void OnEnable()
+    private void Start()
+    {
+        SetDefaultBullet();
+    }
+
+    public void SetDefaultBullet()
     {
         bulletPrefab = defaultBulletPrefab;
     }

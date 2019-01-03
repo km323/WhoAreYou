@@ -120,5 +120,7 @@ public class PlayerController : MonoBehaviour {
     {
         recordController.StopRecord();//記録を止める
         playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
+
+        shot.SetDefaultBullet();
     }
 }
