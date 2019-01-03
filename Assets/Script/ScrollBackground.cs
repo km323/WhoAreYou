@@ -46,12 +46,17 @@ public class ScrollBackground : MonoBehaviour {
     IEnumerator ResetScroll()
     {
         canScroll = false;
-        transform.DOMoveY(initPosition.y, 1);
+        ResetPosition();
         ChangePixelEffect();
         
         yield return new WaitForSeconds(1.5f);
         SetScrollSpeed();
         canScroll = true;
+    }
+
+    public void ResetPosition()
+    {
+        transform.DOMoveY(initPosition.y, 1);
     }
 
     //current state に合うピクセルエフェクトを変える

@@ -16,7 +16,7 @@ public class PlayerInput
     public Vector2 Direction { get; private set; } //移動した方向
 
     private const int maxTouch = 2;
-    private const float minMoveDis = 20f;
+    private const float minMoveDis = 0.5f;
 
     private Vector2 touchPosition; //タップした位置
     private Vector2 oldPosition;
@@ -119,12 +119,14 @@ public class PlayerInput
     private void TouchInput()
     {
         TouchCount = Input.touchCount;
+        QuickSwipe = false;
 
         if (TouchCount <= 0 || TouchCount > maxTouch)
             return;
-
+        
         Touch[] touch = new Touch[TouchCount];
         
+
         for (int i = 0; i < touch.Length; i++)
         {
             touch[i] = Input.GetTouch(i);
@@ -149,13 +151,14 @@ public class PlayerInput
             return;
 
         firstTapDone = true;
-        onFirstTap();
+        if (onFirstTap != null)
+            onFirstTap();
     }
 
     //早いスワイプ
     private bool HasQuickSwipe(Touch touch)
     {
-        if (touch.deltaPosition.magnitude >= minMoveDis)
+        if (touch.phase == TouchPhase.Ended && touch.deltaPosition.magnitude >= minMoveDis)
             return true;
 
         return false;
@@ -174,7 +177,7 @@ public class PlayerInput
     {
         if (PhaseTouch[1] == TouchPhase.Began)
         {
-            touchTime = 0;
+            touchTime = 0.1f;
             return 0;
         }
         else if (PhaseTouch[1] == TouchPhase.Moved)

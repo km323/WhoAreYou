@@ -10,6 +10,11 @@ public class Gameover{
         scrollBackground = GameObject.Find("MovableBg").GetComponent<ScrollBackground>();
     }
 
+    public void RestBg()
+    {
+        scrollBackground.ResetPosition();
+    }
+
     public void ScrollBg()
     {
         scrollBackground.ScrollToBottom();

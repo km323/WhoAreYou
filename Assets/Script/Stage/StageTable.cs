@@ -21,6 +21,8 @@ public class StageTable : ScriptableObject
 
     [SerializeField]
     private float bgScrollSpeed;
+    [SerializeField]
+    private int slowMotionTimes;
 
     public Sprite GetBlackRec()
     {
@@ -45,5 +47,10 @@ public class StageTable : ScriptableObject
     public float GetBgScrollSpeed()
     {
         return bgScrollSpeed;
+    }
+
+    public int GetSlowMotionTimes()
+    {
+        return slowMotionTimes;
     }
 }

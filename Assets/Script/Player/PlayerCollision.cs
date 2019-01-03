@@ -8,8 +8,12 @@ public class PlayerCollision  : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "SlowMotion")
+            return;
+      
         if (collision.tag == "Item")
             return;
+
         //弾を消す
         if(collision.tag == "Bullet")
             Destroy(collision.gameObject);
@@ -17,5 +21,10 @@ public class PlayerCollision  : MonoBehaviour {
             OnBulletHit();
 
         //gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        OnBulletHit = null;
     }
 }
