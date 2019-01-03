@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61120465965005958}
   - component: {fileID: 114281904140593952}
   m_Layer: 10
-  m_Name: BulletWhite
+  m_Name: DefaultBulletWhite
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

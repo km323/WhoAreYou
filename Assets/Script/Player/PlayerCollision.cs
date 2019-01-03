@@ -10,6 +10,9 @@ public class PlayerCollision  : MonoBehaviour {
     {
         if (collision.tag == "SlowMotion")
             return;
+      
+        if (collision.tag == "Item")
+            return;
 
         //弾を消す
         if(collision.tag == "Bullet")

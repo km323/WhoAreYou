@@ -50,11 +50,15 @@ public class GameMain : MonoBehaviour {
     private StageManager stageManager;
     private CameraEffect cameraEffect;
 
+    private ItemManager itemManager;
+
     private void Awake()
     {
         OnNextGame = null;
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         cameraEffect = new CameraEffect();
+
+        itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
     }
 
     private void Start()
@@ -207,8 +211,20 @@ public class GameMain : MonoBehaviour {
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);
         }
 
+
+        SetItem();
+        
+
         yield return new WaitForSeconds(0.5f);
         ActivePlayerInput();
+    }
+    
+    private void SetItem()
+    {
+        if (currentState == BLACK)
+            itemManager.SetItem(black);
+        else
+            itemManager.SetItem(white);
     }
 
     private void OnDestroy()

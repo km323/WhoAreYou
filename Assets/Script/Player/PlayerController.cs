@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rigid;
     private Vector2 velocity;
 
+    private Item item;
+
     void Awake ()
     {
         playerInput = new PlayerInput();
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour {
         //    GetComponent<PolygonCollider2D>().enabled = false;
 #endif
         playerInput.Update();
+        
 
         //回避
         if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
@@ -50,9 +53,6 @@ public class PlayerController : MonoBehaviour {
         //弾を撃つ
         if (playerInput.SameTimeTap)
             shot.ShotBullet();
-        //if (playerInput.TouchTime > 0)
-        //    shot.ChargeShotBullet(playerInput.TouchTime);
-
     }
 
     void FixedUpdate()
@@ -87,10 +87,35 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "SlowMotion")
             return;
 
+        if (collision.tag == "Item")
+        {
+            UseItem();
+            Destroy(collision.gameObject);
+            return;
+        }
+
+        wasDead = true;
+
         GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
         gameMain.DisableWhenActiveDie();
 
         SceneController.Instance.Additive(Scene.Result);
+    }
+
+    private void UseItem()
+    {
+        Item item = GameObject.Find("ItemManager").GetComponent<ItemManager>().GetItem();
+        switch (item.GetKindOfItem())
+        {
+            case Item.KindOfItem.Attack:
+                shot.SetBulletPrefab(item.GetItemEffect());
+                break;
+            case Item.KindOfItem.Defence:
+
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnDestroy()
