@@ -1413,7 +1413,7 @@ MonoBehaviour:
   ItemPrefab: {fileID: 1701509449927370, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
   itemDataBase: {fileID: 11400000, guid: 21f223af03bcfc04591aa4caca96e979, type: 2}
   ItemPopProbability: 1
-  ItemPopStartNum: 1
+  ItemPopStartNum: 0
 --- !u!4 &1981964473
 Transform:
   m_ObjectHideFlags: 0

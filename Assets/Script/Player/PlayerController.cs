@@ -28,11 +28,6 @@ public class PlayerController : MonoBehaviour {
 
     private Item item;
 
-    public static PlayerInput GetPlayerInput()
-    {
-        return playerInput;
-    }
-
     void Awake ()
     {
         playerInput = new PlayerInput();
