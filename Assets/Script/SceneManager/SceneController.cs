@@ -71,6 +71,14 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
         }
     }
 
+    public void Additive(Scene additiveScene = Scene.None)
+    {
+        this.additiveScene = additiveScene;
+
+        if (this.additiveScene != Scene.None)
+            SceneManager.LoadScene(SceneName[this.additiveScene], LoadSceneMode.Additive);
+    }
+
     public void Change(Scene scene, Scene additiveScene = Scene.None)
     {
         if (isFading)

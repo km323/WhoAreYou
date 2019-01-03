@@ -95,4 +95,10 @@ public class ScrollBackground : MonoBehaviour {
     {
         direction = Vector3.Scale(Camera.main.transform.up, -transform.up);
     }
+
+    public void ScrollToBottom()
+    {
+        UpdateDirection();
+        transform.DOMoveY(direction.y * Camera.main.orthographicSize, 1.5f);
+    }
 }

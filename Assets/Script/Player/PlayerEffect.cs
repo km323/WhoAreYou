@@ -12,6 +12,8 @@ public class PlayerEffect : MonoBehaviour {
     private SpriteRenderer frameObjRenderer;
     [SerializeField]
     private Sprite playSprite;
+    [SerializeField]
+    private GameObject activeDeadPrefab;
 
     private StageManager stageManager;
     private Sprite recSprite;
@@ -157,7 +159,7 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     //vanish effect
-    private void PlayVanishEffect()
+    public void PlayVanishEffect()
     {
         if (!gameObject.activeSelf)
             return;
@@ -166,14 +168,21 @@ public class PlayerEffect : MonoBehaviour {
 
         StartCoroutine("VanishEffect");
     }
-    IEnumerator VanishEffect()
+    private IEnumerator VanishEffect()
     {
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
+        bool showActiveDeadEffect = false;
 
         while (radius > 0)
         {
             radius -= Time.deltaTime * speed;
+
+            if (!showActiveDeadEffect && GetComponent<PlayerController>() != null && radius <= 1)
+            {
+                Instantiate(activeDeadPrefab, transform.position, Quaternion.identity);
+                showActiveDeadEffect = true;
+            }
 
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;

@@ -9,6 +9,16 @@ public class PlayerController : MonoBehaviour {
     private float moveSpeed = 2000;
 
     private static PlayerInput playerInput;
+    public static PlayerInput GetPlayerInput()
+    {
+        return playerInput;
+    }
+
+    private bool wasDead;
+    public bool GetWasDead()
+    {
+        return wasDead;
+    }
 
     private RecordController recordController;
     private SpriteRenderer playerSprite;
@@ -35,6 +45,8 @@ public class PlayerController : MonoBehaviour {
         shot = GetComponent<Shot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
+
+        wasDead = false;
     }
 
     void Update () {
@@ -83,9 +95,15 @@ public class PlayerController : MonoBehaviour {
         {
             UseItem();
             Destroy(collision.gameObject);
+            return;
         }
 
-        //SceneController.Instance.Change(Scene.Game);
+        wasDead = true;
+
+        GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
+        gameMain.DisableWhenActiveDie();
+
+        SceneController.Instance.Additive(Scene.Result);
     }
 
     private void UseItem()

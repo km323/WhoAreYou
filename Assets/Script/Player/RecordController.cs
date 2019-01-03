@@ -21,13 +21,14 @@ public class RecordController : MonoBehaviour {
 
     private StageManager stageManager;
     private Sprite signalSprite;
+    private Vector3 startPosition;
 
     public Vector3 GetStartPos()
     {
         if (recordList != null && recordList.Count > 0)
             return recordList[0];
 
-        return Vector3.zero;
+        return startPosition;
     }
 
     void Awake () {
@@ -39,6 +40,7 @@ public class RecordController : MonoBehaviour {
         GetComponent<PlayerCollision>().OnBulletHit += StopPlayRecord;
         GameMain.OnNextGame += StopPlayRecord;
 
+        startPosition = transform.position;
     }
 
     private void OnDestroy()
