@@ -83,10 +83,10 @@ public class GameMain : MonoBehaviour {
     {
         if (currentState == WHITE)
             return;
-        
+
         enemyCount--;
 
-        if (enemyCount == 0 && gameObject != null)
+        if (enemyCount == 0 && gameObject.activeSelf != false)
             StartCoroutine("NextGame");
     }
     private void BlackEnemyHitHandler()
@@ -96,7 +96,7 @@ public class GameMain : MonoBehaviour {
         
         enemyCount--;
 
-        if (enemyCount == 0 && gameObject != null)
+        if (enemyCount == 0 && gameObject.activeSelf != false)
             StartCoroutine("NextGame");
     }
 

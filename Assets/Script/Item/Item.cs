@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     {
         Attack,
         Defence,
+        Missile,
     }
 
     [SerializeField]
@@ -27,6 +28,8 @@ public class Item : ScriptableObject
     private GameObject itemEffectBlack;
     [SerializeField]
     private GameObject itemEffectWhite;
+    [SerializeField]
+    private GameObject itemAssociated;
 
     public KindOfItem GetKindOfItem()
     {
@@ -51,5 +54,9 @@ public class Item : ScriptableObject
             return itemEffectBlack;
         else
             return itemEffectWhite;
+    }
+    public GameObject GetItemAssociated()
+    {
+        return itemAssociated;
     }
 }

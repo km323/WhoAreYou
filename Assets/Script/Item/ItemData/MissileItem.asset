@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86de28a93e8ff814cab4985cbb45909d, type: 3}
+  m_Name: MissileItem
+  m_EditorClassIdentifier: 
+  itemName: MissileItem
+  kindOfItem: 2
+  iconBlack: {fileID: 21300000, guid: 6231ae3be877e074e95acbfe64e94e08, type: 3}
+  iconWhite: {fileID: 21300000, guid: d7a7a72a378a82a42b9eb8b881c5c57d, type: 3}
+  itemEffectBlack: {fileID: 1712381644284766, guid: ad22c4a8e99761e4eb3e5ffd1265e9f2,
+    type: 2}
+  itemEffectWhite: {fileID: 1441766846997454, guid: cc095824dd389a24f9fdb143dc3ba1f0,
+    type: 2}
+  itemAssociated: {fileID: 1526073598441882, guid: 68db8ef3ad6705a4591d8fd78ebd737f,
+    type: 2}

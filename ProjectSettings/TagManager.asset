@@ -9,6 +9,8 @@ TagManager:
   - Item
   - CenterLine
   - SlowMotion
+  - PlayerBlack
+  - PlayerWhite
   layers:
   - Default
   - TransparentFX

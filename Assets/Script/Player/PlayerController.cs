@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 velocity;
 
     private Item item;
+    private GameObject itemAssociated = null;
 
     void Awake ()
     {
@@ -111,6 +112,10 @@ public class PlayerController : MonoBehaviour {
             case Item.KindOfItem.Defence:
 
                 break;
+            case Item.KindOfItem.Missile:
+                shot.SetBulletPrefab(item.GetItemEffect());
+                itemAssociated = Instantiate(item.GetItemAssociated());
+                break;
             default:
                 break;
         }
@@ -122,5 +127,6 @@ public class PlayerController : MonoBehaviour {
         playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
 
         shot.SetDefaultBullet();
+        Destroy(itemAssociated);
     }
 }

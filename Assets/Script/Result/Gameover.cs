@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Gameover{
     private ScrollBackground scrollBackground;
@@ -22,7 +23,8 @@ public class Gameover{
 
     public void DestroyAllCharacter()
     {
-        GameObject[] characters = GameObject.FindGameObjectsWithTag("Player");
+    
+        GameObject[] characters = GameObject.FindGameObjectsWithTag("PlayerBlack").Concat(GameObject.FindGameObjectsWithTag("PlayerWhite")).ToArray();
         PlayerEffect[] playerEffects = new PlayerEffect[characters.Length];
         RecordController[] recordControllers = new RecordController[characters.Length];
 
