@@ -50,5 +50,8 @@ public class Missile : MonoBehaviour {
         position += velocity * Time.deltaTime;
         transform.position = position;
 
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        Quaternion targetAngle = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        transform.rotation = targetAngle;
     }
 }
