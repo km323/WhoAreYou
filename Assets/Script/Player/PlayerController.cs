@@ -95,7 +95,9 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "Item")
         {
             UseItem();
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 1f);
+            collision.transform.DOScale(new Vector3(2f, 2f, 1f), 1f);
+            Destroy(collision.gameObject,1f);
             return;
         }
 
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour {
                 shot.SetBulletPrefab(item.GetItemEffect());
                 break;
             case Item.KindOfItem.Defence:
-
+                itemAssociated = Instantiate(item.GetItemEffect());
                 break;
             case Item.KindOfItem.Missile:
                 itemAssociated = Instantiate(item.GetItemAssociated());
@@ -132,5 +134,11 @@ public class PlayerController : MonoBehaviour {
 
         shot.SetDefaultBullet();
         Destroy(itemAssociated);
+    }
+
+    private void OnDisable()
+    {
+        if (itemAssociated != null) 
+            Destroy(itemAssociated);
     }
 }
