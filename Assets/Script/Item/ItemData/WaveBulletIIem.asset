@@ -9,13 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86de28a93e8ff814cab4985cbb45909d, type: 3}
-  m_Name: DoubleBulletIIem
+  m_Name: WaveBulletIIem
   m_EditorClassIdentifier: 
-  itemName: DoubleBullet
+  itemName: WaveBullet
   kindOfItem: 0
-  iconBlack: {fileID: 21300000, guid: 3d0fa72a5c997f44f9fa23ce7e952d0a, type: 3}
-  iconWhite: {fileID: 21300000, guid: 9745b5280c24afa42b0951023e558d2f, type: 3}
+  iconBlack: {fileID: 21300000, guid: a30cd5cc00f61ef42b36dfc87e6e27f6, type: 3}
+  iconWhite: {fileID: 21300000, guid: b971bb17e30b070429651c19b89794ed, type: 3}
   itemEffectBlack: {fileID: 1358880952389794, guid: af69cc8bfba01a1428b031c345b083e7,
     type: 2}
   itemEffectWhite: {fileID: 1917659040899442, guid: 7b08552c91f92cc4e9215dd084ca13ec,
     type: 2}
+  itemAssociated: {fileID: 0}

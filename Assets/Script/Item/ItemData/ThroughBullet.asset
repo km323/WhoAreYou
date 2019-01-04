@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86de28a93e8ff814cab4985cbb45909d, type: 3}
+  m_Name: ThroughBullet
+  m_EditorClassIdentifier: 
+  itemName: ThroughBullet
+  kindOfItem: 0
+  iconBlack: {fileID: 21300000, guid: 83edece10c4a8b745b10ecf089fc2c43, type: 3}
+  iconWhite: {fileID: 21300000, guid: edf0f24e4a1874b4483e4e2321e23bff, type: 3}
+  itemEffectBlack: {fileID: 1225932203085800, guid: 94ee66c9136b56342bbbdb5683a76ff2,
+    type: 2}
+  itemEffectWhite: {fileID: 1480377265011220, guid: a3783a520501f1946b00d9ce91bd511e,
+    type: 2}
+  itemAssociated: {fileID: 0}
