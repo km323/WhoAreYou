@@ -2,23 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Missile : MonoBehaviour {
-    [SerializeField]
-    private Vector3 velocity;
-    private Vector3 position;
+public class Missile : MonoBehaviour
+{
 
     [SerializeField]
     private float period;
 
     [SerializeField]
+    private Vector2 initialVelocityRangeX;
+    [SerializeField]
+    private Vector2 initialVelocityRangeY;
+
+    private Vector3 velocity;
+    private Vector3 position;
+
     private GameObject target;
 
-    private void Start()
+    private void Awake()
     {
         position = transform.position;
         Destroy(gameObject, 5f);
+        velocity.x = Random.Range(initialVelocityRangeX.x, initialVelocityRangeX.y);
+        velocity.y = Random.Range(initialVelocityRangeY.x, initialVelocityRangeY.y);
+    }
 
-        target = MissileManager.Instance.GetTarget();
+    public void initMissile(GameObject target, int initialVelocityDirectionX)
+    {
+        this.target = target;
+        velocity.x *= initialVelocityDirectionX;
+        Debug.Log(velocity.x + "missile");
     }
 
     private void Update()
@@ -42,10 +54,9 @@ public class Missile : MonoBehaviour {
         {
             velocity += acceleration * Time.deltaTime;
         }
-        else if(target.activeSelf == true)
+        else if (target.activeSelf == true)
         {
-            target.SetActive(false);
-            Destroy(gameObject);
+            GetComponent<Collider2D>().enabled = true;
         }
         position += velocity * Time.deltaTime;
         transform.position = position;

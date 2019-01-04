@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 velocity;
 
     private Item item;
+    private bool missileItem = false;
     private GameObject itemAssociated = null;
 
     void Awake ()
@@ -50,6 +51,9 @@ public class PlayerController : MonoBehaviour {
         //回避
         if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
             dodge.DodgeAttack();
+
+        if (missileItem)
+            return;
 
         //弾を撃つ
         if (playerInput.SameTimeTap)
@@ -113,8 +117,8 @@ public class PlayerController : MonoBehaviour {
 
                 break;
             case Item.KindOfItem.Missile:
-                shot.SetBulletPrefab(item.GetItemEffect());
                 itemAssociated = Instantiate(item.GetItemAssociated());
+                missileItem = true;
                 break;
             default:
                 break;

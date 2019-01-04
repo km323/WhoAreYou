@@ -53,3 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockonPrefab: {fileID: 1728520209118068, guid: 341747bbd86722e4681bfc4b7725d914,
     type: 2}
+  missileBlackPrefab: {fileID: 1712381644284766, guid: ad22c4a8e99761e4eb3e5ffd1265e9f2,
+    type: 2}
+  missileWhitePrefab: {fileID: 1441766846997454, guid: cc095824dd389a24f9fdb143dc3ba1f0,
+    type: 2}

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50711512641513618}
   - component: {fileID: 96926431538287982}
   - component: {fileID: 114484552758456552}
+  - component: {fileID: 61101663969712506}
   m_Layer: 9
   m_Name: MissileBlack
   m_TagString: Bullet
@@ -92,6 +93,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &61101663969712506
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712381644284766}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0030655116, y: 0.041004002}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2703832, y: 0.857992}
+  m_EdgeRadius: 0
 --- !u!96 &96926431538287982
 TrailRenderer:
   serializedVersion: 2
@@ -158,7 +184,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.90588236, g: 0.19195661, b: 0.14117646, a: 1}
+      key0: {r: 0.3018868, g: 0.25802776, b: 0.25489497, a: 1}
       key1: {r: 0.9058824, g: 0.45098042, b: 0.15686275, a: 0.53333336}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -204,9 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4688aaf25a9ec7341a597c6cc340905e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 10, y: -2, z: 0}
-  period: 1
-  target: {fileID: 0}
+  period: 2
+  initialVelocityRangeX: {x: 7, y: 10}
+  initialVelocityRangeY: {x: -8, y: -5}
 --- !u!212 &212930293836733492
 SpriteRenderer:
   m_ObjectHideFlags: 1

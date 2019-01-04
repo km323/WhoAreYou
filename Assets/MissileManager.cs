@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileManager : SingletonMonoBehaviour<MissileManager> {
+public class MissileManager : SingletonMonoBehaviour<MissileManager>
+{
 
     [SerializeField]
     private GameObject lockonPrefab;
 
-    List<GameObject> enemys=new List<GameObject>();
+    [SerializeField]
+    private GameObject missileBlackPrefab;
+    [SerializeField]
+    private GameObject missileWhitePrefab;
 
     // Use this for initialization
     void Start()
@@ -21,34 +25,42 @@ public class MissileManager : SingletonMonoBehaviour<MissileManager> {
         for (int i = 0; i < objects.Length; i++)
         {
             Instantiate(lockonPrefab, objects[i].transform);
-            enemys.Add(objects[i]);
         }
     }
 
-    public GameObject GetTarget()
+    private void Update()
     {
-        GameObject obj = null;
-        int randomNum = 0;
+        if (PlayerController.GetPlayerInput().SameTimeTap)
+            StartCoroutine("Blastoff");
+    }
 
-        while (enemys.Count != 0)
+    IEnumerator Blastoff()
+    {
+        GameObject[] enemys;
+        GameObject missilePrefab;
+        GameObject player = GameObject.Find("GameMain").GetComponent<GameMain>().GetActivePlayer();
+        int directionX = 1;
+
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
         {
-            randomNum = Random.Range(0, enemys.Count);
-            if (enemys[randomNum] == null)
-                enemys.RemoveAt(randomNum);
-            else
-            {
-                obj = enemys[randomNum];
-                break;
-            }
+            missilePrefab = missileBlackPrefab;
+            enemys = GameObject.FindGameObjectsWithTag("PlayerWhite");
+        }
+        else
+        {
+            missilePrefab = missileWhitePrefab;
+            enemys = GameObject.FindGameObjectsWithTag("PlayerBlack");
         }
 
-        if (enemys.Count == 0)
-            return null;
+        foreach (GameObject enemy in enemys)
+        {
+            GameObject missile = Instantiate(missilePrefab, player.transform);
+            missile.GetComponent<Missile>().initMissile(enemy, directionX);
+            Debug.Log(directionX + "manager");
+            directionX *= -1;
+            yield return new WaitForSeconds(0.1f);
+        }
 
-        //obj.transform.Find("Lockon").gameObject.GetComponent<Lockon>().SetTargetSprite();
-        obj.GetComponentInChildren<Lockon>().SetTargetSprite();
-        enemys.RemoveAt(randomNum);
-
-        return obj;
+        yield return null;
     }
 }
