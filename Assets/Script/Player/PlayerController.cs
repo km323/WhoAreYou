@@ -42,11 +42,10 @@ public class PlayerController : MonoBehaviour {
 
     void Update () {
 #if UNITY_EDITOR
-        //if(GetComponent<PolygonCollider2D>().enabled)
+        //if (GetComponent<PolygonCollider2D>().enabled)
         //    GetComponent<PolygonCollider2D>().enabled = false;
 #endif
         playerInput.Update();
-        
 
         //回避
         if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)

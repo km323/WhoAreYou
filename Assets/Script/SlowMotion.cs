@@ -52,7 +52,8 @@ public class SlowMotion : MonoBehaviour {
         {
             touchTimes++;
             Time.timeScale = timeScale;
-        }
+            Invoke("DelayResetTime", 0.15f)
+;        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

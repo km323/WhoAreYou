@@ -209,11 +209,12 @@ public class GameMain : MonoBehaviour {
         {
             ChangeStage();
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);
+            itemManager.CreateItem();
         }
 
 
         SetItem();
-        
+
 
         yield return new WaitForSeconds(0.5f);
         ActivePlayerInput();

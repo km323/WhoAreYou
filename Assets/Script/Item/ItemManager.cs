@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour {
-    
+public class ItemManager : MonoBehaviour
+{
+
     [SerializeField]
     private GameObject ItemPrefab;
 
@@ -16,13 +17,20 @@ public class ItemManager : MonoBehaviour {
     [SerializeField]
     private int ItemPopStartNum;
 
+    [SerializeField]
+    private Vector3 itemBlackCreatePos;
+    [SerializeField]
+    private Vector3 itemWhiteCreatePos;
+
+
     private GameObject hasItemGameObject;
     private GameObject ItemGameObject;
     private Item item;
 
     List<Item> items;
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         hasItemGameObject = null;
         items = itemDataBase.GetItemLists();
 
@@ -33,7 +41,7 @@ public class ItemManager : MonoBehaviour {
 
     private void Start()
     {
-        
+
         GameMain.OnNextGame += RemoveItem;
     }
 
@@ -50,7 +58,7 @@ public class ItemManager : MonoBehaviour {
 
         if (hasItemGameObject == null)
             return;
-        
+
 
         item = items[Random.Range(0, items.Count)];
 
@@ -67,21 +75,40 @@ public class ItemManager : MonoBehaviour {
 
     private void RemoveItem()
     {
-        if (hasItemGameObject == null)
-            return;
 
-        hasItemGameObject.GetComponent<PlayerCollision>().OnBulletHit -= ActiveItem;
-        hasItemGameObject = null;
+        if (GameObject.FindGameObjectsWithTag("Item") != null)
+        {
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item"))
+            {
+                Destroy(item);
+            }
+        }
 
         item = null;
 
         if (ItemGameObject != null)
             Destroy(ItemGameObject);
+
+        if (hasItemGameObject != null)
+        {
+            hasItemGameObject.GetComponent<PlayerCollision>().OnBulletHit -= ActiveItem;
+            hasItemGameObject = null;
+        }
+
     }
 
     private void ActiveItem()
     {
         ItemGameObject = Instantiate(ItemPrefab, hasItemGameObject.transform.position, Quaternion.identity);
     }
-    
+
+    public void CreateItem()
+    {
+        item = items[Random.Range(0, items.Count)];
+
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+            ItemGameObject = Instantiate(ItemPrefab, itemBlackCreatePos, Quaternion.identity);
+        else
+            ItemGameObject = Instantiate(ItemPrefab, itemWhiteCreatePos, Quaternion.identity);
+    }
 }

@@ -32,6 +32,8 @@ public class PlayerEffect : MonoBehaviour {
 
     private void OnEnable()
     {
+        polygonCollider.enabled = false;
+        isPlaying = false;
         PlayStartEffect();    
     }
 
@@ -143,7 +145,7 @@ public class PlayerEffect : MonoBehaviour {
     }
     IEnumerator StartEffect()
     {
-        isPlaying = false;
+        isPlaying = true;
         spriteRenderer.material.SetFloat("_EffectRadius", 0);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
 

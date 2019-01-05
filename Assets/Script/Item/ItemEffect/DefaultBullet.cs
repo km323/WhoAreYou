@@ -25,5 +25,9 @@ public class DefaultBullet : MonoBehaviour {
         velocity = direction * speed * Time.fixedDeltaTime;
         rigid.AddForce(velocity, ForceMode2D.Impulse);
         Destroy(gameObject, deadDelayTime);
+
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        Quaternion targetAngle = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        transform.rotation = targetAngle;
     }
 }
