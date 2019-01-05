@@ -233,6 +233,8 @@ MonoBehaviour:
   period: 2
   initialVelocityRangeX: {x: 7, y: 10}
   initialVelocityRangeY: {x: 8, y: 5}
+  explosionPrefab: {fileID: 1227751786958296, guid: b01f9034243ede049bd77d2334759b47,
+    type: 2}
 --- !u!212 &212965505140363108
 SpriteRenderer:
   m_ObjectHideFlags: 1

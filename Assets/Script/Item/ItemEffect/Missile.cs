@@ -12,6 +12,8 @@ public class Missile : MonoBehaviour
     private Vector2 initialVelocityRangeX;
     [SerializeField]
     private Vector2 initialVelocityRangeY;
+    [SerializeField]
+    private GameObject explosionPrefab;
 
     private Vector3 velocity;
     private Vector3 position;
@@ -57,6 +59,7 @@ public class Missile : MonoBehaviour
         else if (target.activeSelf == true)
         {
             GetComponent<Collider2D>().enabled = true;
+            Instantiate(explosionPrefab, target.transform.position, Quaternion.EulerAngles(-90, 0, 0));
         }
         position += velocity * Time.deltaTime;
         transform.position = position;

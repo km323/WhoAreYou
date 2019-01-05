@@ -36,7 +36,7 @@ public class ItemManager : MonoBehaviour
 
 
 
-        item = items[0];
+        item = items[3];
     }
 
     private void Start()

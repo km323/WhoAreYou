@@ -163,7 +163,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.63057137
+        value: 0.65605164
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -172,7 +172,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.29901123
+        value: 0.32447815
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -184,7 +184,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.3018868, g: 0.25802776, b: 0.25489497, a: 1}
+      key0: {r: 0.90588236, g: 0.19195661, b: 0.14117646, a: 1}
       key1: {r: 0.9058824, g: 0.45098042, b: 0.15686275, a: 0.53333336}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -233,6 +233,8 @@ MonoBehaviour:
   period: 2
   initialVelocityRangeX: {x: 7, y: 10}
   initialVelocityRangeY: {x: -8, y: -5}
+  explosionPrefab: {fileID: 1227751786958296, guid: b01f9034243ede049bd77d2334759b47,
+    type: 2}
 --- !u!212 &212930293836733492
 SpriteRenderer:
   m_ObjectHideFlags: 1
