@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114255922492822678}
   m_Layer: 9
   m_Name: ThroughBulletBlack
-  m_TagString: Bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ Transform:
   m_GameObject: {fileID: 1639663634067610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.3, y: 2.3, z: 1}
+  m_LocalScale: {x: 1.8, y: 2.3, z: 1}
   m_Children: []
   m_Father: {fileID: 4820208624709536}
   m_RootOrder: 0
