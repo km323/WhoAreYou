@@ -6,12 +6,17 @@ using DG.Tweening;
 public class Lockon : MonoBehaviour {
 
     [SerializeField]
-    private Sprite NormalSprite;
+    private Sprite spriteBlack;
     [SerializeField]
-    private Sprite TargetSprite;
+    private Sprite spriteWhite;
 
 	// Use this for initialization
 	void Start () {
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+            GetComponent<SpriteRenderer>().sprite = spriteBlack;
+        else
+            GetComponent<SpriteRenderer>().sprite = spriteWhite;
+
         transform.parent.gameObject.GetComponent<PlayerCollision>().OnBulletHit += LockonDestroy;
         transform.DORotate(new Vector3(0f, 0f,360f), 1, RotateMode.FastBeyond360);
         transform.DOScale(new Vector3(1f, 1f), 1);
@@ -25,10 +30,5 @@ public class Lockon : MonoBehaviour {
     {
         transform.parent.gameObject.GetComponent<PlayerCollision>().OnBulletHit -= LockonDestroy;
         Destroy(gameObject);
-    }
-
-    public void SetTargetSprite()
-    {
-        GetComponent<SpriteRenderer>().sprite = TargetSprite;
     }
 }

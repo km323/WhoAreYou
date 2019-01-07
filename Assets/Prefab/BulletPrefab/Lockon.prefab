@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a3c904bebd96d4587b03d788bca192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalSprite: {fileID: 21300000, guid: e1cf9b7eb4f698f43acc1bf022468036, type: 3}
-  TargetSprite: {fileID: 21300000, guid: e1cf9b7eb4f698f43acc1bf022468036, type: 3}
+  spriteBlack: {fileID: 21300000, guid: e1cf9b7eb4f698f43acc1bf022468036, type: 3}
+  spriteWhite: {fileID: 21300000, guid: 817cef1ecfeb46846a4e967698dd6c28, type: 3}
 --- !u!212 &212444496548965088
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e1cf9b7eb4f698f43acc1bf022468036, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.54509807}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
