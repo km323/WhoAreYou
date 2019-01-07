@@ -45,7 +45,7 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
     private Scene additiveScene = Scene.None;
 
     //フェイド
-    private const float fadeInterval = 0.8f;
+    private const float fadeInterval = 0.7f;
     private bool isFading;
     private float fadeAlpha;
     private Color fadeColor;
