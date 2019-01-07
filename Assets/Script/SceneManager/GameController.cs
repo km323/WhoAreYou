@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class GameController : SingletonMonoBehaviour<GameController> {
     public static int BestScore { get; set; }
     public static int CurrentScore { get; set; }
 
@@ -14,13 +14,18 @@ public class GameController : MonoBehaviour {
 
         GameObject sceneController = new GameObject("SceneController");
         sceneController.AddComponent<SceneController>();
+
+        GameObject soundManager = new GameObject("SoundManager");
+        soundManager.AddComponent<SoundManager>();
     }
 
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
 
         BestScore = -1;
     }

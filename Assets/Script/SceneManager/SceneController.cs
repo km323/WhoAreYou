@@ -81,21 +81,16 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
             SceneManager.LoadScene(SceneName[this.additiveScene], LoadSceneMode.Additive);
     }
 
-    public void Change(Scene scene, Scene additiveScene = Scene.None)
+    public void Change(Scene scene)
     {
         if (isFading)
             return;
 
         nextScene = scene;
 
-        this.additiveScene = additiveScene;
-
         StartCoroutine(ChangeScene(nextScene));
 
         //SceneManager.LoadScene(SceneName[nextScene]);
-
-        if (this.additiveScene != Scene.None)
-            SceneManager.LoadScene(SceneName[this.additiveScene], LoadSceneMode.Additive);
 
         beforeScene = currentScene;
         currentScene = nextScene;
