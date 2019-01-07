@@ -104,6 +104,6 @@ public class ScrollBackground : MonoBehaviour {
     public void ScrollToBottom()
     {
         UpdateDirection();
-        transform.DOMoveY(direction.y * Camera.main.orthographicSize, 1.5f);
+        transform.DOMoveY(direction.y * (Camera.main.orthographicSize + 0.1f), 1.5f);
     }
 }

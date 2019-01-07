@@ -22,6 +22,6 @@ public class GameController : MonoBehaviour {
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
 
-        BestScore = -1;
+        BestScore = -2;
     }
 }

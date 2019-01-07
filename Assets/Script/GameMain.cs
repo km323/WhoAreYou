@@ -59,12 +59,12 @@ public class GameMain : MonoBehaviour {
         cameraEffect = new CameraEffect();
 
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+
+        currentState = BLACK;
     }
 
     private void Start()
-    {
-        currentState = BLACK;
-
+    { 
         black = new List<GameObject>();
         white = new List<GameObject>();
         
