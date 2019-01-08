@@ -9,22 +9,14 @@ public class ResultManager : MonoBehaviour {
     [SerializeField]
     private CanvasGroup canvasGroup;
     [SerializeField]
-    private GameObject normalScoreObj;
+    private Property property;
     [SerializeField]
-    private GameObject bestScoreObj;
+    private float barTargetPosX;
     [SerializeField]
-    private GameObject retryButton;
-    [SerializeField]
-    private GameObject returnButton;
-    [SerializeField]
-    private float targetPosY;
+    private float buttonTargetPosY;
 
     private void Awake()
     {
-        normalScoreObj.SetActive(false);
-        bestScoreObj.SetActive(false);
-        retryButton.SetActive(false);
-        returnButton.SetActive(false);
         canvasGroup.alpha = 0f;
     }
 
@@ -50,12 +42,17 @@ public class ResultManager : MonoBehaviour {
     private void ShowNewBest()
     {
         GameController.BestScore = GameController.CurrentScore;
-        bestScoreObj.SetActive(true);
+        property.GetBestScoreObj().SetActive(true);
+
+        property.SetNewBestScore(GameController.BestScore.ToString());
     }
 
     private void ShowNormalScore()
     {
-        normalScoreObj.SetActive(true);
+        property.GetNormalScoreObj().SetActive(true);
+
+        property.SetNormalScore(GameController.CurrentScore.ToString());
+        property.SetBestScore(GameController.BestScore.ToString());
     }
 
     IEnumerator GameoverEffect()
@@ -71,8 +68,13 @@ public class ResultManager : MonoBehaviour {
         Time.timeScale = 1f;
         gameover.ScrollBg();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
+        ShowBar();
+
+        yield return new WaitForSeconds(0.8f);
         CanvasFadeIn();
+        
+        yield return new WaitForSeconds(0.3f);
 
         yield return new WaitForSeconds(1f);
         ActiveButton();
@@ -80,16 +82,22 @@ public class ResultManager : MonoBehaviour {
 
     private void ActiveButton()
     {
-        retryButton.SetActive(true);
-        returnButton.SetActive(true);
+        property.GetRetryButton().SetActive(true);
+        property.GetReturnButton().SetActive(true);
 
-        retryButton.GetComponent<RectTransform>().DOAnchorPosY(targetPosY, 0.2f);
-        returnButton.GetComponent<RectTransform>().DOAnchorPosY(targetPosY, 0.2f);
+        property.GetRetryButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
+        property.GetReturnButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
+    }
+
+    private void ShowBar()
+    {
+        property.GetBar().gameObject.SetActive(true);
+        property.GetBar().DOAnchorPosX(barTargetPosX, 0.4f);
     }
 
     private void CanvasFadeIn()
     {
-        canvasGroup.DOFade(1f, 2f);
+        canvasGroup.DOFade(1f, 1.5f);
     }
 
     public void LoadTitleScene()

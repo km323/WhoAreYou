@@ -27,6 +27,6 @@ public class GameController : SingletonMonoBehaviour<GameController> {
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(gameObject);
 
-        BestScore = -1;
+        BestScore = -2;
     }
 }
