@@ -8,7 +8,7 @@ public class PlayerControlTutorial : MonoBehaviour {
     [SerializeField]
     private PlayerEffectTutorial effect;
 
-    private Dodge dodge;
+    private DodgeTutorial dodge;
     private PlayerInput playerInput;
     private Shot shot;
     private Rigidbody2D rigid;
@@ -27,7 +27,7 @@ public class PlayerControlTutorial : MonoBehaviour {
     void Start () {
         playerInput = new PlayerInput();
 
-        dodge = GetComponent<Dodge>();
+        dodge = GetComponent<DodgeTutorial>();
         shot = GetComponent<Shot>();
         rigid = GetComponent<Rigidbody2D>();
 
