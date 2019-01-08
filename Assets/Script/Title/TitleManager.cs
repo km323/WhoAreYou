@@ -8,13 +8,19 @@ using DG.Tweening;
 public class TitleManager : MonoBehaviour {
     [SerializeField]
     private CanvasGroup canvasGroup;
+    [SerializeField]
+    private TitleProperty property;
+
+    [SerializeField]
+    private float buttonTargetPosY;
+    [SerializeField]
+    private float titleTargetPosX;
 
     private void Awake()
     {
         canvasGroup.alpha = 0f;
     }
 
-    // Use this for initialization
     void Start () {
         if (SceneManager.sceneCount > 1)
         {
@@ -22,13 +28,12 @@ public class TitleManager : MonoBehaviour {
         }
         else
         {
-            CanvasFadeIn();
+            StartCoroutine("PlayEffect");
         }
     }
 
-    private void CanvasFadeIn()
-    {
-        canvasGroup.DOFade(1f, 2f);
+    void Update()
+    { 
     }
 
     public void LoadTutorialScene()
@@ -41,11 +46,41 @@ public class TitleManager : MonoBehaviour {
         SceneController.Instance.Change(Scene.Game);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator PlayEffect()
     {
-        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        //    SceneController.Instance.Change(Scene.Game);
+        yield return new WaitForSeconds(0.5f);
+
+        MoveTitle();
+        yield return new WaitForSeconds(1f);
+
+        CanvasFadeIn();
+        yield return new WaitForSeconds(1f);
+
+        ActiveButton();
+    }
+
+    private void MoveTitle()
+    {
+        property.GetMoveE().SetActive(true);
+        property.GetMoveO().SetActive(true);
+
+        property.GetMoveE().transform.DOMoveX(titleTargetPosX, 1f);
+        property.GetMoveO().transform.DOMoveX(titleTargetPosX, 1f);
+    }
+
+
+    private void CanvasFadeIn()
+    {
+        property.GetFadeObj().SetActive(true);
+        canvasGroup.DOFade(1f, 3f);
+    }
+
+    private void ActiveButton()
+    {
+        property.GetStartButton().SetActive(true);
+        property.GetTutorialButton().SetActive(true);
+
+        property.GetStartButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
+        property.GetTutorialButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
     }
 }

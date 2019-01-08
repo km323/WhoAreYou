@@ -9,7 +9,7 @@ public class ResultManager : MonoBehaviour {
     [SerializeField]
     private CanvasGroup canvasGroup;
     [SerializeField]
-    private Property property;
+    private ResultProperty property;
     [SerializeField]
     private float barTargetPosX;
     [SerializeField]
