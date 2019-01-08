@@ -19,6 +19,7 @@ public class Missile : MonoBehaviour
     private Vector3 position;
 
     private GameObject target;
+    private bool hasExplode;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Missile : MonoBehaviour
         Destroy(gameObject, 5f);
         velocity.x = Random.Range(initialVelocityRangeX.x, initialVelocityRangeX.y);
         velocity.y = Random.Range(initialVelocityRangeY.x, initialVelocityRangeY.y);
+        hasExplode = false;
     }
 
     public void initMissile(GameObject target, int initialVelocityDirectionX)
@@ -59,7 +61,7 @@ public class Missile : MonoBehaviour
         else if (target.activeSelf == true)
         {
             GetComponent<Collider2D>().enabled = true;
-            Instantiate(explosionPrefab, target.transform.position, Quaternion.EulerAngles(-90, 0, 0));
+            Explode();
         }
         position += velocity * Time.deltaTime;
         transform.position = position;
@@ -67,5 +69,14 @@ public class Missile : MonoBehaviour
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
         Quaternion targetAngle = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         transform.rotation = targetAngle;
+    }
+
+    private void Explode()
+    {
+        if (!hasExplode)
+        {
+            Instantiate(explosionPrefab, target.transform.position, Quaternion.EulerAngles(-90, 0, 0));
+            hasExplode = true;
+        }
     }
 }

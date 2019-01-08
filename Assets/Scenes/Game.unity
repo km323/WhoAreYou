@@ -1382,11 +1382,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4146287462006818, guid: a216136e82dcd7a4ab917466d697d58c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1548,8 +1548,8 @@ MonoBehaviour:
   itemDataBase: {fileID: 11400000, guid: 21f223af03bcfc04591aa4caca96e979, type: 2}
   ItemPopProbability: 1
   ItemPopStartNum: 0
-  itemBlackCreatePos: {x: 4, y: -8, z: 0}
-  itemWhiteCreatePos: {x: -4, y: 8, z: 0}
+  itemBlackCreatePos: {x: 0, y: -6, z: 0}
+  itemWhiteCreatePos: {x: 0, y: 6, z: 0}
 --- !u!4 &1981964473
 Transform:
   m_ObjectHideFlags: 0
