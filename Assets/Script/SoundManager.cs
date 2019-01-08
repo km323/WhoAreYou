@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [System.Serializable]
 public class SoundVolume
@@ -63,7 +64,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     }
     public void PlayBgm(int index)
     {
-        if (index > 0 || index <= bgmClips.Length)
+        if (index < 0 || index >= bgmClips.Length)
             return;
 
         if (bgmSource.clip == bgmClips[index])
@@ -79,15 +80,38 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         bgmSource.Stop();
     }
 
+    public void PauseBgm()
+    {
+        bgmSource.Pause();
+    }
+
+    public void UnPauseBgm()
+    {
+        bgmSource.UnPause();
+    }
+
+    public void FadeOutBgm(float fadeTime = 1f)
+    {
+        if (!bgmSource.isPlaying)
+            return;
+
+        bgmSource.volume = volume.bgm;
+        bgmSource.DOFade(0.0f, fadeTime).SetEase(Ease.InCubic);
+    }
+    public void FadeInBgm(float fadeTime=1f)
+    {
+        bgmSource.DOFade(volume.bgm, fadeTime).SetEase(Ease.InCubic);
+    }
+
+
     public void PlaySe(string name)
     {
         int index = seIndexes[name];
         PlaySe(index);
     }
-
     public void PlaySe(int index)
     {
-        if (index > 0 || index <= bgmClips.Length)
+        if (index < 0 || index >= bgmClips.Length)
             return;
 
         foreach(AudioSource source in seSource)
@@ -100,6 +124,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
             }
         }
     }
+
     public void StopSe()
     {
         foreach(AudioSource source in seSource)

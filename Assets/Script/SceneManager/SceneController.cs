@@ -90,6 +90,8 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
 
         StartCoroutine(ChangeScene(nextScene));
 
+        
+
         //SceneManager.LoadScene(SceneName[nextScene]);
 
         beforeScene = currentScene;
@@ -101,6 +103,8 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
     IEnumerator ChangeScene(Scene scene)
     {
         //fade out
+        SoundManager.Instance.FadeOutBgm(fadeInterval);
+
         isFading = true;
         float time = 0;
         while (time <= fadeInterval)
@@ -114,6 +118,8 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
         SceneManager.LoadScene(SceneName[scene]);
 
         //fade in
+        SoundManager.Instance.FadeInBgm(fadeInterval);
+
         time = 0;
         while (time <= fadeInterval)
         {
