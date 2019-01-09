@@ -75,7 +75,7 @@ public class Missile : MonoBehaviour
     {
         if (!hasExplode)
         {
-            Instantiate(explosionPrefab, target.transform.position, Quaternion.EulerAngles(-90, 0, 0));
+            Instantiate(explosionPrefab, target.transform.position, Quaternion.Euler(-90, 0, 0));
             hasExplode = true;
         }
     }

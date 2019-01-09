@@ -58,14 +58,15 @@ public class ResultManager : MonoBehaviour {
     IEnumerator GameoverEffect()
     {
         Gameover gameover = new Gameover();
+        yield return new WaitForSeconds(0.5f);
 
-        Time.timeScale = 0.5f;
-        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(0.8f);
 
+        Time.timeScale = 1f;
         gameover.DestroyAllCharacter();
         yield return new WaitForSeconds(1f);
 
-        Time.timeScale = 1f;
         gameover.ScrollBg();
 
         yield return new WaitForSeconds(1.2f);

@@ -7,6 +7,8 @@ public class PlayerControlTutorial : MonoBehaviour {
     private float moveSpeed = 2000;
     [SerializeField]
     private PlayerEffectTutorial effect;
+    [SerializeField]
+    private float timeNeedDodge;
 
     private DodgeTutorial dodge;
     private PlayerInput playerInput;
@@ -59,7 +61,7 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     private void Dodge()
     {
-        if (EnableDodge && (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe))
+        if (EnableDodge && playerInput.TouchTime >= timeNeedDodge && playerInput.HasReleased)
         {
             dodge.DodgeAttack();
             if (!HasDodge)
@@ -98,6 +100,8 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Bullet")
+            return;
         effect.DieEffect();
         Destroy(this);
     }

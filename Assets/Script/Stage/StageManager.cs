@@ -132,8 +132,8 @@ public class StageManager : MonoBehaviour {
     {
         return stageDataBase.GetStageList()[curStageNum - 1].GetBgScrollSpeed();
     }
-    public int GetSlowMotionTimes()
+    public float GetPressTimeNeed()
     {
-        return stageDataBase.GetStageList()[curStageNum - 1].GetSlowMotionTimes();
+        return stageDataBase.GetStageList()[curStageNum - 1].GetPressTimeNeed();
     }
 }

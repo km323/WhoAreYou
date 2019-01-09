@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +15,14 @@ public class PlayerController : MonoBehaviour {
         return playerInput;
     }
 
+    private StageManager stageManager;
     private RecordController recordController;
     private Dodge dodge;
     private SpriteRenderer playerSprite;
     private Shot shot;
     private Rigidbody2D rigid;
     private Vector2 velocity;
+    private bool enableDodge;
 
     private Item item;
     private bool missileItem = false;
@@ -32,23 +35,29 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         recordController = GetComponent<RecordController>();
         dodge = GetComponent<Dodge>();
         rigid = GetComponent<Rigidbody2D>();
         shot = GetComponent<Shot>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         playerInput.onFirstTap += () => recordController.StartRecord();//記録しはじめる
+
+        enableDodge = true;
     }
 
     void Update () {
 #if UNITY_EDITOR
         //if (GetComponent<PolygonCollider2D>().enabled)
         //    GetComponent<PolygonCollider2D>().enabled = false;
+
+        if (Input.GetKeyDown(KeyCode.A))
+            dodge.DodgeAttack();
 #endif
         playerInput.Update();
 
         //回避
-        if (Input.GetKeyDown(KeyCode.A) || playerInput.QuickSwipe)
+        if (enableDodge && playerInput.TouchTime >= stageManager.GetPressTimeNeed() && playerInput.HasReleased)
             dodge.DodgeAttack();
 
         if (missileItem)
@@ -99,6 +108,8 @@ public class PlayerController : MonoBehaviour {
             Destroy(collision.gameObject,1f);
             return;
         }
+
+        enableDodge = false;
 
         GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
         gameMain.DisableWhenActiveDie();

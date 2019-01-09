@@ -22,7 +22,7 @@ public class StageTable : ScriptableObject
     [SerializeField]
     private float bgScrollSpeed;
     [SerializeField]
-    private int slowMotionTimes;
+    private float pressTimeNeed;
 
     public Sprite GetBlackRec()
     {
@@ -49,8 +49,8 @@ public class StageTable : ScriptableObject
         return bgScrollSpeed;
     }
 
-    public int GetSlowMotionTimes()
+    public float GetPressTimeNeed()
     {
-        return slowMotionTimes;
+        return pressTimeNeed;
     }
 }

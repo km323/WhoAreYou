@@ -16,4 +16,4 @@ MonoBehaviour:
   playerBlackPlay: {fileID: 21300000, guid: 9745b5280c24afa42b0951023e558d2f, type: 3}
   playerWhitePlay: {fileID: 21300000, guid: 60a0c4e2253315c41ac79a8896eabb1c, type: 3}
   bgScrollSpeed: 0
-  slowMotionTimes: 1
+  pressTimeNeed: 2

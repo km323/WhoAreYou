@@ -19,6 +19,9 @@ public class TutorialManager : MonoBehaviour {
     private float duration = 0.2f;
 
     [SerializeField]
+    private GameObject bulletSpawner;
+
+    [SerializeField]
     private GameObject nextButton;
     [SerializeField]
     private GameObject returnButton;
@@ -59,6 +62,7 @@ public class TutorialManager : MonoBehaviour {
         shotCanvas.SetActive(false);
         dodgeCanvas.SetActive(false);
         dieCanvas.SetActive(false);
+        bulletSpawner.SetActive(false);
     }
 
     private void SetupState()
@@ -133,6 +137,7 @@ public class TutorialManager : MonoBehaviour {
         {
             MoveIn(dodgeCanvas);
             control.EnableDodge = true;
+            bulletSpawner.SetActive(true);
         };
         Action update = () =>
         {
@@ -143,6 +148,7 @@ public class TutorialManager : MonoBehaviour {
         {
             MoveOut(dodgeCanvas);
             nextButton.SetActive(false);
+            bulletSpawner.SetActive(false);
         };
         stateMachine.Add(state, enter, update, exit);
     }

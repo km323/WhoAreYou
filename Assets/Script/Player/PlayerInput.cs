@@ -11,9 +11,12 @@ public class PlayerInput
     public bool HasTouch { get; private set; } //タップされてるか
     public bool SameTimeTap { get; private set; } //同時押ししてるか
     public bool QuickSwipe { get; private set; } //早いスワイプなのか
+    public bool HasReleased { get; private set; } //指離したか
     public int TouchCount { get; private set; } //何タップあるのか
+    public float TouchTime { get; private set; } //長押ししてる時間
     public TouchPhase[] PhaseTouch { get; private set; } //タップのフェース
     public Vector2 Direction { get; private set; } //移動した方向
+
 
     private const int maxTouch = 2;
     private const float minMoveDis = 15f;
@@ -22,16 +25,12 @@ public class PlayerInput
     private Vector2 oldPosition;
     private bool firstTapDone;
 
-    private float touchTime;
-    public float TouchTime { get; private set; }
 
     public PlayerInput()
     {
         firstTapDone = false;
         HasTouch = false;
         PhaseTouch = new TouchPhase[maxTouch];
-
-        TouchTime = 0;
 
         touchPosition = Vector2.zero;
         Direction = Vector2.zero;
@@ -43,9 +42,7 @@ public class PlayerInput
 
     public void Update()
     {
-        HasTouch = false;
-        SameTimeTap = false;
-        PhaseTouch[1] = TouchPhase.Canceled;
+        ResetTouchState();
 
         if (Application.isEditor)
             MouseInput();
@@ -57,11 +54,11 @@ public class PlayerInput
 
         if (HasTouch)
         {
+            SetLongPressTime();
             SameTimeTap = HasSecondTap();
+            HasReleased = HasReleaseFinger();
             Direction = CalcDirection();
             oldPosition = touchPosition;
-
-            TouchTime = GetSecondLongTap();
         }
     }
 
@@ -156,6 +153,16 @@ public class PlayerInput
             onFirstTap();
     }
 
+    private void ResetTouchState()
+    {
+        if (HasReleased)
+            TouchTime = 0f;
+        HasTouch = false;
+        SameTimeTap = false;
+        HasReleased = false;
+        PhaseTouch[1] = TouchPhase.Canceled;
+    }
+
     //早いスワイプ
     private bool HasQuickSwipe(Touch touch)
     {
@@ -174,23 +181,46 @@ public class PlayerInput
         return false;
     }
 
-    private float GetSecondLongTap()
+    private bool HasReleaseFinger()
     {
-        if (PhaseTouch[1] == TouchPhase.Began)
-        {
-            touchTime = 0.1f;
-            return 0;
-        }
-        else if (PhaseTouch[1] == TouchPhase.Moved)
-        {
-            touchTime += Time.deltaTime;
-            return 0;
-        }
-        else if (PhaseTouch[1] == TouchPhase.Ended)
-            return touchTime;
+        if (PhaseTouch[0] == TouchPhase.Ended)
+            return true;
 
-        return 0;
+        return false;
     }
+
+    private void SetLongPressTime()
+    {
+        if (PhaseTouch[0] == TouchPhase.Began)
+        {
+            TouchTime = 0f;
+            TouchTime += Time.deltaTime;
+        }
+        else if (PhaseTouch[0] == TouchPhase.Moved)
+        {
+            TouchTime += Time.deltaTime;
+        }
+
+        Debug.Log(TouchTime);
+    }
+
+    //private float GetSecondLongTap()
+    //{
+    //    if (PhaseTouch[1] == TouchPhase.Began)
+    //    {
+    //        touchTime = 0.1f;
+    //        return 0;
+    //    }
+    //    else if (PhaseTouch[1] == TouchPhase.Moved)
+    //    {
+    //        touchTime += Time.deltaTime;
+    //        return 0;
+    //    }
+    //    else if (PhaseTouch[1] == TouchPhase.Ended)
+    //        return touchTime;
+
+    //    return 0;
+    //}
 
     //スワイプの方向
     private Vector2 CalcDirection()

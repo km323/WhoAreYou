@@ -8,15 +8,17 @@ public class SlowMotion : MonoBehaviour {
     [SerializeField]
     private Vector3 offset = new Vector3(0, 2, 0);
 
+    private GameObject postCamera;
     private GameObject activePlayer;
     private int oldCurrentState;
     private StageManager stageManager;
     private BoxCollider2D boxCollider;
-    private int touchTimes = 0; //弾がslow motion 範囲に触れた回数
 
     // Use this for initialization
     void Start()
     {
+        postCamera = GameObject.Find("PostCamera");
+        postCamera.SetActive(false);
         boxCollider = GetComponent<BoxCollider2D>();
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         oldCurrentState = GameMain.GetCurrentState();
@@ -30,17 +32,22 @@ public class SlowMotion : MonoBehaviour {
         {
             oldCurrentState = GameMain.GetCurrentState();
             ChangeActivePlayer();
-            touchTimes = 0;
-            boxCollider.enabled = true;
         }
 
         if (activePlayer == null)
             return;
 
-        if (touchTimes > stageManager.GetSlowMotionTimes())
+        if (PlayerController.GetPlayerInput().TouchTime >= stageManager.GetPressTimeNeed())
+            boxCollider.enabled = true;
+        else
             boxCollider.enabled = false;
 
         transform.position = activePlayer.transform.position + offset * oldCurrentState;
+    }
+
+    private void ResetCollider()
+    {
+        boxCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,15 +57,18 @@ public class SlowMotion : MonoBehaviour {
 
         if (collision.tag == "Bullet")
         {
-            touchTimes++;
+            postCamera.SetActive(true);
             Time.timeScale = timeScale;
-            Invoke("DelayResetTime", 0.15f)
+            Invoke("DelayResetTime", 0.2f)
 ;        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Bullet")
+        {
             Time.timeScale = 1f;
+            postCamera.SetActive(false);
+        }
     }
 
     private void ChangeActivePlayer()
@@ -69,5 +79,7 @@ public class SlowMotion : MonoBehaviour {
     private void DelayResetTime()
     {
         Time.timeScale = 1f;
+        boxCollider.enabled = false;
+        postCamera.SetActive(false);
     }
 }

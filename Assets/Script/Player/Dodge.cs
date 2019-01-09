@@ -12,7 +12,12 @@ public class Dodge : MonoBehaviour {
         polygonCollider = GetComponent<PolygonCollider2D>();
         s = DOTween.Sequence();
 
-        s.AppendCallback(() => { polygonCollider.enabled = false;  Time.timeScale = 1f;})
+        s.AppendCallback(() => 
+        {
+            polygonCollider.enabled = false;
+            Time.timeScale = 1f;
+            GameObject.Find("PostCamera").SetActive(false);
+        })
         .Append(
              transform.DORotate(new Vector3(0, 89, 0), 0.3f)
         )

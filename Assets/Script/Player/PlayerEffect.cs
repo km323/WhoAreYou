@@ -72,7 +72,6 @@ public class PlayerEffect : MonoBehaviour {
         else
             frameObjRenderer.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
 
-
         recSprite = SetPlayerRecSprite();
 
         if (stageManager.GetNeedToReset())
@@ -89,6 +88,7 @@ public class PlayerEffect : MonoBehaviour {
             frameObjRenderer.sprite = recSprite;
 
     }
+
     private void SetCurStageRecSprite()
     {
         frameObjRenderer.sprite = recSprite;
@@ -127,7 +127,6 @@ public class PlayerEffect : MonoBehaviour {
         //Instantiate(deadParticle, transform.position, Quaternion.identity,transform);
         //gameObject.SetActive(false);
     }
-
     private void DestroyDeadParticle()
     {
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("DeadEffect"))
@@ -186,7 +185,7 @@ public class PlayerEffect : MonoBehaviour {
         {
             radius -= Time.deltaTime * speed;
 
-            if (!showActiveDeadEffect && GetComponent<PlayerController>() != null && radius <= 1)
+            if (!showActiveDeadEffect && GetComponent<PlayerController>() != null && radius <= 1.2f)
             {
                 Instantiate(activeDeadPrefab, transform.position, Quaternion.identity);
                 showActiveDeadEffect = true;
