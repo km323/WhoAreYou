@@ -20,6 +20,6 @@ public class ScrollBgTutorial : MonoBehaviour {
     public void ScrollToBottom()
     {
         centerWall.SetActive(false);
-        transform.DOMoveY(-Camera.main.orthographicSize, 1f).SetDelay(1f);
+        transform.DOMoveY(-Camera.main.orthographicSize - 0.1f , 1f).SetDelay(1f);
     }
 }
