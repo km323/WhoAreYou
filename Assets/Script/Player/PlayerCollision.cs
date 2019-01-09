@@ -20,6 +20,8 @@ public class PlayerCollision  : MonoBehaviour {
         if (OnBulletHit != null)
             OnBulletHit();
 
+        SoundManager.Instance.PlaySe(SE.Damage);
+
         //gameObject.SetActive(false);
     }
 

@@ -44,6 +44,7 @@ public class PlayerInput
     public void Update()
     {
         HasTouch = false;
+        SameTimeTap = false;
         PhaseTouch[1] = TouchPhase.Canceled;
 
         if (Application.isEditor)

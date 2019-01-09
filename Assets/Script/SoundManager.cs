@@ -3,6 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum BGM
+{
+    None=-1,
+    Title,
+    Game,
+}
+
+public enum SE
+{
+    None = -1,
+    DefaultShot,
+    Damage,
+    ChangeTurn,
+    LockOn,
+}
+
 [System.Serializable]
 public class SoundVolume
 {
@@ -22,6 +38,20 @@ public class SoundVolume
 public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
     public SoundVolume volume = new SoundVolume();
+
+    private Dictionary<BGM, string> bgmName = new Dictionary<BGM, string>()
+    {
+        {BGM.Title,"bgmTitle2" },
+        {BGM.Game,"bgmTitle2" }
+    };
+    private Dictionary<SE, string> seName = new Dictionary<SE, string>()
+    {
+        {SE.DefaultShot,"cursor7" },
+        {SE.Damage,"cancel7" },
+        {SE.ChangeTurn,"se_maoudamashii_se_syber01" },
+        {SE.LockOn,"warning1" },
+    };
+
     private AudioClip[] seClips;
     private AudioClip[] bgmClips;
 
@@ -57,9 +87,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
             bgmIndexes[bgmClips[i].name] = i;
     }
 
-    public void PlayBgm(string name)
+    public void PlayBgm(BGM id)
     {
-        int index = bgmIndexes[name];
+        int index = bgmIndexes[bgmName[id]];
         PlayBgm(index);
     }
     public void PlayBgm(int index)
@@ -104,14 +134,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     }
 
 
-    public void PlaySe(string name)
+    public void PlaySe(SE id)
     {
-        int index = seIndexes[name];
+        int index = seIndexes[seName[id]];
         PlaySe(index);
     }
     public void PlaySe(int index)
     {
-        if (index < 0 || index >= bgmClips.Length)
+        if (index < 0 || index >= seClips.Length)
             return;
 
         foreach(AudioSource source in seSource)

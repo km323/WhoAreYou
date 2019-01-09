@@ -29,5 +29,7 @@ public class DefaultBullet : MonoBehaviour {
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
         Quaternion targetAngle = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         transform.rotation = targetAngle;
+
+        SoundManager.Instance.PlaySe(SE.DefaultShot);
     }
 }
