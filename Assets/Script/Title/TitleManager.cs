@@ -24,8 +24,9 @@ public class TitleManager : MonoBehaviour {
         {
             CanvasFadeIn();
         }
-
-        SoundManager.Instance.PlayBgm(BGM.Title);
+        SoundManager.Instance.StopBgm();
+        SoundManager.Instance.PlayBgm(BGM.Game);
+        SoundManager.Instance.PlayBgm(BGM.Game2);
     }
 
     private void CanvasFadeIn()

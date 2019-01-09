@@ -8,6 +8,7 @@ public enum BGM
     None=-1,
     Title,
     Game,
+    Game2,
 }
 
 public enum SE
@@ -17,6 +18,7 @@ public enum SE
     Damage,
     ChangeTurn,
     LockOn,
+    ShotBegin,
 }
 
 [System.Serializable]
@@ -42,7 +44,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     private Dictionary<BGM, string> bgmName = new Dictionary<BGM, string>()
     {
         {BGM.Title,"bgmTitle2" },
-        {BGM.Game,"bgmTitle2" }
+        {BGM.Game,"Beatmatch info - MT2 03 Synth Cm 129 Bpm" },
+        {BGM.Game2,"Beatmatch info - MT2 09 Drums 128 Bpm" }
     };
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
@@ -50,6 +53,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.Damage,"cancel7" },
         {SE.ChangeTurn,"se_maoudamashii_se_syber01" },
         {SE.LockOn,"warning1" },
+        {SE.ShotBegin,"se_maoudamashii_se_pc03" },
     };
 
     private AudioClip[] seClips;
@@ -60,7 +64,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
     const int cNumChannel = 16;
 
-    private AudioSource bgmSource;
+    const int bNumChannel = 2;
+    //private AudioSource bgmSource;
+    private AudioSource[] bgmSource = new AudioSource[bNumChannel];
     private AudioSource[] seSource = new AudioSource[cNumChannel];
 
 
@@ -71,8 +77,15 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         DontDestroyOnLoad(gameObject);
         gameObject.name = "SoundManager";
 
-        bgmSource = gameObject.AddComponent<AudioSource>();
-        bgmSource.loop = true;
+        //bgmSource = gameObject.AddComponent<AudioSource>();
+        //bgmSource.loop = true;
+
+        for(int i=0;i<bgmSource.Length;i++)
+        {
+            bgmSource[i] = gameObject.AddComponent<AudioSource>();
+            bgmSource[i].loop = true;
+            bgmSource[i].volume = volume.bgm;
+        }
 
         for (int i = 0; i < seSource.Length; i++)
             seSource[i] = gameObject.AddComponent<AudioSource>();
@@ -89,7 +102,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
     public void PlayBgm(BGM id)
     {
-        int index = bgmIndexes[bgmName[id]];
+        int index= bgmIndexes[bgmName[id]];
         PlayBgm(index);
     }
     public void PlayBgm(int index)
@@ -97,40 +110,74 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         if (index < 0 || index >= bgmClips.Length)
             return;
 
-        if (bgmSource.clip == bgmClips[index])
-            return;
-
-        bgmSource.Stop();
-        bgmSource.clip = bgmClips[index];
-        bgmSource.Play();
+        foreach (AudioSource source in bgmSource)
+        {
+            if (!source.isPlaying)
+            {
+                source.clip = bgmClips[index];
+                source.Play();
+                return;
+            }
+        }
     }
 
     public void StopBgm()
     {
-        bgmSource.Stop();
+        foreach (AudioSource source in bgmSource)
+        {
+            source.Stop();
+
+        }
     }
 
-    public void PauseBgm()
-    {
-        bgmSource.Pause();
-    }
+    //public void PlayBgm(BGM id)
+    //{
+    //    int index = bgmIndexes[bgmName[id]];
+    //    PlayBgm(index);
+    //}
+    //public void PlayBgm(int index)
+    //{
+    //    if (index < 0 || index >= bgmClips.Length)
+    //        return;
 
-    public void UnPauseBgm()
-    {
-        bgmSource.UnPause();
-    }
+    //    if (bgmSource.clip == bgmClips[index])
+    //        return;
 
-    public void FadeOutBgm(float fadeTime = 1f)
+    //    bgmSource.Stop();
+    //    bgmSource.clip = bgmClips[index];
+    //    bgmSource.Play();
+    //}
+
+    //public void StopBgm()
+    //{
+    //    bgmSource.Stop();
+    //}
+
+    //public void PauseBgm()
+    //{
+    //    bgmSource.Pause();
+    //}
+
+    //public void UnPauseBgm()
+    //{
+    //    bgmSource.UnPause();
+    //}
+
+    public void FadeOutBgm(int index=1,float fadeTime = 1f)
     {
-        if (!bgmSource.isPlaying)
+        if (!bgmSource[index].isPlaying)
             return;
 
-        bgmSource.volume = volume.bgm;
-        bgmSource.DOFade(0.0f, fadeTime).SetEase(Ease.InCubic);
+        ///bgmSource[index].volume = volume.bgm;
+        bgmSource[index].DOFade(0.0f, fadeTime).SetEase(Ease.InCubic);
     }
-    public void FadeInBgm(float fadeTime=1f)
+    public void FadeInBgm(int index=1, float fadeTime = 1f)
     {
-        bgmSource.DOFade(volume.bgm, fadeTime).SetEase(Ease.InCubic);
+        bgmSource[index].DOFade(volume.bgm, fadeTime).SetEase(Ease.InCubic);
+    }
+    public void MuteBgm(int index=1)
+    {
+        bgmSource[index].volume = 0;
     }
 
 

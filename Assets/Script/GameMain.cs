@@ -66,6 +66,9 @@ public class GameMain : MonoBehaviour {
     private void Start()
     {
         SoundManager.Instance.StopBgm();
+        SoundManager.Instance.PlayBgm(BGM.Game);
+        SoundManager.Instance.PlayBgm(BGM.Game2);
+        SoundManager.Instance.MuteBgm(1);
 
         black = new List<GameObject>();
         white = new List<GameObject>();
@@ -190,6 +193,9 @@ public class GameMain : MonoBehaviour {
 
     IEnumerator NextGame()
     {
+        SoundManager.Instance.FadeInBgm(1);
+        SoundManager.Instance.PlaySe(SE.ChangeTurn);
+
         yield return new WaitForSeconds(1f);
 
         Destroy(activePlayer.GetComponent<PlayerController>());
@@ -197,8 +203,7 @@ public class GameMain : MonoBehaviour {
 
         OnNextGame();
 
-        SoundManager.Instance.PlaySe(SE.ChangeTurn);
-
+        SoundManager.Instance.FadeOutBgm(1);
         yield return new WaitForSeconds(1f);
 
         ResetGame();
