@@ -22,6 +22,7 @@ public class TitleManager : MonoBehaviour {
     }
 
     void Start () {
+
         if (SceneManager.sceneCount > 1)
         {
             GameObject.Find("TestCamera").SetActive(false);
@@ -56,7 +57,11 @@ public class TitleManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         CanvasFadeIn();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
+        if (GameController.BestScore > 0)
+            property.ShowBestScore();
+        yield return new WaitForSeconds(0.5f);
 
         ActiveButton();
     }

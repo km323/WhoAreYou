@@ -10,38 +10,23 @@ using UnityEditor;
 public class StageTable : ScriptableObject
 {
     [SerializeField]
-    private Sprite playerBlackRec;
+    private Sprite playerBlack;
     [SerializeField]
-    private Sprite playerWhiteRec;
-
-    [SerializeField]
-    private Sprite playerBlackPlay;
-    [SerializeField]
-    private Sprite playerWhitePlay;
+    private Sprite playerWhite;
 
     [SerializeField]
     private float bgScrollSpeed;
     [SerializeField]
     private float pressTimeNeed;
 
-    public Sprite GetBlackRec()
+    public Sprite GetBlack()
     {
-        return playerBlackRec;
+        return playerBlack;
     }
 
-    public Sprite GetWhiteRec()
+    public Sprite GetWhite()
     {
-        return playerWhiteRec;
-    }
-
-    public Sprite GetBlackPlay()
-    {
-        return playerBlackPlay;
-    }
-
-    public Sprite GetWhitePlay()
-    {
-        return playerWhitePlay;
+        return playerWhite;
     }
 
     public float GetBgScrollSpeed()

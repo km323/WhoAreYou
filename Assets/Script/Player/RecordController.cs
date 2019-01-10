@@ -53,9 +53,9 @@ public class RecordController : MonoBehaviour {
     {
         Sprite sprite = null;
         if (gameObject.layer == 9)
-            sprite = stageManager.GetPlayerBlackPlay();
+            sprite = stageManager.GetCurrentBlack();
         if (gameObject.layer == 10)
-            sprite = stageManager.GetPlayerWhitePlay();
+            sprite = stageManager.GetCurrentWhite();
 
         return sprite;
     }

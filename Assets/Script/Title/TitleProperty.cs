@@ -16,6 +16,10 @@ public class TitleProperty : MonoBehaviour {
     [SerializeField]
     private GameObject tutorialButtonBlack;
 
+    [SerializeField]
+    private GameObject highScoreBlack;
+    [SerializeField]
+    private Text bestScore;
 
     public GameObject GetMoveE()
     {
@@ -42,6 +46,11 @@ public class TitleProperty : MonoBehaviour {
         return tutorialButtonBlack;
     }
 
+    public void ShowBestScore()
+    {
+        highScoreBlack.SetActive(true);
+        bestScore.text = GameController.BestScore.ToString();
+    }
 
     // Use this for initialization
     void Awake ()
@@ -53,6 +62,7 @@ public class TitleProperty : MonoBehaviour {
 
         startButtonBlack.SetActive(false);
         tutorialButtonBlack.SetActive(false);
+        highScoreBlack.SetActive(false);
     }
 	
 	// Update is called once per frame

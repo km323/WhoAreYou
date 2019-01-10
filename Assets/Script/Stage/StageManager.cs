@@ -102,30 +102,22 @@ public class StageManager : MonoBehaviour {
         return stageDataBase.GetStageList()[num - 1];
     }
 
-    public Sprite GetPreviousBlackRec()
+    public Sprite GetPreviousBlack()
     {
-        return stageDataBase.GetStageList()[previousStage - 1].GetBlackRec();
+        return stageDataBase.GetStageList()[previousStage - 1].GetBlack();
     }
-    public Sprite GetPreviousWhiteRec()
+    public Sprite GetPreviousWhite()
     {
-        return stageDataBase.GetStageList()[previousStage - 1].GetWhiteRec();
+        return stageDataBase.GetStageList()[previousStage - 1].GetWhite();
     }
 
-    public Sprite GetPlayerBlackRec()
+    public Sprite GetCurrentBlack()
     {
-        return GetStageTable().GetBlackRec();
+        return GetStageTable().GetBlack();
     }
-    public Sprite GetPlayerWhiteRec()
+    public Sprite GetCurrentWhite()
     {
-        return GetStageTable().GetWhiteRec();
-    }
-    public Sprite GetPlayerBlackPlay()
-    {
-        return GetStageTable().GetBlackPlay();
-    }
-    public Sprite GetPlayerWhitePlay()
-    {
-        return GetStageTable().GetWhitePlay();
+        return GetStageTable().GetWhite();
     }
 
     public float GetBgScrollSpeed()
