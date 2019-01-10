@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Property : MonoBehaviour {
+public class ResultProperty : MonoBehaviour {
     [SerializeField]
     private GameObject normalScoreObjBlack;
     [SerializeField]
@@ -38,7 +38,6 @@ public class Property : MonoBehaviour {
     private Text bestScore;
     [SerializeField]
     private Text newBestScore;
-
 
     public GameObject GetNormalScoreObj()
     {
@@ -133,10 +132,9 @@ public class Property : MonoBehaviour {
         normalScore.gameObject.SetActive(false);
         bestScore.gameObject.SetActive(false);
         newBestScore.gameObject.SetActive(false);
-}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    void Update()
+    {
+    }
 }
