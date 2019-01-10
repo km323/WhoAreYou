@@ -356,7 +356,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2200, y: -189}
-  m_SizeDelta: {x: 1440, y: 1000}
+  m_SizeDelta: {x: 1440, y: 1002}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &295293659
 MonoBehaviour:
@@ -556,7 +556,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 22002200, y: -189.00009}
-  m_SizeDelta: {x: 1440, y: 1000}
+  m_SizeDelta: {x: 1440, y: 1002}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &404501278
 MonoBehaviour:
@@ -1749,31 +1749,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114074748706906468, guid: 2558ab398ab8275498f02e942f5cc388,
-        type: 2}
-      propertyPath: timeNeedDodge
-      value: 0.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114487325834678872, guid: 2558ab398ab8275498f02e942f5cc388, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2558ab398ab8275498f02e942f5cc388, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1425215866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1427889085016462, guid: 2558ab398ab8275498f02e942f5cc388,
-    type: 2}
-  m_PrefabInternal: {fileID: 1370084411}
---- !u!114 &1425215868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1425215866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5a0d4afe874af478e62e1bf6171860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1425215872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4095349743402118, guid: 2558ab398ab8275498f02e942f5cc388,
@@ -2300,7 +2278,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2200, y: -189}
-  m_SizeDelta: {x: 1440, y: 1000}
+  m_SizeDelta: {x: 1440, y: 1002}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1645653069
 MonoBehaviour:
@@ -3073,7 +3051,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2200, y: -189}
-  m_SizeDelta: {x: 1440, y: 1000}
+  m_SizeDelta: {x: 1440, y: 1002}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2060926189
 GameObject:

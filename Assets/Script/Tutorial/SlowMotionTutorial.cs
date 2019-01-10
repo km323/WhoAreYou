@@ -14,6 +14,7 @@ public class SlowMotionTutorial : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        postCamera.SetActive(false);
         distance = transform.position - player.position;
     }
 	
