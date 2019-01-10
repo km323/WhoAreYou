@@ -6,6 +6,11 @@ public class PlayerCollision  : MonoBehaviour {
     public delegate void BulletHitHandler();
     public BulletHitHandler OnBulletHit;
 
+    public void OnTriggerMissile()
+    {
+        OnBulletHit();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "SlowMotion")

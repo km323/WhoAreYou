@@ -58,8 +58,10 @@ public class PlayerController : MonoBehaviour {
 
         //回避
         if (enableDodge && playerInput.TouchTime >= stageManager.GetPressTimeNeed() && playerInput.HasReleased)
+        {
             dodge.DodgeAttack();
-
+            SoundManager.Instance.PlaySe(SE.DodgeAttack);
+        }
         if (missileItem)
             return;
 

@@ -23,6 +23,10 @@ public enum SE
     ShotBegin,
     GetItem,
     ShieldBreak,
+    MissileShot,
+    MissileExprosion,
+    DodgeAttack,
+    SlowMotion,
 }
 
 [System.Serializable]
@@ -60,7 +64,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.LockOn,"warning1" },
         {SE.ShotBegin,"se_maoudamashii_se_pc03" },
         {SE.GetItem,"button36" },
-        {SE.ShieldBreak,"glass-break4" }
+        {SE.ShieldBreak,"glass-break4" },
+        {SE.MissileShot,"attack010" },
+        {SE.MissileExprosion,"game_explosion010" },
+        {SE.DodgeAttack,"page02" },
+        {SE.SlowMotion,"button19" },
     };
 
     private AudioClip[] seClips;

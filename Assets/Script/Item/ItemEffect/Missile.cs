@@ -24,10 +24,12 @@ public class Missile : MonoBehaviour
     private void Awake()
     {
         position = transform.position;
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
         velocity.x = Random.Range(initialVelocityRangeX.x, initialVelocityRangeX.y);
         velocity.y = Random.Range(initialVelocityRangeY.x, initialVelocityRangeY.y);
         hasExplode = false;
+
+        SoundManager.Instance.PlaySe(SE.MissileShot);
     }
 
     public void initMissile(GameObject target, int initialVelocityDirectionX)
@@ -60,8 +62,11 @@ public class Missile : MonoBehaviour
         }
         else if (target.activeSelf == true)
         {
-            GetComponent<Collider2D>().enabled = true;
+            target.GetComponent<PlayerCollision>().OnTriggerMissile();
+            target.SetActive(false);
             Explode();
+            Destroy(gameObject);
+            SoundManager.Instance.PlaySe(SE.MissileExprosion);
         }
         position += velocity * Time.deltaTime;
         transform.position = position;

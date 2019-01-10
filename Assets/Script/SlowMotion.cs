@@ -59,7 +59,9 @@ public class SlowMotion : MonoBehaviour {
         {
             postCamera.SetActive(true);
             Time.timeScale = timeScale;
-            Invoke("DelayResetTime", 0.2f)
+            Invoke("DelayResetTime", 0.2f);
+            SoundManager.Instance.PlaySe(SE.SlowMotion);
+            
 ;        }
     }
     private void OnTriggerExit2D(Collider2D collision)
