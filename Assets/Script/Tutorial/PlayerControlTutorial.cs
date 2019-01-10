@@ -18,12 +18,14 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     public bool EnableMove { get; set; }
     public bool EnableShot { get; set; }
+    public bool EnableLongTap { get; set; }
     public bool EnableDodge { get; set; }
 
     public bool HasStart { get; private set; }
     public bool HasMove { get; private set; }
     public bool HasShot { get; private set; }
     public bool HasDodge { get; private set; }
+    public bool HasLongTap { get; private set; }
 
     // Use this for initialization
     void Start () {
@@ -61,6 +63,9 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     private void Dodge()
     {
+        if (EnableLongTap && !HasLongTap && playerInput.TouchTime >= timeNeedDodge)
+            HasLongTap = true;
+
         if (EnableDodge && playerInput.TouchTime >= timeNeedDodge && playerInput.HasReleased)
         {
             dodge.DodgeAttack();

@@ -31,7 +31,9 @@ public class TutorialManager : MonoBehaviour {
     [SerializeField]
     private GameObject shotCanvas;
     [SerializeField]
-    private GameObject dodgeCanvas;
+    private GameObject dodgeCanvas1;
+    [SerializeField]
+    private GameObject dodgeCanvas2;
     [SerializeField]
     private GameObject dieCanvas;
 
@@ -40,7 +42,8 @@ public class TutorialManager : MonoBehaviour {
         Start,
         Move,
         Shot,
-        Dodge,
+        Dodge1,
+        Dodge2,
         Die
     }
 
@@ -60,7 +63,8 @@ public class TutorialManager : MonoBehaviour {
         nextButton.SetActive(false);
         moveCanvas.SetActive(false);
         shotCanvas.SetActive(false);
-        dodgeCanvas.SetActive(false);
+        dodgeCanvas1.SetActive(false);
+        dodgeCanvas1.SetActive(false);
         dieCanvas.SetActive(false);
         bulletSpawner.SetActive(false);
     }
@@ -70,7 +74,8 @@ public class TutorialManager : MonoBehaviour {
         SetupStateStart();
         SetupStateMove();
         SetupStateShot();
-        SetupStateDodge();
+        SetupStateDodge1();
+        SetupStateDodge2();
         SetupStateDie();
         stateMachine.ChangeState(State.Start);
     }
@@ -130,12 +135,33 @@ public class TutorialManager : MonoBehaviour {
         stateMachine.Add(state, enter, update, exit);
     }
 
-    private void SetupStateDodge()
+    private void SetupStateDodge1()
     {
-        State state = State.Dodge;
+        State state = State.Dodge1;
         Action<State> enter = (prev) =>
         {
-            MoveIn(dodgeCanvas);
+            MoveIn(dodgeCanvas1);
+            control.EnableLongTap = true;
+        };
+        Action update = () =>
+        {
+            if(control.HasLongTap)
+                nextButton.SetActive(true);
+        };
+        Action<State> exit = (next) =>
+        {
+            MoveOut(dodgeCanvas1);
+            nextButton.SetActive(false);
+        };
+        stateMachine.Add(state, enter, update, exit);
+    }
+
+    private void SetupStateDodge2()
+    {
+        State state = State.Dodge2;
+        Action<State> enter = (prev) =>
+        {
+            MoveIn(dodgeCanvas2);
             control.EnableDodge = true;
             bulletSpawner.SetActive(true);
         };
@@ -146,7 +172,7 @@ public class TutorialManager : MonoBehaviour {
         };
         Action<State> exit = (next) =>
         {
-            MoveOut(dodgeCanvas);
+            MoveOut(dodgeCanvas2);
             nextButton.SetActive(false);
             bulletSpawner.SetActive(false);
         };
