@@ -30,7 +30,7 @@ public class TitleManager : MonoBehaviour {
         {
             StartCoroutine("PlayEffect");
         }
-
+        SoundManager.Instance.StopBgm();
         SoundManager.Instance.PlayBgm(BGM.Title);
     }
 

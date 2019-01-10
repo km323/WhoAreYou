@@ -8,6 +8,7 @@ public enum BGM
     None=-1,
     Title,
     Game,
+    Game2,
 }
 
 public enum SE
@@ -17,6 +18,7 @@ public enum SE
     Damage,
     ChangeTurn,
     LockOn,
+    ShotBegin,
 }
 
 [System.Serializable]
@@ -41,15 +43,16 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
 
     private Dictionary<BGM, string> bgmName = new Dictionary<BGM, string>()
     {
-        {BGM.Title,"bgmTitle2" },
-        {BGM.Game,"bgmTitle2" }
+        {BGM.Title,"Monolithic Feelings" },
+        {BGM.Game,"Berlin Hours330" },
     };
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
-        {SE.DefaultShot,"cursor7" },
-        {SE.Damage,"cancel7" },
-        {SE.ChangeTurn,"se_maoudamashii_se_syber01" },
+        {SE.DefaultShot,"beam-gun03" },
+        {SE.Damage,"se_maoudamashii_system20" },
+        {SE.ChangeTurn,"場面転換・スライド表現04" },
         {SE.LockOn,"warning1" },
+        {SE.ShotBegin,"se_maoudamashii_se_pc03" },
     };
 
     private AudioClip[] seClips;
@@ -59,7 +62,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     private Dictionary<string, int> bgmIndexes = new Dictionary<string, int>();
 
     const int cNumChannel = 16;
-
+    
     private AudioSource bgmSource;
     private AudioSource[] seSource = new AudioSource[cNumChannel];
 
@@ -108,6 +111,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     public void StopBgm()
     {
         bgmSource.Stop();
+        bgmSource.clip = null;
     }
 
     public void PauseBgm()
@@ -128,9 +132,13 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         bgmSource.volume = volume.bgm;
         bgmSource.DOFade(0.0f, fadeTime).SetEase(Ease.InCubic);
     }
-    public void FadeInBgm(float fadeTime=1f)
+    public void FadeInBgm(float fadeTime = 1f)
     {
         bgmSource.DOFade(volume.bgm, fadeTime).SetEase(Ease.InCubic);
+    }
+    public void MuteBgm(int index=1)
+    {
+        bgmSource.volume = 0;
     }
 
 

@@ -24,14 +24,13 @@ public class PlayerInput
     private Vector2 touchPosition; //タップした位置
     private Vector2 oldPosition;
     private bool firstTapDone;
-
+    public bool SameTimeTapBegin { get; private set; }
 
     public PlayerInput()
     {
         firstTapDone = false;
         HasTouch = false;
         PhaseTouch = new TouchPhase[maxTouch];
-
         touchPosition = Vector2.zero;
         Direction = Vector2.zero;
         oldPosition = Vector2.zero;
@@ -59,6 +58,7 @@ public class PlayerInput
             HasReleased = HasReleaseFinger();
             Direction = CalcDirection();
             oldPosition = touchPosition;
+            SameTimeTapBegin = HasSecondTapBegin();
         }
     }
 
@@ -160,6 +160,7 @@ public class PlayerInput
         HasTouch = false;
         SameTimeTap = false;
         HasReleased = false;
+        SameTimeTapBegin = false;
         PhaseTouch[1] = TouchPhase.Canceled;
     }
 
@@ -180,7 +181,7 @@ public class PlayerInput
 
         return false;
     }
-
+    
     private bool HasReleaseFinger()
     {
         if (PhaseTouch[0] == TouchPhase.Ended)
@@ -203,24 +204,13 @@ public class PlayerInput
 
         Debug.Log(TouchTime);
     }
+    private bool HasSecondTapBegin()
+    {
+        if (PhaseTouch[1] == TouchPhase.Began)
+            return true;
 
-    //private float GetSecondLongTap()
-    //{
-    //    if (PhaseTouch[1] == TouchPhase.Began)
-    //    {
-    //        touchTime = 0.1f;
-    //        return 0;
-    //    }
-    //    else if (PhaseTouch[1] == TouchPhase.Moved)
-    //    {
-    //        touchTime += Time.deltaTime;
-    //        return 0;
-    //    }
-    //    else if (PhaseTouch[1] == TouchPhase.Ended)
-    //        return touchTime;
-
-    //    return 0;
-    //}
+        return false;
+    }
 
     //スワイプの方向
     private Vector2 CalcDirection()

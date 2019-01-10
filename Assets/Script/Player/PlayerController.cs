@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour {
             return;
 
         //弾を撃つ
+        if (playerInput.SameTimeTapBegin)
+            SoundManager.Instance.PlaySe(SE.ShotBegin);
         if (playerInput.SameTimeTap)
             shot.ShotBullet();
     }

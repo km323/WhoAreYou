@@ -66,7 +66,8 @@ public class GameMain : MonoBehaviour {
     private void Start()
     {
         SoundManager.Instance.StopBgm();
-
+        SoundManager.Instance.PlayBgm(BGM.Game);
+       
         black = new List<GameObject>();
         white = new List<GameObject>();
         
@@ -190,15 +191,16 @@ public class GameMain : MonoBehaviour {
 
     IEnumerator NextGame()
     {
+
+        
+
         yield return new WaitForSeconds(1f);
 
         Destroy(activePlayer.GetComponent<PlayerController>());
         turn++;
 
         OnNextGame();
-
         SoundManager.Instance.PlaySe(SE.ChangeTurn);
-
         yield return new WaitForSeconds(1f);
 
         ResetGame();
