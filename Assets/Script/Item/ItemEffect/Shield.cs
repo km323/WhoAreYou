@@ -41,6 +41,7 @@ public class Shield : MonoBehaviour {
 
     IEnumerator Vanish()
     {
+        SoundManager.Instance.PlaySe(SE.ShieldBreak);
         effect.Play();
         transform.DOScale(Vector3.zero, 0.5f);
         yield return new WaitForSeconds(0.5f);

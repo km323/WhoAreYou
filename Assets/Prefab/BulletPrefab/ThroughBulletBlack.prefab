@@ -131,6 +131,7 @@ MonoBehaviour:
   speed: 1000
   direction: {x: 0, y: 1}
   deadDelayTime: 2
+  se: 1
 --- !u!212 &212322326208856714
 SpriteRenderer:
   m_ObjectHideFlags: 1

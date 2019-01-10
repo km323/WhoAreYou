@@ -10,7 +10,7 @@ public class PlayerCollision  : MonoBehaviour {
     {
         if (collision.tag == "SlowMotion")
             return;
-      
+
         if (collision.tag == "Item")
             return;
 

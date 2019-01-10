@@ -15,10 +15,14 @@ public enum SE
 {
     None = -1,
     DefaultShot,
+    ThroughShot,
+    WaveShot,
     Damage,
     ChangeTurn,
     LockOn,
     ShotBegin,
+    GetItem,
+    ShieldBreak,
 }
 
 [System.Serializable]
@@ -49,10 +53,14 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
         {SE.DefaultShot,"beam-gun03" },
+        {SE.ThroughShot,"laser2" },
+        {SE.WaveShot,"laser" },
         {SE.Damage,"se_maoudamashii_system20" },
         {SE.ChangeTurn,"場面転換・スライド表現04" },
         {SE.LockOn,"warning1" },
         {SE.ShotBegin,"se_maoudamashii_se_pc03" },
+        {SE.GetItem,"button36" },
+        {SE.ShieldBreak,"glass-break4" }
     };
 
     private AudioClip[] seClips;

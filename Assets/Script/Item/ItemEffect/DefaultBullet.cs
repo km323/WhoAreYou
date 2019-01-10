@@ -11,6 +11,9 @@ public class DefaultBullet : MonoBehaviour {
     [SerializeField]
     private float deadDelayTime;
 
+    [SerializeField]
+    private SE se;
+
     private const float angleOffset = 90;
 
     private Vector3 velocity;
@@ -30,6 +33,6 @@ public class DefaultBullet : MonoBehaviour {
         Quaternion targetAngle = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         transform.rotation = targetAngle;
 
-        SoundManager.Instance.PlaySe(SE.DefaultShot);
+        SoundManager.Instance.PlaySe(se);
     }
 }
