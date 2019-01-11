@@ -201,8 +201,6 @@ public class PlayerInput
         {
             TouchTime += Time.deltaTime;
         }
-
-        Debug.Log(TouchTime);
     }
     private bool HasSecondTapBegin()
     {

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBlack: {fileID: 21300000, guid: 9438ff58d3bed67439adaa69d9b1de2c, type: 3}
   playerWhite: {fileID: 21300000, guid: 80dc89e8a58caef4bbe49c9b9318fae6, type: 3}
+  colorBlack: {r: 0.5254902, g: 0.7568628, b: 0.20392159, a: 1}
+  colorWhite: {r: 0.9843138, g: 0.2509804, b: 0.17254902, a: 1}
   bgScrollSpeed: 0.1
-  pressTimeNeed: 1.5
+  pressTimeNeed: 1.1

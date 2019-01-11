@@ -39,7 +39,8 @@ public class ScrollBackground : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Scroll();
+        if(FindObjectOfType<GameMain>() != null)
+            Scroll();
     }
 
     //回転中はスクロールしない

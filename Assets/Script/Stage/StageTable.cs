@@ -15,6 +15,11 @@ public class StageTable : ScriptableObject
     private Sprite playerWhite;
 
     [SerializeField]
+    private Color colorBlack;
+    [SerializeField]
+    private Color colorWhite;
+
+    [SerializeField]
     private float bgScrollSpeed;
     [SerializeField]
     private float pressTimeNeed;
@@ -27,6 +32,16 @@ public class StageTable : ScriptableObject
     public Sprite GetWhite()
     {
         return playerWhite;
+    }
+
+    public Color GetColorBlack()
+    {
+        return colorBlack;
+    }
+
+    public Color GetColorWhite()
+    {
+        return colorWhite;
     }
 
     public float GetBgScrollSpeed()

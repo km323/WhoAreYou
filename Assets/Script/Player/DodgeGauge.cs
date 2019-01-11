@@ -4,20 +4,21 @@ using UnityEngine;
 
 /// <summary>
 /// 回避に必要な長押しの時間を自機のフレームで表現するクラス
+/// tutorial scene用に継承できるように
 /// </summary>
 
 public class DodgeGauge : MonoBehaviour {
     [SerializeField]
-    private SpriteRenderer frame;
+    protected SpriteRenderer frame;
     [SerializeField]
-    private Texture[] recMask;
+    protected Texture[] recMask;
 
-    private const float firstPhase = 1 / 4f;
-    private const float secondPhase = 1 / 2f;
-    private const float thirdPhase = 3 / 4f;
+    protected const float firstPhase = 1 / 4f;
+    protected const float secondPhase = 1 / 2f;
+    protected const float thirdPhase = 3 / 4f;
 
     private StageManager stageManager;
-    private float pressedTime;
+    protected float pressedTime;
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +48,7 @@ public class DodgeGauge : MonoBehaviour {
             SetTexture(recMask[0]);
     }
 
-    private bool ReachNeedTime(float needTime)
+    protected bool ReachNeedTime(float needTime)
     {
         if (pressedTime >= needTime)
             return true;
@@ -55,7 +56,7 @@ public class DodgeGauge : MonoBehaviour {
             return false;
     }
 
-    private void SetTexture(Texture tex)
+    protected void SetTexture(Texture tex)
     {
         frame.material.SetTexture("_AlphaTex", tex);
     }
