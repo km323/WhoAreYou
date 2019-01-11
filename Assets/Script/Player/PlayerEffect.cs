@@ -9,9 +9,17 @@ public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private GameObject deadParticle;
     [SerializeField]
-    private SpriteRenderer frameObjRenderer;
+    private GameObject frameOut;
     [SerializeField]
-    private Sprite playSprite;
+    private SpriteRenderer frameObjRenderer;
+
+    [SerializeField]
+    private Sprite simpleFrame;
+    [SerializeField]
+    private Texture playTex;
+    [SerializeField]
+    private Texture recTex;
+
     [SerializeField]
     private GameObject activeDeadPrefab;
 
@@ -87,6 +95,8 @@ public class PlayerEffect : MonoBehaviour {
         else
             frameObjRenderer.sprite = recSprite;
 
+        frameObjRenderer.material.SetTexture("_AlphaTex", recTex);
+
     }
 
     private void SetCurStageRecSprite()
@@ -98,9 +108,9 @@ public class PlayerEffect : MonoBehaviour {
     {
         Sprite sprite = null;
         if (GameMain.GetCurrentState() == GameMain.BLACK)
-            sprite = stageManager.GetPlayerBlackRec();
+            sprite = stageManager.GetCurrentBlack();
         if (GameMain.GetCurrentState() == GameMain.WHITE)
-            sprite = stageManager.GetPlayerWhiteRec();
+            sprite = stageManager.GetCurrentWhite();
 
         return sprite;
     }
@@ -108,16 +118,19 @@ public class PlayerEffect : MonoBehaviour {
     {
         Sprite sprite = null;
         if (GameMain.GetCurrentState() == GameMain.BLACK)
-            sprite = stageManager.GetPreviousBlackRec();
+            sprite = stageManager.GetPreviousBlack();
         if (GameMain.GetCurrentState() == GameMain.WHITE)
-            sprite = stageManager.GetPreviousWhiteRec();
+            sprite = stageManager.GetPreviousWhite();
 
         return sprite;
     }
 
     private void ChageFrameObjSprite()
     {
-        frameObjRenderer.sprite = playSprite;
+        if (frameOut.activeSelf)
+            frameOut.SetActive(false);
+        frameObjRenderer.sprite = simpleFrame;
+        frameObjRenderer.material.SetTexture("_AlphaTex", playTex);
         frameObjRenderer.sortingLayerName = "Default";
     }
 

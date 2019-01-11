@@ -197,7 +197,7 @@ public class PlayerInput
             TouchTime = 0f;
             TouchTime += Time.deltaTime;
         }
-        else if (PhaseTouch[0] == TouchPhase.Moved)
+        else if (PhaseTouch[0] == TouchPhase.Moved || PhaseTouch[0] == TouchPhase.Stationary)
         {
             TouchTime += Time.deltaTime;
         }
