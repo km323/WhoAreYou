@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114868271003697960}
   - component: {fileID: 114638026623456732}
   - component: {fileID: 114303063550954796}
+  - component: {fileID: 114157145288890862}
   m_Layer: 9
   m_Name: PlayerBlack
   m_TagString: PlayerBlack
@@ -117,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592875330346722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.1206465, y: -3.437451, z: 0}
+  m_LocalPosition: {x: -4.867263, y: -8.05492, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4507845680788198}
@@ -214,6 +215,24 @@ PolygonCollider2D:
       - {x: -1.1985905, y: -0.12411976}
       - {x: 0.004964769, y: -1.3425684}
       - {x: 1.1985908, y: -0.13404846}
+--- !u!114 &114157145288890862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592875330346722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60ba47aa13a1b541afa6fab5b1d8cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frame: {fileID: 212825275582073886}
+  recMask:
+  - {fileID: 2800000, guid: 49277c628f1c89442b9c173f763a965c, type: 3}
+  - {fileID: 2800000, guid: 36c028536703a6a4494a50bffc5e2178, type: 3}
+  - {fileID: 2800000, guid: 1f6cd5cc6783511439131659bf3e0ed1, type: 3}
+  - {fileID: 2800000, guid: 0ecf57dbfc6c5274192652f07966dbbf, type: 3}
+  - {fileID: 2800000, guid: 51a072a2a06f09446905d638f1961c5c, type: 3}
 --- !u!114 &114303063550954796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,9 +260,9 @@ MonoBehaviour:
     type: 2}
   frameOut: {fileID: 1837939734325808}
   frameObjRenderer: {fileID: 212825275582073886}
-  simpleFrame: {fileID: 21300000, guid: 4325a570fd2e1434dbec510de6ca3aad, type: 3}
-  playTex: {fileID: 2800000, guid: b6776526f00628d47a8f6b8712abb075, type: 3}
-  recTex: {fileID: 2800000, guid: 49277c628f1c89442b9c173f763a965c, type: 3}
+  greyFrame: {fileID: 21300000, guid: 4325a570fd2e1434dbec510de6ca3aad, type: 3}
+  playMask: {fileID: 2800000, guid: b6776526f00628d47a8f6b8712abb075, type: 3}
+  recMask: {fileID: 2800000, guid: 49277c628f1c89442b9c173f763a965c, type: 3}
   activeDeadPrefab: {fileID: 1423441249107680, guid: b3fdafcd2833d534eac0a39387ed254e,
     type: 2}
 --- !u!114 &114743428142921734

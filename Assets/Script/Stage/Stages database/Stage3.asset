@@ -11,9 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a7c1ac824836649bf50abfc44e1290, type: 3}
   m_Name: Stage3
   m_EditorClassIdentifier: 
-  playerBlackRec: {fileID: 21300000, guid: ef1416fef6c543c47ace07fb9fad17c4, type: 3}
-  playerWhiteRec: {fileID: 21300000, guid: e50ead8e1c0198e4aaa08e7206f5ebae, type: 3}
-  playerBlackPlay: {fileID: 21300000, guid: d7a7a72a378a82a42b9eb8b881c5c57d, type: 3}
-  playerWhitePlay: {fileID: 21300000, guid: 341139ebb72692044b0988c2d854bcd5, type: 3}
+  playerBlack: {fileID: 21300000, guid: 6c4359a0c84864741ac55ac352cbf00c, type: 3}
+  playerWhite: {fileID: 21300000, guid: af7785dec1a437c49a1c378a94c9f9c9, type: 3}
   bgScrollSpeed: 0.2
   pressTimeNeed: 2

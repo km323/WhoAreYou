@@ -9,16 +9,16 @@ public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private GameObject deadParticle;
     [SerializeField]
-    private GameObject frameOut;
+    private GameObject frameOut; //prefabにある外側のフレーム、色変更×
     [SerializeField]
-    private SpriteRenderer frameObjRenderer;
+    private SpriteRenderer frameObjRenderer; //色を変更できるフレーム
 
     [SerializeField]
-    private Sprite simpleFrame;
+    private Sprite greyFrame;
     [SerializeField]
-    private Texture playTex;
+    private Texture playMask;
     [SerializeField]
-    private Texture recTex;
+    private Texture recMask;
 
     [SerializeField]
     private GameObject activeDeadPrefab;
@@ -47,7 +47,7 @@ public class PlayerEffect : MonoBehaviour {
 
     void Start () {
         GetComponent<PlayerCollision>().OnBulletHit += PlayVanishEffect;
-        GetComponent<PlayerCollision>().OnBulletHit += SetDeadParticle;
+        GetComponent<PlayerCollision>().OnBulletHit += DisableCollision;
 
         GameMain.OnNextGame += PlayVanishEffect;
         GameMain.OnNextGame += DestroyDeadParticle;
@@ -60,7 +60,7 @@ public class PlayerEffect : MonoBehaviour {
     private void OnDestroy()
     {
         GetComponent<PlayerCollision>().OnBulletHit -= PlayVanishEffect;
-        GetComponent<PlayerCollision>().OnBulletHit -= SetDeadParticle;
+        GetComponent<PlayerCollision>().OnBulletHit -= DisableCollision;
 
         GameMain.OnNextGame -= PlayVanishEffect;
         GameMain.OnNextGame -= DestroyDeadParticle;
@@ -68,11 +68,13 @@ public class PlayerEffect : MonoBehaviour {
         GameMain.OnNextGame -= DeadMove;
     }
 
+    //ターン変わると、キャラクターを初期位置に戻す
     private void DeadMove()
     {
         transform.DOMove(GetComponent<RecordController>().GetStartPos(), 1);
     }
 
+    //start時、frameObjRendererの色を決めるメソッド
     private void CreateFrameObj()
     {
         if (Camera.main.transform.up.y == 1)
@@ -95,7 +97,7 @@ public class PlayerEffect : MonoBehaviour {
         else
             frameObjRenderer.sprite = recSprite;
 
-        frameObjRenderer.material.SetTexture("_AlphaTex", recTex);
+        frameObjRenderer.material.SetTexture("_AlphaTex", recMask);
 
     }
 
@@ -125,20 +127,19 @@ public class PlayerEffect : MonoBehaviour {
         return sprite;
     }
 
+    //ターン変わるたびフレームの初期化
     private void ChageFrameObjSprite()
     {
         if (frameOut.activeSelf)
             frameOut.SetActive(false);
-        frameObjRenderer.sprite = simpleFrame;
-        frameObjRenderer.material.SetTexture("_AlphaTex", playTex);
+        frameObjRenderer.sprite = greyFrame;
+        frameObjRenderer.material.SetTexture("_AlphaTex", playMask);
         frameObjRenderer.sortingLayerName = "Default";
     }
 
-    private void SetDeadParticle()
+    private void DisableCollision()
     {
         polygonCollider.enabled = false;
-        //Instantiate(deadParticle, transform.position, Quaternion.identity,transform);
-        //gameObject.SetActive(false);
     }
     private void DestroyDeadParticle()
     {

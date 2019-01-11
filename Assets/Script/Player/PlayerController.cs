@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour {
 
         enableDodge = false;
 
-        GameMain gameMain = GameObject.Find("GameMain").GetComponent<GameMain>();
+        GameMain gameMain = FindObjectOfType<GameMain>();
         gameMain.DisableWhenActiveDie();
 
         SceneController.Instance.Additive(Scene.Result);
@@ -146,6 +146,9 @@ public class PlayerController : MonoBehaviour {
     {
         recordController.StopRecord();//記録を止める
         playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
+        DodgeGauge dodgeGuage = FindObjectOfType<DodgeGauge>();
+        if (dodgeGuage != null)
+            Object.Destroy(dodgeGuage);
 
         shot.SetDefaultBullet();
         Destroy(itemAssociated);
