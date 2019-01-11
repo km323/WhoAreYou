@@ -237,13 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60ba47aa13a1b541afa6fab5b1d8cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frame: {fileID: 212690807856243714}
-  recMask:
-  - {fileID: 2800000, guid: 49277c628f1c89442b9c173f763a965c, type: 3}
-  - {fileID: 2800000, guid: 36c028536703a6a4494a50bffc5e2178, type: 3}
-  - {fileID: 2800000, guid: 1f6cd5cc6783511439131659bf3e0ed1, type: 3}
-  - {fileID: 2800000, guid: 0ecf57dbfc6c5274192652f07966dbbf, type: 3}
-  - {fileID: 2800000, guid: 51a072a2a06f09446905d638f1961c5c, type: 3}
+  gauge:
+  - {fileID: 1738577985646438, guid: 1e17264ca55587d42bd3f210ae8edaf2, type: 2}
+  - {fileID: 1067605099026104, guid: 4d67d75376d49d543918c328a76be2f9, type: 2}
+  - {fileID: 1486434539071664, guid: cabd59e13cce01649985f949c2e35192, type: 2}
 --- !u!114 &114286490170697422
 MonoBehaviour:
   m_ObjectHideFlags: 1
