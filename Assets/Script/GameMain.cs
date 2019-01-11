@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMain : MonoBehaviour {
+public class GameMain : MonoBehaviour
+{
 
     //プレーヤーの初期位置　ランダムにするかこっちで指定するか
     [SerializeField]
@@ -37,7 +38,7 @@ public class GameMain : MonoBehaviour {
     //前回の自分のリスト
     private List<GameObject> black;
     private List<GameObject> white;
-    
+
     //操作してるプレイヤー
     private GameObject activePlayer;
     public GameObject GetActivePlayer() { return activePlayer; }
@@ -67,18 +68,18 @@ public class GameMain : MonoBehaviour {
     {
         SoundManager.Instance.StopBgm();
         SoundManager.Instance.PlayBgm(BGM.Game);
-       
+
         black = new List<GameObject>();
         white = new List<GameObject>();
-        
+
         //プレイヤーの初期化
         activePlayer = Instantiate(blackPlayerPrefab);
         activePlayer.transform.position = startBlackPlayerPos[0];
         activePlayer.AddComponent<PlayerController>();
 
-        Instantiate(slowMotionPrefab,activePlayer.transform.position,Quaternion.identity);
+        Instantiate(slowMotionPrefab, activePlayer.transform.position, Quaternion.identity);
 
-        GameObject enemy =Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
+        GameObject enemy = Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
     }
 
@@ -96,7 +97,7 @@ public class GameMain : MonoBehaviour {
     {
         if (currentState == BLACK)
             return;
-        
+
         enemyCount--;
 
         if (enemyCount == 0 && gameObject.activeSelf != false)
@@ -111,7 +112,7 @@ public class GameMain : MonoBehaviour {
 
     private void Update()
     {
-        
+
     }
 
     private void ResetGame()
@@ -123,7 +124,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = black.Count;
 
             //WhitePrefabで初期化
-            activePlayer = Instantiate(whitePlayerPrefab,startWhitePlayerPos[black.Count % 6],whitePlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(whitePlayerPrefab, startWhitePlayerPos[black.Count % 6], whitePlayerPrefab.transform.rotation);
         }
         else
         {
@@ -132,7 +133,7 @@ public class GameMain : MonoBehaviour {
             enemyCount = white.Count;
 
             //BlackPrefabで初期化
-            activePlayer = Instantiate(blackPlayerPrefab,startBlackPlayerPos[white.Count % 6],blackPlayerPrefab.transform.rotation);
+            activePlayer = Instantiate(blackPlayerPrefab, startBlackPlayerPos[white.Count % 6], blackPlayerPrefab.transform.rotation);
         }
 
         activePlayer.SetActive(false);
@@ -166,7 +167,7 @@ public class GameMain : MonoBehaviour {
     private void ChangeStage()
     {
         cameraEffect.Play();
-        Invoke("DestroyCharacter", + StageManager.EffectWaitInterval / 2);
+        Invoke("DestroyCharacter", +StageManager.EffectWaitInterval / 2);
     }
     private void DestroyCharacter()
     {
@@ -192,15 +193,18 @@ public class GameMain : MonoBehaviour {
     IEnumerator NextGame()
     {
 
-        
+        turn++;
 
         yield return new WaitForSeconds(1f);
 
         Destroy(activePlayer.GetComponent<PlayerController>());
-        turn++;
+        
 
         OnNextGame();
         SoundManager.Instance.PlaySe(SE.ChangeTurn);
+        if (stageManager.GetNeedToReset())
+            SoundManager.Instance.FadeOutBgm(1.0f);
+
         yield return new WaitForSeconds(1f);
 
         ResetGame();
@@ -214,7 +218,12 @@ public class GameMain : MonoBehaviour {
         if (stageManager.GetNeedToReset())
         {
             ChangeStage();
+            SoundManager.Instance.PlaySe(SE.ResetStage);
+            //SoundManager.Instance.FadeOutBgm(StageManager.EffectWaitInterval);
+            SoundManager.Instance.PlayBgm(BGM.Game2);
+            SoundManager.Instance.FadeInBgm(1.5f);
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);
+
             itemManager.CreateItem();
         }
 
@@ -225,7 +234,7 @@ public class GameMain : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         ActivePlayerInput();
     }
-    
+
     private void SetItem()
     {
         if (currentState == BLACK)

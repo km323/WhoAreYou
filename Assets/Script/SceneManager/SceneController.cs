@@ -118,7 +118,7 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
         SceneManager.LoadScene(SceneName[scene]);
 
         //fade in
-        SoundManager.Instance.FadeInBgm(fadeInterval);
+        SoundManager.Instance.FadeInBgm(1.0f);
 
         time = 0;
         while (time <= fadeInterval)

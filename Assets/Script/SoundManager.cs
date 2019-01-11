@@ -27,6 +27,8 @@ public enum SE
     MissileExprosion,
     DodgeAttack,
     SlowMotion,
+    ResetStage,
+
 }
 
 [System.Serializable]
@@ -53,6 +55,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     {
         {BGM.Title,"Monolithic Feelings" },
         {BGM.Game,"Berlin Hours330" },
+        {BGM.Game2,"Imminent Blackout" },
     };
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
@@ -69,6 +72,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.MissileExprosion,"game_explosion010" },
         {SE.DodgeAttack,"page02" },
         {SE.SlowMotion,"button19" },
+        {SE.ResetStage,"jammer1" },
     };
 
     private AudioClip[] seClips;
