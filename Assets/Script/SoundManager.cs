@@ -28,7 +28,8 @@ public enum SE
     DodgeAttack,
     SlowMotion,
     ResetStage,
-
+    DodgeGaugeCharge,
+    DodgeGaugeMax,
 }
 
 [System.Serializable]
@@ -55,7 +56,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
     {
         {BGM.Title,"Monolithic Feelings" },
         {BGM.Game,"Berlin Hours330" },
-        {BGM.Game2,"Imminent Blackout" },
+        {BGM.Game2,"Tenuous Streams" },
     };
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
@@ -73,6 +74,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.DodgeAttack,"page02" },
         {SE.SlowMotion,"button19" },
         {SE.ResetStage,"jammer1" },
+        {SE.DodgeGaugeCharge,"button41" },
+        {SE.DodgeGaugeMax,"one22" },
     };
 
     private AudioClip[] seClips;
