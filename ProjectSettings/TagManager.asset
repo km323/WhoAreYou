@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: playerSprite
+    uniqueID: 2655473215
+    locked: 0
   - name: innerFrame
     uniqueID: 894512355
     locked: 0

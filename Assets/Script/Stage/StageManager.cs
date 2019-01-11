@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private const int stageMax = 5;
-    private const int resetTurn = 2;
+    private const int resetTurn = 11;
     public const float EffectWaitInterval = 2f;
 
     [SerializeField]
