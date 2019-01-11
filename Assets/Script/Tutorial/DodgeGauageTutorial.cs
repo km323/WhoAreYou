@@ -26,14 +26,16 @@ public class DodgeGauageTutorial : DodgeGauge {
         pressedTime = control.GetPlayerInput().TouchTime;
 
         if (ReachNeedTime(control.timeNeedDodge))
-            SetTexture(recMask[4]);
+            curTexture = recMask[4];
         else if (ReachNeedTime(control.timeNeedDodge * thirdPhase))
-            SetTexture(recMask[3]);
+            curTexture = recMask[3];
         else if (ReachNeedTime(control.timeNeedDodge * secondPhase))
-            SetTexture(recMask[2]);
+            curTexture = recMask[2];
         else if (ReachNeedTime(control.timeNeedDodge * firstPhase))
-            SetTexture(recMask[1]);
+            curTexture = recMask[1];
         else
-            SetTexture(recMask[0]);
+            curTexture = recMask[0];
+
+        SetTexture(curTexture);
     }
 }

@@ -8,19 +8,19 @@ using UnityEngine;
 
 public class DodgeGauge : MonoBehaviour {
     [SerializeField]
-    private SpriteRenderer frame;
+    protected SpriteRenderer frame;
     [SerializeField]
-    private Texture[] recMask;
+    protected Texture[] recMask;
 
-    private Texture curTexture;
-    private Texture oldTexture;
+    protected Texture curTexture;
+    protected Texture oldTexture;
 
-    private const float firstPhase = 1 / 4f;
-    private const float secondPhase = 2 / 4f;
-    private const float thirdPhase = 3 / 4f;
+    protected const float firstPhase = 1 / 4f;
+    protected const float secondPhase = 2 / 4f;
+    protected const float thirdPhase = 3 / 4f;
 
     private StageManager stageManager;
-    private float pressedTime;
+    protected float pressedTime;
 
 	// Use this for initialization
 	void Start () {
@@ -52,7 +52,7 @@ public class DodgeGauge : MonoBehaviour {
         SetTexture(curTexture);
     }
 
-    private bool ReachNeedTime(float needTime)
+    protected bool ReachNeedTime(float needTime)
     {
         if (pressedTime >= needTime)
             return true;
@@ -60,7 +60,7 @@ public class DodgeGauge : MonoBehaviour {
             return false;
     }
 
-    private void SetTexture(Texture tex)
+    protected void SetTexture(Texture tex)
     {
         if (curTexture != oldTexture)
         {

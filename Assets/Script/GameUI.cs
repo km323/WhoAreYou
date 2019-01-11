@@ -86,11 +86,11 @@ public class GameUI : MonoBehaviour {
 
         if (stageManager != null)
         {
-            leftUp.color = white;
-            rightDown.color = white;
+            //leftUp.color = white;
+            //rightDown.color = white;
 
-            //leftUp.color = stageManager.GetColorBlack();
-            //rightDown.color = stageManager.GetColorBlack();
+            leftUp.color = stageManager.GetColorBlack();
+            rightDown.color = stageManager.GetColorBlack();
         }
 
         leftUp.DOFade(1, duration);
@@ -114,11 +114,11 @@ public class GameUI : MonoBehaviour {
 
         if (stageManager != null)
         {
-            leftUp.color = black;
-            rightDown.color = black;
+            //leftUp.color = black;
+            //rightDown.color = black;
 
-            //leftUp.color = stageManager.GetColorWhite();
-            //rightDown.color = stageManager.GetColorWhite();
+            leftUp.color = stageManager.GetColorWhite();
+            rightDown.color = stageManager.GetColorWhite();
         }
 
         leftUp.DOFade(1, duration);
