@@ -4,21 +4,23 @@ using UnityEngine;
 
 /// <summary>
 /// 回避に必要な長押しの時間を自機のフレームで表現するクラス
-/// tutorial scene用に継承できるように
 /// </summary>
 
 public class DodgeGauge : MonoBehaviour {
     [SerializeField]
-    protected SpriteRenderer frame;
+    private SpriteRenderer frame;
     [SerializeField]
-    protected Texture[] recMask;
+    private Texture[] recMask;
 
-    protected const float firstPhase = 1 / 4f;
-    protected const float secondPhase = 1 / 2f;
-    protected const float thirdPhase = 3 / 4f;
+    private Texture curTexture;
+    private Texture oldTexture;
+
+    private const float firstPhase = 1 / 4f;
+    private const float secondPhase = 2 / 4f;
+    private const float thirdPhase = 3 / 4f;
 
     private StageManager stageManager;
-    protected float pressedTime;
+    private float pressedTime;
 
 	// Use this for initialization
 	void Start () {
@@ -31,24 +33,26 @@ public class DodgeGauge : MonoBehaviour {
     }
 
     // 4段階 (過ぎてる時間の割合：どのテクスチャ番号）  
-    //0:0,　1/4:1,  1/2:2,  3/4:3,  1:4
+    //0:0,　1/4:1,  2/4:2,  3/4:3,  1:4
     private void UpdateMask()
     {
         pressedTime = PlayerController.GetPlayerInput().TouchTime;
 
         if (ReachNeedTime(stageManager.GetPressTimeNeed()))
-            SetTexture(recMask[4]);
+            curTexture = recMask[4];
         else if (ReachNeedTime(stageManager.GetPressTimeNeed() * thirdPhase))
-            SetTexture(recMask[3]);
+            curTexture = recMask[3];
         else if (ReachNeedTime(stageManager.GetPressTimeNeed() * secondPhase))
-            SetTexture(recMask[2]);
+            curTexture = recMask[2];
         else if (ReachNeedTime(stageManager.GetPressTimeNeed() * firstPhase))
-            SetTexture(recMask[1]);
+            curTexture = recMask[1];
         else
-            SetTexture(recMask[0]);
+            curTexture = recMask[0];
+
+        SetTexture(curTexture);
     }
 
-    protected bool ReachNeedTime(float needTime)
+    private bool ReachNeedTime(float needTime)
     {
         if (pressedTime >= needTime)
             return true;
@@ -56,8 +60,18 @@ public class DodgeGauge : MonoBehaviour {
             return false;
     }
 
-    protected void SetTexture(Texture tex)
+    private void SetTexture(Texture tex)
     {
-        frame.material.SetTexture("_AlphaTex", tex);
+        if (curTexture != oldTexture)
+        {
+            oldTexture = curTexture;
+            frame.material.SetTexture("_AlphaTex", tex);
+            if (tex == recMask[0])
+                return;
+            else if (tex == recMask[4])
+                SoundManager.Instance.PlaySe(SE.DodgeGaugeMax);
+            else
+                SoundManager.Instance.PlaySe(SE.DodgeGaugeCharge);
+        }
     }
 }
