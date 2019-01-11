@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour {
         playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
         playerSprite.sortingLayerName = "Default";
 
+        Object.Destroy(FindObjectOfType<Dodge>());
         DodgeGauge dodgeGuage = FindObjectOfType<DodgeGauge>();
         if (dodgeGuage != null)
             Object.Destroy(dodgeGuage);

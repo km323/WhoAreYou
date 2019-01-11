@@ -33,17 +33,15 @@ public class GameUI : MonoBehaviour {
     private Color black;
     [SerializeField]
     private Color white;
-    [SerializeField]
-    private Color blue;
-    [SerializeField]
-    private Color orange;
 
     private const float duration = 0.5f;
 
+    private StageManager stageManager;
     private Sequence startSequence;
 
     void Start () {
         GameMain.OnNextGame += UpdateUI;
+        stageManager = FindObjectOfType<StageManager>();
 
         startSequence = DOTween.Sequence();
         SetStartSequence();
@@ -78,34 +76,54 @@ public class GameUI : MonoBehaviour {
         ChangeColor(boarder, black, 1f);
         ChangeColor(pause, black, 1f);
 
+        ChangeColor(leftUp, white, 1f);
+        ChangeColor(rightDown, white, 1f);
+
         leftUp.DOFade(0, duration);
         rightDown.DOFade(0, duration);
 
         yield return new WaitForSeconds(0.5f);
 
-        leftUp.color = blue;
-        rightDown.color = blue;
+        if (stageManager != null)
+        {
+            leftUp.color = white;
+            rightDown.color = white;
+
+            //leftUp.color = stageManager.GetColorBlack();
+            //rightDown.color = stageManager.GetColorBlack();
+        }
 
         leftUp.DOFade(1, duration);
         rightDown.DOFade(1, duration);
+        yield return null;
     }
     IEnumerator WhiteUI()
     {
         ChangeColor(boarder, white, 1f);
         ChangeColor(pause, white, 1f);
 
+        //ChangeColor(leftUp, black, 1f);
+        //ChangeColor(rightDown, black, 1f);
+
+        //yield return null;
+
         leftUp.DOFade(0, duration);
         rightDown.DOFade(0, duration);
 
         yield return new WaitForSeconds(0.5f);
 
-        leftUp.color = orange;
-        rightDown.color = orange;
+        if (stageManager != null)
+        {
+            leftUp.color = black;
+            rightDown.color = black;
+
+            //leftUp.color = stageManager.GetColorWhite();
+            //rightDown.color = stageManager.GetColorWhite();
+        }
 
         leftUp.DOFade(1, duration);
         rightDown.DOFade(1, duration);
     }
-
 
     private void ChangeColor(Image target, Color color, float duration)
     {

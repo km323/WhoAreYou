@@ -8,7 +8,7 @@ public class PlayerControlTutorial : MonoBehaviour {
     [SerializeField]
     private PlayerEffectTutorial effect;
     [SerializeField]
-    private float timeNeedDodge;
+    public float timeNeedDodge;
 
     private DodgeTutorial dodge;
     private PlayerInput playerInput;
@@ -26,6 +26,11 @@ public class PlayerControlTutorial : MonoBehaviour {
     public bool HasShot { get; private set; }
     public bool HasDodge { get; private set; }
     public bool HasLongTap { get; private set; }
+
+    public PlayerInput GetPlayerInput()
+    {
+        return playerInput;
+    }
 
     // Use this for initialization
     void Start () {

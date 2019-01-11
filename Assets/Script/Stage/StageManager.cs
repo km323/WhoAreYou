@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
     private const int stageMax = 5;
-    private const int resetTurn = 2;
     public const float EffectWaitInterval = 2f;
 
+    [SerializeField]
+    private int resetTurn = 11;
     [SerializeField]
     private StageDataBase stageDataBase;
 
@@ -118,6 +119,15 @@ public class StageManager : MonoBehaviour {
     public Sprite GetCurrentWhite()
     {
         return GetStageTable().GetWhite();
+    }
+
+    public Color GetColorBlack()
+    {
+        return GetStageTable().GetColorBlack();
+    }
+    public Color GetColorWhite()
+    {
+        return GetStageTable().GetColorWhite();
     }
 
     public float GetBgScrollSpeed()

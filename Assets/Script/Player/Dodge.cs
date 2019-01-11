@@ -16,7 +16,9 @@ public class Dodge : MonoBehaviour {
         {
             polygonCollider.enabled = false;
             Time.timeScale = 1f;
-            GameObject.Find("PostCamera").SetActive(false);
+
+            if(GameObject.Find("PostCamera") != null)
+                GameObject.Find("PostCamera").SetActive(false);
         })
         .Append(
              transform.DORotate(new Vector3(0, 89, 0), 0.3f)
@@ -33,4 +35,8 @@ public class Dodge : MonoBehaviour {
         if (!s.IsPlaying())
             s.Restart();
 	}
+    public void Kill()
+    {
+        s.Kill();
+    }
 }
