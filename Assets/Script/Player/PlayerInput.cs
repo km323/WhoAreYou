@@ -37,6 +37,8 @@ public class PlayerInput
 
         for (int i = 0; i < maxTouch; i++)
             PhaseTouch[i] = TouchPhase.Canceled;
+
+        GameMain.OnNextGame += ResetTouchTime;
     }
 
     public void Update()
@@ -188,6 +190,11 @@ public class PlayerInput
             return true;
 
         return false;
+    }
+
+    private void ResetTouchTime()
+    {
+        TouchTime = 0f;
     }
 
     private void SetLongPressTime()

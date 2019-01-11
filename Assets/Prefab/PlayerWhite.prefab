@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 114286490170697422}
   - component: {fileID: 114969302938601106}
   - component: {fileID: 114163730239867332}
-  - component: {fileID: 114172067894646834}
   m_Layer: 10
   m_Name: PlayerWhite
   m_TagString: PlayerWhite
@@ -226,21 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe6be9c51ef0594ca4074ad778ba0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114172067894646834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583261223142556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b60ba47aa13a1b541afa6fab5b1d8cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gauge:
-  - {fileID: 1738577985646438, guid: 1e17264ca55587d42bd3f210ae8edaf2, type: 2}
-  - {fileID: 1067605099026104, guid: 4d67d75376d49d543918c328a76be2f9, type: 2}
-  - {fileID: 1486434539071664, guid: cabd59e13cce01649985f949c2e35192, type: 2}
 --- !u!114 &114286490170697422
 MonoBehaviour:
   m_ObjectHideFlags: 1

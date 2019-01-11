@@ -196,7 +196,7 @@ public class TutorialManager : MonoBehaviour {
         MoveIn(dieCanvas);
         returnButton.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         
         MoveOut(dieCanvas);
         scroll.ScrollToBottom();

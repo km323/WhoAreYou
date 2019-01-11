@@ -18,7 +18,7 @@ public class NextButton : MonoBehaviour {
         s = DOTween.Sequence();
 
         s.PrependCallback(() => rectTransform.anchoredPosition = initPos)
-        .Append(rectTransform.DOAnchorPosY(targetPos.y, 1.5f))
+        .Append(rectTransform.DOAnchorPosX(targetPos.x, 0.8f))
         .SetEase(Ease.InOutQuad);
 	}
 

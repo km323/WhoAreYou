@@ -26,6 +26,7 @@ public class PlayerEffect : MonoBehaviour {
     private StageManager stageManager;
     private Sprite recSprite;
 
+    private GameMain gameMain;
     private SpriteRenderer spriteRenderer;
     private PolygonCollider2D polygonCollider;
     private bool isPlaying;
@@ -42,10 +43,12 @@ public class PlayerEffect : MonoBehaviour {
     {
         polygonCollider.enabled = false;
         isPlaying = false;
-        PlayStartEffect();    
+        PlayStartEffect();
     }
 
     void Start () {
+        gameMain = FindObjectOfType<GameMain>();
+
         GetComponent<PlayerCollision>().OnBulletHit += PlayVanishEffect;
         GetComponent<PlayerCollision>().OnBulletHit += DisableCollision;
 
@@ -54,7 +57,7 @@ public class PlayerEffect : MonoBehaviour {
         GameMain.OnNextGame += ChageFrameObjSprite;
         GameMain.OnNextGame += DeadMove;
 
-        CreateFrameObj();
+        CreateFrameObj();  
     }
 
     private void OnDestroy()
@@ -97,8 +100,7 @@ public class PlayerEffect : MonoBehaviour {
         else
             frameObjRenderer.sprite = recSprite;
 
-        frameObjRenderer.material.SetTexture("_AlphaTex", recMask);
-
+        //frameObjRenderer.material.SetTexture("_AlphaTex", recMask);
     }
 
     private void SetCurStageRecSprite()
@@ -150,8 +152,7 @@ public class PlayerEffect : MonoBehaviour {
     //start effect
     private void PlayStartEffect()
     {
-        if (GetComponent<PlayerController>() == null)
-            spriteRenderer.material.SetFloat("_AlphaAmount", 0.35f);
+        spriteRenderer.material.SetFloat("_AlphaAmount", 0.35f);
 
         if(!isPlaying)
             StartCoroutine("StartEffect");
@@ -170,8 +171,8 @@ public class PlayerEffect : MonoBehaviour {
             yield return null;
         }
 
-        if (GetComponent<PlayerController>() != null)
-            spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
+        if (gameObject == gameMain.GetActivePlayer())
+             spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
         polygonCollider.enabled = true;
         isPlaying = false;
@@ -182,8 +183,6 @@ public class PlayerEffect : MonoBehaviour {
     {
         if (!gameObject.activeSelf)
             return;
-        if (GetComponent<PlayerController>() != null)
-            spriteRenderer.material.SetFloat("_AlphaAmount", 1f);
 
         if (!isPlaying)
             StartCoroutine("VanishEffect");

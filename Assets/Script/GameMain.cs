@@ -81,6 +81,12 @@ public class GameMain : MonoBehaviour
 
         GameObject enemy = Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
+
+        foreach(SpriteRenderer s in enemy.GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (s.sortingLayerName == "frame")
+                s.enabled = false;
+        }
     }
 
     private void WhiteEnemyHitHandler()
@@ -167,7 +173,7 @@ public class GameMain : MonoBehaviour
     private void ChangeStage()
     {
         cameraEffect.Play();
-        Invoke("DestroyCharacter", +StageManager.EffectWaitInterval / 2);
+        Invoke("DestroyCharacter", StageManager.EffectWaitInterval / 2);
     }
     private void DestroyCharacter()
     {
@@ -192,7 +198,6 @@ public class GameMain : MonoBehaviour
 
     IEnumerator NextGame()
     {
-
         turn++;
 
         yield return new WaitForSeconds(1f);
@@ -229,8 +234,7 @@ public class GameMain : MonoBehaviour
 
 
         SetItem();
-
-
+        
         yield return new WaitForSeconds(0.5f);
         ActivePlayerInput();
     }

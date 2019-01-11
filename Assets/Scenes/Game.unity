@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e417f853366846ab726a766e0d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTurn: 2
+  resetTurn: 11
   stageDataBase: {fileID: 11400000, guid: 80c9f5d0832b6294fa25a18c4671e7f4, type: 2}
 --- !u!4 &1110572082
 Transform:
@@ -2905,7 +2905,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1592875330346722, guid: df9cfa1f17222894cb730596873bd704, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: df9cfa1f17222894cb730596873bd704, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1978193822
@@ -3023,6 +3028,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 011af0590212b2949bcd1935a6f0f65b,
         type: 3}
+    - target: {fileID: 1486434539071664, guid: cabd59e13cce01649985f949c2e35192, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cabd59e13cce01649985f949c2e35192, type: 2}
   m_IsPrefabAsset: 0

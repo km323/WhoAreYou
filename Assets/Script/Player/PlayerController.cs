@@ -149,9 +149,6 @@ public class PlayerController : MonoBehaviour {
         playerSprite.sortingLayerName = "Default";
 
         Object.Destroy(FindObjectOfType<Dodge>());
-        DodgeGauge dodgeGuage = FindObjectOfType<DodgeGauge>();
-        if (dodgeGuage != null)
-            Object.Destroy(dodgeGuage);
 
         shot.SetDefaultBullet();
         Destroy(itemAssociated);
