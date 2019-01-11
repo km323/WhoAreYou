@@ -37,6 +37,7 @@ public class ResultManager : MonoBehaviour {
             ShowNewBest();
         else
             ShowNormalScore();
+        SoundManager.Instance.PlayBgm(BGM.Game);
     }
 
     private void ShowNewBest()

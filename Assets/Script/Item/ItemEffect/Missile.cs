@@ -60,7 +60,7 @@ public class Missile : MonoBehaviour
         {
             velocity += acceleration * Time.deltaTime;
         }
-        else if (target.activeSelf == true)
+        else if (target.GetComponent<Collider2D>().enabled == true)
         {
             target.GetComponent<PlayerCollision>().OnTriggerMissile();
             target.SetActive(false);
