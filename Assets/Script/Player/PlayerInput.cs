@@ -16,7 +16,7 @@ public class PlayerInput
     public float TouchTime { get; private set; } //長押ししてる時間
     public TouchPhase[] PhaseTouch { get; private set; } //タップのフェース
     public Vector2 Direction { get; private set; } //移動した方向
-
+    public bool SameTimeTapBegin { get; private set; }
 
     private const int maxTouch = 2;
     private const float minMoveDis = 15f;
@@ -24,7 +24,8 @@ public class PlayerInput
     private Vector2 touchPosition; //タップした位置
     private Vector2 oldPosition;
     private bool firstTapDone;
-    public bool SameTimeTapBegin { get; private set; }
+    private bool enableInput;
+
 
     public PlayerInput()
     {
@@ -34,6 +35,7 @@ public class PlayerInput
         touchPosition = Vector2.zero;
         Direction = Vector2.zero;
         oldPosition = Vector2.zero;
+        enableInput = true;
 
         for (int i = 0; i < maxTouch; i++)
             PhaseTouch[i] = TouchPhase.Canceled;
@@ -43,6 +45,9 @@ public class PlayerInput
 
     public void Update()
     {
+        if (!enableInput)
+            return;
+
         ResetTouchState();
 
         if (Application.isEditor)
@@ -62,6 +67,21 @@ public class PlayerInput
             oldPosition = touchPosition;
             SameTimeTapBegin = HasSecondTapBegin();
         }
+    }
+
+    public void EnableInput()
+    {
+        enableInput = true;
+    }
+
+    public void DisableInput()
+    {
+        enableInput = false;
+    }
+
+    public void ResetTouchTime()
+    {
+        TouchTime = 0f;
     }
 
     public PlayerInput GetTouch()
@@ -190,11 +210,6 @@ public class PlayerInput
             return true;
 
         return false;
-    }
-
-    private void ResetTouchTime()
-    {
-        TouchTime = 0f;
     }
 
     private void SetLongPressTime()

@@ -122,9 +122,12 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "Item")
         {
             UseItem();
+
+            collision.gameObject.GetComponent<Collider2D>().enabled = false;
             collision.gameObject.GetComponentInChildren<SpriteRenderer>().DOFade(0f, 1f);
             collision.transform.DOScale(new Vector3(2f, 2f, 1f), 1f);
             Destroy(collision.gameObject,1f);
+
             SoundManager.Instance.PlaySe(SE.GetItem);
             return;
         }

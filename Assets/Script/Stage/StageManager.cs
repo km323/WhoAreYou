@@ -67,7 +67,11 @@ public class StageManager : MonoBehaviour {
         if (turn % resetTurn == 0)
         {
             needToReset = true;
-            previousStage = curStageNum;
+
+            if (curStageNum > stageMax)
+                previousStage = randomStage;
+            else
+                previousStage = curStageNum;
 
             if (curStageNum <= stageMax)
                 curStageNum++;
@@ -136,6 +140,11 @@ public class StageManager : MonoBehaviour {
     }
     public float GetPressTimeNeed()
     {
-        return stageDataBase.GetStageList()[curStageNum - 1].GetPressTimeNeed();
+        float time = 0;
+        if (clearLastStage)
+            time = stageDataBase.GetStageList()[stageMax - 1].GetPressTimeNeed();
+        else
+            time = stageDataBase.GetStageList()[curStageNum - 1].GetPressTimeNeed();
+        return time;
     }
 }

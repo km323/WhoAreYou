@@ -15,6 +15,7 @@ public class DodgeGauge : MonoBehaviour
     protected float pressedTime;
     protected float pressedTimeNeed;
     private int oldCurrentStage;
+    private bool hasGameover;
 
     protected Gauge oldGauge;
 
@@ -53,11 +54,20 @@ public class DodgeGauge : MonoBehaviour
         oldCurrentStage = GameMain.GetCurrentState();
 
         pressedTime = PlayerController.GetPlayerInput().TouchTime;
-        UpdateMask();
+
+        if (FindObjectOfType<GameMain>() != null)
+            UpdateMask();
+        else if (!hasGameover)
+        {
+            foreach (GameObject obj in gauge)
+                obj.SetActive(false);
+            Invoke("ShowAllGauge", 4f);
+            hasGameover = true;
+        }
     }
 
-    // 4段階 (過ぎてる時間の割合：どのテクスチャ番号）  
-    //0:0,　1/4:1,  2/4:2,  3/4:3,  1:4
+    // 3段階 (過ぎてる時間の割合：どのテクスチャ番号）  
+    //1/3:2,  2/3:1,  1:0
     protected void UpdateMask()
     {
         if (ReachNeedTime(pressedTimeNeed))
@@ -100,5 +110,11 @@ public class DodgeGauge : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    private void ShowAllGauge()
+    {
+        foreach (GameObject obj in gauge)
+            obj.SetActive(true);
     }
 }

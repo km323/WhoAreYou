@@ -28,7 +28,6 @@ public class ItemBehaviour : MonoBehaviour
         Vector3 direction = Vector3.Scale(Camera.main.transform.up, transform.up);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y,
             Mathf.Acos(direction.y) * Mathf.Rad2Deg);
-        Debug.Log(transform.eulerAngles);
 
         transform.localScale = Vector3.zero;
         transform.DOScale(Vector3.one, 0.5f);
