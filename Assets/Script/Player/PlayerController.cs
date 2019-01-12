@@ -25,8 +25,10 @@ public class PlayerController : MonoBehaviour {
     private bool enableDodge;
 
     private Item item;
-    private bool missileItem = false;
+    private bool hasMissileItem = false;
     private GameObject itemAssociated = null;
+
+    private bool canDodgeGaugeMaxSe = true;
 
     void Awake ()
     {
@@ -56,13 +58,15 @@ public class PlayerController : MonoBehaviour {
 #endif
         playerInput.Update();
 
+        //PlayDodgegGaugeMaxSe();
+
         //回避
         if (enableDodge && playerInput.TouchTime >= stageManager.GetPressTimeNeed() && playerInput.HasReleased)
         {
             dodge.DodgeAttack();
             SoundManager.Instance.PlaySe(SE.DodgeAttack);
         }
-        if (missileItem)
+        if (hasMissileItem)
             return;
 
         //弾を撃つ
@@ -70,6 +74,17 @@ public class PlayerController : MonoBehaviour {
             SoundManager.Instance.PlaySe(SE.ShotBegin);
         if (playerInput.SameTimeTap)
             shot.ShotBullet();
+    }
+
+    private void PlayDodgegGaugeMaxSe()
+    {
+        if (canDodgeGaugeMaxSe && playerInput.TouchTime >= stageManager.GetPressTimeNeed())
+        {
+            SoundManager.Instance.PlaySe(SE.DodgeGaugeMax);
+            canDodgeGaugeMaxSe = false;
+        }
+        if (playerInput.HasReleased)
+            canDodgeGaugeMaxSe = true;
     }
 
     void FixedUpdate()
@@ -135,7 +150,7 @@ public class PlayerController : MonoBehaviour {
                 break;
             case Item.KindOfItem.Missile:
                 itemAssociated = Instantiate(item.GetItemAssociated());
-                missileItem = true;
+                hasMissileItem = true;
                 break;
             default:
                 break;

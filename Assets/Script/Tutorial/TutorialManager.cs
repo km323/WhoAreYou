@@ -52,6 +52,8 @@ public class TutorialManager : MonoBehaviour {
     void Start () {
         InactiveCanvas();
         SetupState();
+
+        SoundManager.Instance.PlayBgm(BGM.Title);
 	}
 	
 	void Update () {

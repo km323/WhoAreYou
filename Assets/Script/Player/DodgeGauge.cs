@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DodgeGauge : MonoBehaviour {
+public class DodgeGauge : MonoBehaviour
+{
     [SerializeField]
     protected GameObject[] gauge;
 
@@ -12,13 +13,25 @@ public class DodgeGauge : MonoBehaviour {
 
     private StageManager stageManager;
     protected float pressedTime;
+    protected float pressedTimeNeed;
     private int oldCurrentStage;
+
+    protected Gauge oldGauge;
+
+    protected enum Gauge
+    {
+        None = -1,
+        firstPhase,
+        secondPhase,
+        thirdPhase,
+    }
 
     // Use this for initialization
     void Start()
     {
         stageManager = FindObjectOfType<StageManager>();
         oldCurrentStage = GameMain.GetCurrentState();
+        pressedTimeNeed = stageManager.GetPressTimeNeed();
     }
 
     // Update is called once per frame
@@ -33,29 +46,52 @@ public class DodgeGauge : MonoBehaviour {
                 else
                     obj.GetComponent<Image>().color = stageManager.GetColorWhite();
             }
+
+            pressedTimeNeed = stageManager.GetPressTimeNeed();
         }
 
         oldCurrentStage = GameMain.GetCurrentState();
+
+        pressedTime = PlayerController.GetPlayerInput().TouchTime;
         UpdateMask();
     }
 
     // 4段階 (過ぎてる時間の割合：どのテクスチャ番号）  
     //0:0,　1/4:1,  2/4:2,  3/4:3,  1:4
-    private void UpdateMask()
+    protected void UpdateMask()
     {
-        pressedTime = PlayerController.GetPlayerInput().TouchTime;
-
-        if (ReachNeedTime(stageManager.GetPressTimeNeed()))
-            gauge[0].SetActive(true);
-        else if (ReachNeedTime(stageManager.GetPressTimeNeed() * secondPhase))
-            gauge[1].SetActive(true);
-        else if (ReachNeedTime(stageManager.GetPressTimeNeed() * firstPhase))
-            gauge[2].SetActive(true);
+        if (ReachNeedTime(pressedTimeNeed))
+            SetGaugeActive(Gauge.thirdPhase);
+        else if (ReachNeedTime(pressedTimeNeed * secondPhase))
+            SetGaugeActive(Gauge.secondPhase);
+        else if (ReachNeedTime(pressedTimeNeed * firstPhase))
+            SetGaugeActive(Gauge.firstPhase);
         else
+            SetGaugeActive(Gauge.None);
+    }
+    protected void SetGaugeActive(Gauge curGauge)
+    {
+        if (curGauge == oldGauge)
+            return;
+
+        switch (curGauge)
         {
-            foreach (GameObject obj in gauge)
-                obj.SetActive(false);
+            case Gauge.firstPhase:
+                gauge[2].SetActive(true);
+                break;
+            case Gauge.secondPhase:
+                gauge[1].SetActive(true);
+                break;
+            case Gauge.thirdPhase:
+                gauge[0].SetActive(true);
+                SoundManager.Instance.PlaySe(SE.DodgeGaugeMax);
+                break;
+            case Gauge.None:
+                foreach (GameObject obj in gauge)
+                    obj.SetActive(false);
+                break;
         }
+        oldGauge = curGauge;
     }
 
     protected bool ReachNeedTime(float needTime)

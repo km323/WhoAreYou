@@ -75,7 +75,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.SlowMotion,"button19" },
         {SE.ResetStage,"jammer1" },
         {SE.DodgeGaugeCharge,"button41" },
-        {SE.DodgeGaugeMax,"button15" },
+        {SE.DodgeGaugeMax,"decision10" },
     };
 
     private AudioClip[] seClips;
