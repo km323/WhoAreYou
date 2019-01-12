@@ -74,6 +74,7 @@ public class PlayerControlTutorial : MonoBehaviour {
         if (EnableDodge && playerInput.TouchTime >= timeNeedDodge && playerInput.HasReleased)
         {
             dodge.DodgeAttack();
+            SoundManager.Instance.PlaySe(SE.DodgeAttack);
             if (!HasDodge)
                 HasDodge = true;
         }

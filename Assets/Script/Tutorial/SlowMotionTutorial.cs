@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowMotionTutorial : MonoBehaviour {
+public class SlowMotionTutorial : MonoBehaviour
+{
     [SerializeField]
     private float timeScale = 0.2f;
     [SerializeField]
@@ -13,13 +14,15 @@ public class SlowMotionTutorial : MonoBehaviour {
     private Vector3 distance;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         postCamera.SetActive(false);
         distance = transform.position - player.position;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         transform.position = player.position + distance;
     }
 
@@ -32,8 +35,8 @@ public class SlowMotionTutorial : MonoBehaviour {
         {
             postCamera.SetActive(true);
             Time.timeScale = timeScale;
-            Invoke("DelayResetTime", 0.2f)
-;
+            Invoke("DelayResetTime", 0.2f);
+            SoundManager.Instance.PlaySe(SE.SlowMotion);
         }
     }
 
@@ -43,6 +46,7 @@ public class SlowMotionTutorial : MonoBehaviour {
         {
             Time.timeScale = 1f;
             postCamera.SetActive(false);
+
         }
     }
 

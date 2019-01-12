@@ -4039,6 +4039,10 @@ Prefab:
       propertyPath: postCamera
       value: 
       objectReference: {fileID: 816283649}
+    - target: {fileID: 1350221262523774, guid: 4c81645c096f75b4db7f23dc93e9528b, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c81645c096f75b4db7f23dc93e9528b, type: 2}
   m_IsPrefabAsset: 0
