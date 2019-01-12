@@ -85,10 +85,10 @@ public class ResultManager : MonoBehaviour {
     private void ActiveButton()
     {
         property.GetRetryButton().SetActive(true);
-        property.GetReturnButton().SetActive(true);
+        property.GetTitleButton().SetActive(true);
 
         property.GetRetryButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
-        property.GetReturnButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
+        property.GetTitleButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
     }
 
     private void ShowBar()
@@ -104,6 +104,7 @@ public class ResultManager : MonoBehaviour {
 
     public void LoadTitleScene()
     {
+
         SceneController.Instance.Change(Scene.Title);
     }
 

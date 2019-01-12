@@ -21,11 +21,11 @@ public class ResultProperty : MonoBehaviour {
     [SerializeField]
     private GameObject retryButtonBlack;
     [SerializeField]
-    private GameObject returnButtonBlack;
+    private GameObject titleButtonBlack;
     [SerializeField]
     private GameObject retryButtonWhite;
     [SerializeField]
-    private GameObject returnButtonWhite;
+    private GameObject titleButtonWhite;
 
     [SerializeField]
     private Color colorBlack;
@@ -38,6 +38,16 @@ public class ResultProperty : MonoBehaviour {
     private Text bestScore;
     [SerializeField]
     private Text newBestScore;
+
+    public Color GetColorBlack()
+    {
+        return colorBlack;
+    }
+
+    public Color GetColorWhite()
+    {
+        return colorWhite;
+    }
 
     public GameObject GetNormalScoreObj()
     {
@@ -71,12 +81,12 @@ public class ResultProperty : MonoBehaviour {
             return retryButtonWhite;
     }
 
-    public GameObject GetReturnButton()
+    public GameObject GetTitleButton()
     {
         if (GameMain.GetCurrentState() == GameMain.BLACK)
-            return returnButtonBlack;
+            return titleButtonBlack;
         else
-            return returnButtonWhite;
+            return titleButtonWhite;
     }
 
     public void SetNormalScore(string score)
@@ -112,6 +122,22 @@ public class ResultProperty : MonoBehaviour {
         newBestScore.text = score;
     }
 
+    public void SetRetryButtonColor(Color color)
+    {
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+            retryButtonBlack.transform.Find("Mark").GetComponent<Image>().color = color;
+        else
+            retryButtonWhite.transform.Find("Mark").GetComponent<Image>().color = color;
+    }
+
+    public void SetTitleButtonColor(Color color)
+    {
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+             titleButtonBlack.transform.Find("Mark").GetComponent<Image>().color = color;
+        else
+            titleButtonWhite.transform.Find("Mark").GetComponent<Image>().color = color;
+    }
+
     // Use this for initialization
     void Awake () {
         normalScoreObjBlack.SetActive(false);
@@ -126,8 +152,8 @@ public class ResultProperty : MonoBehaviour {
         retryButtonBlack.SetActive(false);
         retryButtonWhite.SetActive(false);
 
-        returnButtonBlack.SetActive(false);
-        returnButtonWhite.SetActive(false);
+        titleButtonBlack.SetActive(false);
+        titleButtonWhite.SetActive(false);
 
         normalScore.gameObject.SetActive(false);
         bestScore.gameObject.SetActive(false);
