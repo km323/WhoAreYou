@@ -58,7 +58,7 @@ public class PlayerEffectTutorial : MonoBehaviour {
             spriteRenderer.material.SetFloat("_EffectRadius", radius);
             yield return null;
         }
-        yield return new WaitForSeconds(1f);
-        SceneController.Instance.Change(Scene.Title);
+        //yield return new WaitForSeconds(1f);
+        //SceneController.Instance.Change(Scene.Title);
     }
 }

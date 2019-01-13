@@ -7,7 +7,10 @@ using DG.Tweening;
 
 public class TutorialManager : MonoBehaviour {
     [SerializeField]
-    private PlayerControlTutorial control;
+    private GameObject whitePrefab;
+
+    [SerializeField]
+    private PlayerControlTutorial blackControl;
     [SerializeField]
     private ScrollBgTutorial scroll;
 
@@ -35,7 +38,9 @@ public class TutorialManager : MonoBehaviour {
     [SerializeField]
     private GameObject dodgeCanvas2;
     [SerializeField]
-    private GameObject dieCanvas;
+    private GameObject systemCanvas1;
+    [SerializeField]
+    private GameObject systemCanvas2;
 
     enum State
     {
@@ -44,14 +49,22 @@ public class TutorialManager : MonoBehaviour {
         Shot,
         Dodge1,
         Dodge2,
-        Die
+        System1,
+        System2,
     }
 
     StateMachine<State> stateMachine = new StateMachine<State>();
 
+    private RecordTutorial record;
+    private bool canChangeState;
+    private bool continueState;
+
     void Start () {
         InactiveCanvas();
+        InactiveObject();
         SetupState();
+
+        record = FindObjectOfType<RecordTutorial>();
 
         SoundManager.Instance.PlayBgm(BGM.Title);
 	}
@@ -67,7 +80,12 @@ public class TutorialManager : MonoBehaviour {
         shotCanvas.SetActive(false);
         dodgeCanvas1.SetActive(false);
         dodgeCanvas1.SetActive(false);
-        dieCanvas.SetActive(false);
+        systemCanvas1.SetActive(false);
+        systemCanvas2.SetActive(false);
+    }
+
+    private void InactiveObject()
+    {
         bulletSpawner.SetActive(false);
     }
 
@@ -78,7 +96,9 @@ public class TutorialManager : MonoBehaviour {
         SetupStateShot();
         SetupStateDodge1();
         SetupStateDodge2();
-        SetupStateDie();
+        SetupStateSystem1();
+        SetupStateSystem2();
+
         stateMachine.ChangeState(State.Start);
     }
 
@@ -88,7 +108,7 @@ public class TutorialManager : MonoBehaviour {
         Action<State> enter = (prev) => {  };
         Action update = () =>
         {
-            if (control.HasStart)
+            if (blackControl.HasStart)
                 stateMachine.ChangeState(State.Move);
         };
         Action<State> exit = (next) => { };
@@ -100,12 +120,13 @@ public class TutorialManager : MonoBehaviour {
         State state = State.Move;
         Action<State> enter = (prev) => 
         {
+            canChangeState = true;
             MoveIn(moveCanvas);
-            control.EnableMove = true;
+            blackControl.EnableMove = true;
         };
         Action update = () =>
         {
-            if (control.HasMove)
+            if (blackControl.HasMove)
                 nextButton.SetActive(true);
         };
         Action<State> exit = (next) => 
@@ -122,17 +143,18 @@ public class TutorialManager : MonoBehaviour {
         Action<State> enter = (prev) =>
         {
             MoveIn(shotCanvas);
-            control.EnableShot = true;
+            blackControl.EnableShot = true;
         };
         Action update = () =>
         {
-            if (control.HasShot)
+            if (blackControl.HasShot)
                 nextButton.SetActive(true);
         };
         Action<State> exit = (next) => 
         {
             MoveOut(shotCanvas);
             nextButton.SetActive(false);
+            blackControl.GetPlayerInput().ResetTouchTime();
         };
         stateMachine.Add(state, enter, update, exit);
     }
@@ -143,11 +165,11 @@ public class TutorialManager : MonoBehaviour {
         Action<State> enter = (prev) =>
         {
             MoveIn(dodgeCanvas1);
-            control.EnableLongTap = true;
+            blackControl.EnableLongTap = true;
         };
         Action update = () =>
         {
-            if(control.HasLongTap)
+            if(blackControl.HasLongTap)
                 nextButton.SetActive(true);
         };
         Action<State> exit = (next) =>
@@ -164,12 +186,12 @@ public class TutorialManager : MonoBehaviour {
         Action<State> enter = (prev) =>
         {
             MoveIn(dodgeCanvas2);
-            control.EnableDodge = true;
+            blackControl.EnableDodge = true;
             bulletSpawner.SetActive(true);
         };
         Action update = () =>
         {
-            if (control.HasDodge)
+            if (blackControl.HasDodge)
                 nextButton.SetActive(true);
         };
         Action<State> exit = (next) =>
@@ -181,33 +203,102 @@ public class TutorialManager : MonoBehaviour {
         stateMachine.Add(state, enter, update, exit);
     }
 
-    private void SetupStateDie()
+    private void SetupStateSystem1()
     {
-        State state = State.Die;
+        PlayerControlTutorial whiteControl = null;
+        State state = State.System1;
         Action<State> enter = (prev) =>
         {
-            StartCoroutine("DieEffect");
+            canChangeState = false;
+            MoveIn(systemCanvas1);
+            nextButton.SetActive(true);
+            blackControl.GetPlayerInput().DisableInput();
         };
-        Action update = () =>{ };
-        Action<State> exit = (next) =>{};
+        Action update = () =>
+        {
+            if(continueState)
+            {
+                continueState = false;
+                MoveOut(systemCanvas1);
+                nextButton.SetActive(false);
+
+                GameObject white = Instantiate(whitePrefab, new Vector3(0, 5, 0), Quaternion.identity);
+                whiteControl = white.GetComponent<PlayerControlTutorial>();
+                blackControl.GetPlayerInput().EnableInput();
+                record.StartRecord();
+            }
+            if (whiteControl != null && whiteControl.HasDie)
+            {
+                record.StopRecord();
+                blackControl.GetPlayerInput().DisableInput();
+                Camera.main.GetComponent<CameraRotateTutorial>().CameraRotate();
+                stateMachine.ChangeState(State.System2);
+            }
+
+        };
+        Action<State> exit = (next) =>
+        {
+
+        };
         stateMachine.Add(state, enter, update, exit);
     }
 
-    IEnumerator DieEffect()
+    private void SetupStateSystem2()
     {
-        MoveIn(dieCanvas);
-        returnButton.SetActive(false);
+        PlayerControlTutorial whiteControl = null;
+        State state = State.System2;
+        Action<State> enter = (prev) =>
+        {
+            StartCoroutine("System2Anim");
+        };
+        Action update = () =>
+        {
+            if (continueState)
+            {
+                continueState = false;
+                MoveOut(systemCanvas2);
+                nextButton.SetActive(false);
 
-        yield return new WaitForSeconds(2.5f);
-        
-        MoveOut(dieCanvas);
-        scroll.ScrollToBottom();
+                GameObject white = Instantiate(whitePrefab, new Vector3(0, 5, 0), Quaternion.identity);
+                whiteControl = white.GetComponent<PlayerControlTutorial>();
+                blackControl.gameObject.SetActive(true);
+                record.StartPlayRecord();
+                scroll.ScrollToBottom();
+            }
+
+            if (whiteControl != null && whiteControl.HasDie)
+            {
+                Invoke("OnReturn", 2f);
+            }
+        };
+        Action<State> exit = (next) =>
+        {
+
+        };
+        stateMachine.Add(state, enter, update, exit);
+    }
+    IEnumerator System2Anim()
+    {
+        canChangeState = false;
+        blackControl.GetPlayerInput().ResetTouchTime();
+        yield return new WaitForSeconds(2f);
+
+        MoveIn(systemCanvas2);
+        nextButton.SetActive(true);
+        blackControl.gameObject.SetActive(false);
+    }
+
+    private void ChangeState()
+    {
+        stateMachine.ChangeState(stateMachine.GetCurrentState().Key + 1);
     }
 
     public void OnNext()
     {
-        if (stateMachine.GetCurrentState().Key != State.Die)
-            stateMachine.ChangeState(stateMachine.GetCurrentState().Key + 1);
+        if (canChangeState && stateMachine.GetCurrentState().Key != State.System2)
+            Invoke("ChangeState", 0.1f);
+        else
+            continueState = true;
     }
     public void OnReturn()
     {
