@@ -42,11 +42,18 @@ public class TitleManager : MonoBehaviour {
     public void LoadTutorialScene()
     {
         SceneController.Instance.Change(Scene.Tutorial);
+        SoundManager.Instance.PlaySe(SE.UIResult);
     }
 
     public void LoadGameScene()
     {
         SceneController.Instance.Change(Scene.Game);
+        SoundManager.Instance.PlaySe(SE.UIResult);
+    }
+
+    public void OnPointerDownSe()
+    {
+        SoundManager.Instance.PlaySe(SE.ShotBegin);
     }
 
     IEnumerator PlayEffect()

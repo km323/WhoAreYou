@@ -137,6 +137,8 @@ public class PlayerController : MonoBehaviour {
         GameMain gameMain = FindObjectOfType<GameMain>();
         gameMain.DisableWhenActiveDie();
 
+        SoundManager.Instance.PlaySe(SE.PlayerDamage);
+
         SceneController.Instance.Additive(Scene.Result);
     }
 

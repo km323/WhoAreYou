@@ -40,6 +40,16 @@ public class ButtonEvent : MonoBehaviour {
             property.SetRetryButtonColor(property.GetColorBlack());
     }
 
+    public void OnPointerClickSe()
+    {
+        SoundManager.Instance.PlaySe(SE.UIResult);
+    }
+
+    public void OnPointerDownSe()
+    {
+        SoundManager.Instance.PlaySe(SE.ShotBegin);
+    }
+
     private void Start()
     {
         stageManager = FindObjectOfType<StageManager>();

@@ -28,8 +28,9 @@ public enum SE
     DodgeAttack,
     SlowMotion,
     ResetStage,
-    DodgeGaugeCharge,
     DodgeGaugeMax,
+    PlayerDamage,
+    UIResult,
 }
 
 [System.Serializable]
@@ -74,8 +75,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.DodgeAttack,"page02" },
         {SE.SlowMotion,"button19" },
         {SE.ResetStage,"jammer1" },
-        {SE.DodgeGaugeCharge,"button41" },
         {SE.DodgeGaugeMax,"decision10" },
+        {SE.UIResult,"decision22" },
+        {SE.PlayerDamage,"magic-ice010" },
     };
 
     private AudioClip[] seClips;
