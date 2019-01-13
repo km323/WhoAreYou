@@ -26,6 +26,7 @@ public class PlayerControlTutorial : MonoBehaviour {
     public bool HasShot { get; private set; }
     public bool HasDodge { get; private set; }
     public bool HasLongTap { get; private set; }
+    public bool HasDie { get; private set; }
 
     public PlayerInput GetPlayerInput()
     {
@@ -39,7 +40,6 @@ public class PlayerControlTutorial : MonoBehaviour {
         dodge = GetComponent<DodgeTutorial>();
         shot = GetComponent<Shot>();
         rigid = GetComponent<Rigidbody2D>();
-
         effect.StartEffect();
     }
 	
@@ -111,9 +111,11 @@ public class PlayerControlTutorial : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Bullet")
+        if (collision.gameObject.layer == 10)
             return;
         effect.DieEffect();
-        Destroy(this);
+        HasDie = true;
+        Destroy(collision.gameObject);
+        Destroy(this.gameObject,1f);
     }
 }

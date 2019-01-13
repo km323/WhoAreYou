@@ -5,6 +5,8 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour {
     [SerializeField]
     private GameObject bulletPrefab;
+    [SerializeField]
+    private PlayerControlTutorial control;
 
     private void OnEnable()
     {
@@ -22,9 +24,13 @@ public class BulletSpawner : MonoBehaviour {
 
         while (true)
         {
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(2f);
+            if (control.GetPlayerInput().TouchTime < control.timeNeedDodge)
+                yield return null;
+            else
+            {
+                Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(2f);
+            }
         }
-
     }
 }
