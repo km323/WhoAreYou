@@ -147,4 +147,9 @@ public class StageManager : MonoBehaviour {
             time = stageDataBase.GetStageList()[curStageNum - 1].GetPressTimeNeed();
         return time;
     }
+
+    public BGM GetBgm()
+    {
+        return GetStageTable().GetBgm();
+    }
 }

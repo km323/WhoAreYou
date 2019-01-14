@@ -300,6 +300,8 @@ public class TutorialManager : MonoBehaviour {
             Invoke("ChangeState", 0.1f);
         else
             continueState = true;
+
+        SoundManager.Instance.PlaySe(SE.ShotBegin);
     }
     public void OnReturn()
     {

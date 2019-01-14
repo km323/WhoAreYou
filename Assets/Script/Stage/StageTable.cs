@@ -24,6 +24,9 @@ public class StageTable : ScriptableObject
     [SerializeField]
     private float pressTimeNeed;
 
+    [SerializeField]
+    private BGM bgm;
+
     public Sprite GetBlack()
     {
         return playerBlack;
@@ -52,5 +55,10 @@ public class StageTable : ScriptableObject
     public float GetPressTimeNeed()
     {
         return pressTimeNeed;
+    }
+
+    public BGM GetBgm()
+    {
+        return bgm;
     }
 }

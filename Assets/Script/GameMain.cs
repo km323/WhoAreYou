@@ -225,7 +225,7 @@ public class GameMain : MonoBehaviour
             ChangeStage();
             SoundManager.Instance.PlaySe(SE.ResetStage);
             //SoundManager.Instance.FadeOutBgm(StageManager.EffectWaitInterval);
-            SoundManager.Instance.PlayBgm(BGM.Game2);
+            SoundManager.Instance.PlayBgm(stageManager.GetBgm());
             SoundManager.Instance.FadeInBgm(1.5f);
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);
 
