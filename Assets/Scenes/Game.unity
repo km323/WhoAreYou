@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e417f853366846ab726a766e0d7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTurn: 11
+  resetTurn: 1
   stageDataBase: {fileID: 11400000, guid: 80c9f5d0832b6294fa25a18c4671e7f4, type: 2}
 --- !u!4 &1110572082
 Transform:

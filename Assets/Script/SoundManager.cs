@@ -9,6 +9,9 @@ public enum BGM
     Title,
     Game,
     Game2,
+    Game3,
+    Game4,
+    Game5,
 }
 
 public enum SE
@@ -58,6 +61,9 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {BGM.Title,"Monolithic Feelings" },
         {BGM.Game,"Berlin Hours330" },
         {BGM.Game2,"Tenuous Streams" },
+        {BGM.Game3,"Anxious Poetry11" },
+        {BGM.Game4,"Anxious Poetry11" },
+        {BGM.Game5,"Anxious Poetry11" },
     };
     private Dictionary<SE, string> seName = new Dictionary<SE, string>()
     {
@@ -76,7 +82,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager> {
         {SE.SlowMotion,"button19" },
         {SE.ResetStage,"jammer1" },
         {SE.DodgeGaugeMax,"decision10" },
-        {SE.UIResult,"decision22" },
+        {SE.UIResult,"decision220" },
         {SE.PlayerDamage,"magic-ice010" },
     };
 

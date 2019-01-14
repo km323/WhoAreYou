@@ -17,3 +17,4 @@ MonoBehaviour:
   colorWhite: {r: 1, g: 0.6627451, b: 0, a: 1}
   bgScrollSpeed: 0
   pressTimeNeed: 0.8
+  bgm: 1
