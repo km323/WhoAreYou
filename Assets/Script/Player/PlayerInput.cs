@@ -77,6 +77,7 @@ public class PlayerInput
     public void DisableInput()
     {
         enableInput = false;
+        SameTimeTap = false;
     }
 
     public void ResetTouchTime()
