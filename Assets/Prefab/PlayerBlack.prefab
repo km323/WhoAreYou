@@ -242,6 +242,7 @@ MonoBehaviour:
   frameOut: {fileID: 1837939734325808}
   frameObjRenderer: {fileID: 212825275582073886}
   greyFrame: {fileID: 21300000, guid: 4325a570fd2e1434dbec510de6ca3aad, type: 3}
+  playMaskAlpha: {fileID: 2800000, guid: afe8ccb208411714eb51f476d0d3f039, type: 3}
   playMask: {fileID: 2800000, guid: b6776526f00628d47a8f6b8712abb075, type: 3}
   recMask: {fileID: 2800000, guid: 49277c628f1c89442b9c173f763a965c, type: 3}
   activeDeadPrefab: {fileID: 1423441249107680, guid: b3fdafcd2833d534eac0a39387ed254e,
@@ -459,7 +460,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

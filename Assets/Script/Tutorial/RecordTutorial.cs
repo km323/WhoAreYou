@@ -43,7 +43,6 @@ public class RecordTutorial : MonoBehaviour {
         int index = 0;
         bool goForward = true;
 
-
         while (true)
         {
             transform.position = new Vector3(recordList[index].x, recordList[index].y, transform.position.z);

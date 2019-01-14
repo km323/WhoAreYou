@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour {
     private void OnDestroy()
     {
         recordController.StopRecord();//記録を止める
-        playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.4f);
+        playerSprite.color = new Color(playerSprite.color.r, playerSprite.color.g, playerSprite.color.b, 0.35f);
         playerSprite.sortingLayerName = "Default";
 
         Object.Destroy(FindObjectOfType<Dodge>());

@@ -124,11 +124,10 @@ public class RecordController : MonoBehaviour {
     //プレイヤーの動きを再生するメソッド
     IEnumerator PlayRecord()
     {
-        int index = 1;
+        int index = 0;
         bool goForward = true;
 
-        //最初の一回
-        transform.position = new Vector3(recordList[0].x, recordList[0].y, transform.position.z);
+        //transform.position = new Vector3(recordList[0].x, recordList[0].y, transform.position.z);
 
         if (stageManager.GetNeedToReset())
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);

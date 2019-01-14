@@ -16,6 +16,8 @@ public class PlayerEffect : MonoBehaviour {
     [SerializeField]
     private Sprite greyFrame;
     [SerializeField]
+    private Texture playMaskAlpha;
+    [SerializeField]
     private Texture playMask;
     [SerializeField]
     private Texture recMask;
@@ -129,13 +131,33 @@ public class PlayerEffect : MonoBehaviour {
         return sprite;
     }
 
+    private void SetPlayTexture(Texture tex)
+    {
+        frameObjRenderer.material.SetTexture("_AlphaTex", tex);
+    }
+
     //ターン変わるたびフレームの初期化
     private void ChageFrameObjSprite()
     {
         if (frameOut.activeSelf)
             frameOut.SetActive(false);
         frameObjRenderer.sprite = greyFrame;
-        frameObjRenderer.material.SetTexture("_AlphaTex", playMask);
+
+        if (GameMain.GetCurrentState() == GameMain.BLACK)
+        {
+            if(frameObjRenderer.gameObject.layer == 10)
+                SetPlayTexture(playMaskAlpha);
+            else
+                SetPlayTexture(playMask);
+        }
+        if (GameMain.GetCurrentState() == GameMain.WHITE)
+        {
+            if (frameObjRenderer.gameObject.layer == 9)
+                SetPlayTexture(playMaskAlpha);
+            else
+                SetPlayTexture(playMask);
+        }
+
         frameObjRenderer.sortingLayerName = "Default";
     }
 

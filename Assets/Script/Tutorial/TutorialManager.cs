@@ -83,7 +83,6 @@ public class TutorialManager : MonoBehaviour {
         systemCanvas1.SetActive(false);
         systemCanvas2.SetActive(false);
     }
-
     private void InactiveObject()
     {
         bulletSpawner.SetActive(false);
@@ -238,7 +237,6 @@ public class TutorialManager : MonoBehaviour {
         };
         Action<State> exit = (next) =>
         {
-
         };
         stateMachine.Add(state, enter, update, exit);
     }
@@ -261,7 +259,10 @@ public class TutorialManager : MonoBehaviour {
 
                 GameObject white = Instantiate(whitePrefab, new Vector3(0, 5, 0), Quaternion.identity);
                 whiteControl = white.GetComponent<PlayerControlTutorial>();
+
                 blackControl.gameObject.SetActive(true);
+                Destroy(blackControl);
+
                 record.StartPlayRecord();
                 scroll.ScrollToBottom();
             }
