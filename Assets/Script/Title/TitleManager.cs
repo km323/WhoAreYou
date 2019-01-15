@@ -75,11 +75,8 @@ public class TitleManager : MonoBehaviour {
 
     private void MoveTitle()
     {
-        property.GetMoveE().SetActive(true);
-        property.GetMoveO().SetActive(true);
-
-        property.GetMoveE().transform.DOMoveX(titleTargetPosX, 1f);
-        property.GetMoveO().transform.DOMoveX(titleTargetPosX, 1f);
+        property.GetMoveE().DOAnchorPosX(titleTargetPosX, 1f);
+        property.GetMoveO().DOAnchorPosX(titleTargetPosX, 1f);
     }
 
 

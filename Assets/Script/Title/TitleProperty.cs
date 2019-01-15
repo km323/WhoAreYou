@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class TitleProperty : MonoBehaviour {
     [SerializeField]
-    private GameObject move_EBlack;
+    private RectTransform move_EBlack;
     [SerializeField]
-    private GameObject move_OBlack;
+    private RectTransform move_OBlack;
     [SerializeField]
     private GameObject fadeObjBlack;
 
@@ -21,12 +21,12 @@ public class TitleProperty : MonoBehaviour {
     [SerializeField]
     private Text bestScore;
 
-    public GameObject GetMoveE()
+    public RectTransform GetMoveE()
     {
         return move_EBlack;
     }
 
-    public GameObject GetMoveO()
+    public RectTransform GetMoveO()
     {
         return move_OBlack;
     }
@@ -55,9 +55,6 @@ public class TitleProperty : MonoBehaviour {
     // Use this for initialization
     void Awake ()
     {
-        move_EBlack.SetActive(false);
-
-        move_OBlack.SetActive(false);
         fadeObjBlack.SetActive(false);
 
         startButtonBlack.SetActive(false);

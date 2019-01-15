@@ -10,6 +10,9 @@ public class TutorialManager : MonoBehaviour {
     private GameObject whitePrefab;
 
     [SerializeField]
+    private Sprite nextButtonWhite;
+
+    [SerializeField]
     private PlayerControlTutorial blackControl;
     [SerializeField]
     private ScrollBgTutorial scroll;
@@ -286,6 +289,7 @@ public class TutorialManager : MonoBehaviour {
 
         MoveIn(systemCanvas2);
         nextButton.SetActive(true);
+        nextButton.GetComponent<Image>().sprite = nextButtonWhite;
         blackControl.gameObject.SetActive(false);
     }
 
