@@ -8,6 +8,8 @@ public class ButtonEvent : MonoBehaviour {
 
     private StageManager stageManager;
 
+    private bool canPlaySe = true;
+
     public void OnPointerClickTitle()
     {
         if(GameMain.GetCurrentState() == GameMain.BLACK)
@@ -42,11 +44,16 @@ public class ButtonEvent : MonoBehaviour {
 
     public void OnPointerClickSe()
     {
+        if (!canPlaySe)
+            return;
         SoundManager.Instance.PlaySe(SE.UIResult);
+        canPlaySe = false;
     }
 
     public void OnPointerDownSe()
     {
+        if (!canPlaySe)
+            return;
         SoundManager.Instance.PlaySe(SE.ShotBegin);
     }
 
