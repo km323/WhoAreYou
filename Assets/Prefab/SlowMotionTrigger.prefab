@@ -79,3 +79,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: 0.15
   offset: {x: 0, y: 3, z: 0}
+  linePrefab: {fileID: 1555577067629526, guid: 9ca01cdc6dcb21949afd9d8344a81d2d, type: 2}

@@ -223,7 +223,6 @@ public class PlayerEffect : MonoBehaviour {
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
         bool showActiveDeadEffect = false;
 
-
         while (radius > 0)
         {
             radius -= Time.deltaTime * speed;

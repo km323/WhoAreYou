@@ -15,6 +15,6 @@ MonoBehaviour:
   playerWhite: {fileID: 21300000, guid: e322d34eaa7f00e4fbf40d4280053e36, type: 3}
   colorBlack: {r: 0.20392159, g: 0.70980394, b: 0.89019614, a: 1}
   colorWhite: {r: 1, g: 0.6627451, b: 0, a: 1}
-  bgScrollSpeed: 0
+  bgScrollSpeed: 0.3
   pressTimeNeed: 0.8
   bgm: 1

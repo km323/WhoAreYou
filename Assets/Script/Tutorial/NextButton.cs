@@ -7,8 +7,7 @@ public class NextButton : MonoBehaviour {
     [SerializeField]
     private Vector2 targetPos;
 
-    private const float clickScale = 1.8f;
-
+    private float clickScale;
     private Sequence s;
     private RectTransform rectTransform;
     private Vector2 initPos;
@@ -16,17 +15,18 @@ public class NextButton : MonoBehaviour {
 	void Awake () {
         rectTransform = GetComponent<RectTransform>();
         initPos = rectTransform.anchoredPosition;
+        clickScale = rectTransform.localScale.x;
 
         s = DOTween.Sequence();
 
         s.PrependCallback(() => rectTransform.anchoredPosition = initPos)
-        .Append(rectTransform.DOAnchorPosX(targetPos.x, 0.8f))
+        .Append(rectTransform.DOAnchorPosX(targetPos.x, 0.5f))
         .SetEase(Ease.InOutQuad);
 	}
 
     private void OnEnable()
     {
-        GetComponent<RectTransform>().localScale = new Vector3(2,2,2);
+        GetComponent<RectTransform>().localScale = new Vector3(clickScale, clickScale, clickScale);
         s.Restart();
     }
 
@@ -37,6 +37,6 @@ public class NextButton : MonoBehaviour {
 
     public void OnClick()
     {
-        GetComponent<RectTransform>().localScale = new Vector3(clickScale, clickScale, clickScale);
+        GetComponent<RectTransform>().localScale = new Vector3(clickScale - 0.1f, clickScale - 0.1f, clickScale - 0.1f);
     }
 }
