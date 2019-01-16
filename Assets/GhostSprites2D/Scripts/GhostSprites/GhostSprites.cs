@@ -44,7 +44,7 @@ public class GhostSprites : MonoBehaviour
 	public int spacing = 5;
 	
 	[Tooltip("Pick a color for the trail.  The Aplha of this color will be used to determine the transparancy fluctuation.")]
-	public Color color = new Color (1,1,1,0.3f);
+	public Color color = new Color (1,1,1,0.1f);
 	
 	[Tooltip("If the Ghost Material is not set, then the material from the GameObject's SpriteRenderer will be used for the ghosts.")]
 	[ContextMenuItem("Clear List", "DeleteMaterials")]
