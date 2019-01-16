@@ -10,15 +10,24 @@ public class TitleManager : MonoBehaviour {
     private CanvasGroup canvasGroup;
     [SerializeField]
     private TitleProperty property;
+    [SerializeField]
+    private Camera camera;
 
     [SerializeField]
-    private float buttonTargetPosY;
+    private float startBtnTargetPosY;
+    [SerializeField]
+    private float tutorialBtnTargetPosY;
     [SerializeField]
     private float titleTargetPosX;
+
+    private const float glitchIntensity = 0.04f;
+
+    private DigitalGlitch digitalGlitch;
 
     private void Awake()
     {
         canvasGroup.alpha = 0f;
+        digitalGlitch = camera.GetComponent<DigitalGlitch>();
     }
 
     void Start () {
@@ -71,6 +80,19 @@ public class TitleManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         ActiveButton();
+
+        StartCoroutine("Glitch");
+    }
+
+    IEnumerator Glitch()
+    {
+        while(true)
+        {
+            digitalGlitch.intensity = 0;
+            yield return new WaitForSeconds(Random.Range(2,5));
+            digitalGlitch.intensity = glitchIntensity;
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void MoveTitle()
@@ -91,7 +113,7 @@ public class TitleManager : MonoBehaviour {
         property.GetStartButton().SetActive(true);
         property.GetTutorialButton().SetActive(true);
 
-        property.GetStartButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
-        property.GetTutorialButton().GetComponent<RectTransform>().DOAnchorPosY(buttonTargetPosY, 0.3f);
+        property.GetStartButton().GetComponent<RectTransform>().DOAnchorPosY(startBtnTargetPosY, 0.3f);
+        property.GetTutorialButton().GetComponent<RectTransform>().DOAnchorPosY(tutorialBtnTargetPosY, 0.3f);
     }
 }

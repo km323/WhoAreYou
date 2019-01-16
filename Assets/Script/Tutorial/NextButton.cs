@@ -7,6 +7,8 @@ public class NextButton : MonoBehaviour {
     [SerializeField]
     private Vector2 targetPos;
 
+    private const float clickScale = 1.8f;
+
     private Sequence s;
     private RectTransform rectTransform;
     private Vector2 initPos;
@@ -24,11 +26,17 @@ public class NextButton : MonoBehaviour {
 
     private void OnEnable()
     {
+        GetComponent<RectTransform>().localScale = new Vector3(2,2,2);
         s.Restart();
     }
 
     private void OnDisable()
     {
         s.Pause();
+    }
+
+    public void OnClick()
+    {
+        GetComponent<RectTransform>().localScale = new Vector3(clickScale, clickScale, clickScale);
     }
 }
