@@ -11,7 +11,7 @@ public class TitleManager : MonoBehaviour {
     [SerializeField]
     private TitleProperty property;
     [SerializeField]
-    private Camera camera;
+    private Camera glitchCamera;
 
     [SerializeField]
     private float startBtnTargetPosY;
@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour {
     private void Awake()
     {
         canvasGroup.alpha = 0f;
-        digitalGlitch = camera.GetComponent<DigitalGlitch>();
+        digitalGlitch = glitchCamera.GetComponent<DigitalGlitch>();
     }
 
     void Start () {
