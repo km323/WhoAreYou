@@ -60,6 +60,17 @@ public class PlayerController : MonoBehaviour {
 
         //PlayDodgegGaugeMaxSe();
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale = 0;
+            playerInput.DisableInput();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Time.timeScale = 1;
+            playerInput.EnableInput();
+        }
+
         //回避
         if (enableDodge && playerInput.TouchTime >= stageManager.GetPressTimeNeed() && playerInput.HasReleased)
         {

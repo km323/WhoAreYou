@@ -24,6 +24,8 @@ public class TitleManager : MonoBehaviour {
 
     private DigitalGlitch digitalGlitch;
 
+    private bool canPlaySe = true;
+
     private void Awake()
     {
         canvasGroup.alpha = 0f;
@@ -50,19 +52,29 @@ public class TitleManager : MonoBehaviour {
 
     public void LoadTutorialScene()
     {
+        if (!canPlaySe)
+            return;
         SceneController.Instance.Change(Scene.Tutorial);
         SoundManager.Instance.PlaySe(SE.UIResult);
+        canPlaySe = false;
     }
 
     public void LoadGameScene()
     {
+        if (!canPlaySe)
+            return;
         SceneController.Instance.Change(Scene.Game);
         SoundManager.Instance.PlaySe(SE.UIResult);
+        canPlaySe = false;
     }
 
     public void OnPointerDownSe()
     {
+        if (!canPlaySe)
+            return;
         SoundManager.Instance.PlaySe(SE.ShotBegin);
+
+        Debug.Log("aaa");
     }
 
     IEnumerator PlayEffect()
