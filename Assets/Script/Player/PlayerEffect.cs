@@ -35,6 +35,7 @@ public class PlayerEffect : MonoBehaviour {
 
     private void Awake()
     {
+        gameMain = FindObjectOfType<GameMain>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
@@ -49,7 +50,7 @@ public class PlayerEffect : MonoBehaviour {
     }
 
     void Start () {
-        gameMain = FindObjectOfType<GameMain>();
+        
 
         GetComponent<PlayerCollision>().OnBulletHit += PlayVanishEffect;
         GetComponent<PlayerCollision>().OnBulletHit += DisableCollision;
@@ -185,6 +186,10 @@ public class PlayerEffect : MonoBehaviour {
         spriteRenderer.material.SetFloat("_EffectRadius", 0);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
 
+        yield return null;
+        if (gameMain.GetActivePlayer() == gameObject)
+            PlayerController.GetPlayerInput().DisableInput();
+
         while (radius < 2)
         {
             radius += Time.deltaTime * speed;
@@ -198,6 +203,8 @@ public class PlayerEffect : MonoBehaviour {
 
         polygonCollider.enabled = true;
         isPlaying = false;
+        if (gameMain.GetActivePlayer() == gameObject)
+            PlayerController.GetPlayerInput().EnableInput();
     }
 
     //vanish effect
@@ -215,6 +222,7 @@ public class PlayerEffect : MonoBehaviour {
         spriteRenderer.material.SetFloat("_EffectRadius", 2);
         float radius = spriteRenderer.material.GetFloat("_EffectRadius");
         bool showActiveDeadEffect = false;
+
 
         while (radius > 0)
         {
