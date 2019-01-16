@@ -678,7 +678,7 @@ RectTransform:
   m_GameObject: {fileID: 510979696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9980399, y: 0.9980399, z: 0.9980399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1360577431}
   - {fileID: 1831689617}
@@ -752,10 +752,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.30142516
-    y: 0
-    width: 0.3971497
-    height: 1
+    x: 0
+    y: 0.0008699894
+    width: 1
+    height: 0.99826
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1630,10 +1630,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.30142516
-    y: 0
-    width: 0.3971497
-    height: 1
+    x: 0
+    y: 0.0008699894
+    width: 1
+    height: 0.99826
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2339,10 +2339,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.30142516
-    y: 0
-    width: 0.3971497
-    height: 1
+    x: 0
+    y: 0.0008699894
+    width: 1
+    height: 0.99826
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2611,6 +2611,7 @@ GameObject:
   - component: {fileID: 1831689620}
   - component: {fileID: 1831689619}
   - component: {fileID: 1831689618}
+  - component: {fileID: 1831689621}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -2675,9 +2676,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1831689616}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1831689621}
+        m_MethodName: OnPause
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2722,6 +2723,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1831689616}
   m_CullTransparentMesh: 0
+--- !u!114 &1831689621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1831689616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02a7721ad91e6f40a2863784e4df03c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1858459968
 Prefab:
   m_ObjectHideFlags: 0

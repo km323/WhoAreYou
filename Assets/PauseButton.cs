@@ -15,6 +15,6 @@ public class PauseButton : MonoBehaviour {
 	}
     public void OnPause()
     {
-        Time.timeScale = 0;
+        SceneController.Instance.Additive(Scene.Pause);
     }
 }

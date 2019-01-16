@@ -10,6 +10,7 @@ public enum Scene
     Tutorial,
     Game,
     Result,
+    Pause,
 }
 
 public class SceneController : SingletonMonoBehaviour<SceneController> {
@@ -20,7 +21,8 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
         {Scene.Title,"Title" },
         {Scene.Tutorial, "Tutorial" },
         {Scene.Game,"Game"},
-        {Scene.Result,"Result"}
+        {Scene.Result,"Result"},
+        {Scene.Pause,"Pause" }
     };
 
     //一個前と現在、次のシーン名
@@ -79,6 +81,11 @@ public class SceneController : SingletonMonoBehaviour<SceneController> {
 
         if (this.additiveScene != Scene.None)
             SceneManager.LoadScene(SceneName[this.additiveScene], LoadSceneMode.Additive);
+    }
+
+    public void UnLoad(Scene scene)
+    {
+        SceneManager.UnloadSceneAsync(SceneName[scene]);
     }
 
     public void Change(Scene scene)

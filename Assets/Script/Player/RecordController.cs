@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RecordController : MonoBehaviour {
+public class RecordController : MonoBehaviour
+{
     private List<Vector3> recordList;
     private Shot shot;
 
@@ -31,7 +32,8 @@ public class RecordController : MonoBehaviour {
         return startPosition;
     }
 
-    void Awake () {
+    void Awake()
+    {
         shot = GetComponent<Shot>();
         recordList = new List<Vector3>();
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
@@ -46,7 +48,7 @@ public class RecordController : MonoBehaviour {
     private void OnDestroy()
     {
         GetComponent<PlayerCollision>().OnBulletHit -= StopPlayRecord;
-        GameMain.OnNextGame -=  StopPlayRecord;
+        GameMain.OnNextGame -= StopPlayRecord;
     }
 
     private Sprite SetPlayerPlaySprite()
@@ -68,14 +70,14 @@ public class RecordController : MonoBehaviour {
         StartPlayRecord();
     }
 
-	private void OnDisable()
+    private void OnDisable()
     {
         StopPlayRecord();
     }
 
     public void StartRecord()
     {
-        StartCoroutine("Record");     
+        StartCoroutine("Record");
     }
     public void StopRecord()
     {
@@ -94,8 +96,8 @@ public class RecordController : MonoBehaviour {
     private void CreateSignalArray()//予備動作のための配列を作る
     {
         signalArray = new int[recordList.Count];
-        
-        for(int i=0;i<recordList.Count;i++)
+
+        for (int i = 0; i < recordList.Count; i++)
         {
             if (recordList[i].z == 1)
             {
@@ -131,7 +133,7 @@ public class RecordController : MonoBehaviour {
 
         if (stageManager.GetNeedToReset())
             yield return new WaitForSeconds(StageManager.EffectWaitInterval);
-        
+
         yield return new WaitForSeconds(1f);
 
         while (true)
@@ -144,7 +146,7 @@ public class RecordController : MonoBehaviour {
                 shot.ShotBullet();
                 PlaySprite();//通常のspriteに変える
             }
-            
+
 
             if (/*index == 0 || */index == recordList.Count - 1)
                 yield return new WaitForSeconds(0.5f);
@@ -167,7 +169,7 @@ public class RecordController : MonoBehaviour {
             else if (index == 0)
                 goForward = true;
 
-            yield return null;
+            yield return new WaitForSeconds(0.001f);
         }
     }
 
@@ -184,7 +186,7 @@ public class RecordController : MonoBehaviour {
 
             recordList.Add(recordTmp);
 
-            yield return null;
+            yield return new WaitForSeconds(0.001f);
         }
     }
 }
