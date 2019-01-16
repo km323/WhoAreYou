@@ -37,33 +37,33 @@ public class GhostSprites : MonoBehaviour
 	
 	[Range(2, 200)]
 	[Tooltip("Number of Ghost frames in the Sprite's trail")]
-	public int trailSize = 20;
+	public int trailSize = 7;
 	
 	[Tooltip("Spacing increments on a frame basis - n spacing setting results in waiting n frames before the next ghost will be set.")]
 	[Range(0, 20)]
-	public int spacing = 0;
+	public int spacing = 5;
 	
 	[Tooltip("Pick a color for the trail.  The Aplha of this color will be used to determine the transparancy fluctuation.")]
-	public Color color = new Color (255,255,255,100);
+	public Color color = new Color (1,1,1,0.3f);
 	
 	[Tooltip("If the Ghost Material is not set, then the material from the GameObject's SpriteRenderer will be used for the ghosts.")]
 	[ContextMenuItem("Clear List", "DeleteMaterials")]
-	public List<Material> ghostMaterial;
+	public List<Material> ghostMaterial = new List<Material>();
 	
 	[Tooltip("Integers below the corresponding Sprite will allow different color ghosting - while integers that are above will turn the corresponding Sprite to the configured color value.")]
-	public int ghostSpriteSortingOrder;
+	public int ghostSpriteSortingOrder = 10;
 	
 	[Tooltip("If checked, and a RigidBody2D is attached to this gameobject, then ghosts will only render when this gameobject is in motion.")]
 	public bool renderOnMotion;
-	
-	[Tooltip("Set this to true to use the Aplha Fluctuation Override value.  See tooltip for Alpha Fluctuation Override.")]
-	public bool colorAlphaOverride;
+
+    [Tooltip("Set this to true to use the Aplha Fluctuation Override value.  See tooltip for Alpha Fluctuation Override.")]
+    public bool colorAlphaOverride;
 	
 	[Tooltip("If the Color Alpha Override bool is set to true, this value (up to 255) will be used instead of the automagically set alpha fluctuation for the ghosts.")]
 	[Range(0,1)]
 	public float alphaFluctuationOverride;
 	
-	[Range(0,250)]
+	[Range(0,1)]
 	public int alphaFluctuationDivisor;
 	
 	#endregion

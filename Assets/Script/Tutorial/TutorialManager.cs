@@ -214,7 +214,7 @@ public class TutorialManager : MonoBehaviour {
             canChangeState = false;
             MoveIn(systemCanvas1);
             nextButton.SetActive(true);
-            blackControl.GetPlayerInput().DisableInput();
+            //blackControl.GetPlayerInput().DisableInput();
         };
         Action update = () =>
         {
@@ -226,7 +226,7 @@ public class TutorialManager : MonoBehaviour {
 
                 GameObject white = Instantiate(whitePrefab, new Vector3(0, 5, 0), Quaternion.identity);
                 whiteControl = white.GetComponent<PlayerControlTutorial>();
-                blackControl.GetPlayerInput().EnableInput();
+                //blackControl.GetPlayerInput().EnableInput();
                 record.StartRecord();
             }
             if (whiteControl != null && whiteControl.HasDie)
@@ -262,6 +262,7 @@ public class TutorialManager : MonoBehaviour {
 
                 GameObject white = Instantiate(whitePrefab, new Vector3(0, 5, 0), Quaternion.identity);
                 whiteControl = white.GetComponent<PlayerControlTutorial>();
+                whiteControl.EnableMove = true;
 
                 blackControl.gameObject.SetActive(true);
                 Destroy(blackControl);
