@@ -6,6 +6,8 @@ using DG.Tweening;
 public class NextButton : MonoBehaviour {
     [SerializeField]
     private Vector2 targetPos;
+    [SerializeField]
+    private PlayerControlTutorial control;
 
     private float clickScale;
     private Sequence s;
@@ -26,17 +28,20 @@ public class NextButton : MonoBehaviour {
 
     private void OnEnable()
     {
+        
         GetComponent<RectTransform>().localScale = new Vector3(clickScale, clickScale, clickScale);
         s.Restart();
     }
 
     private void OnDisable()
     {
+        control.EnableShot = true;
         s.Pause();
     }
 
     public void OnClick()
     {
+        control.EnableShot = false;
         GetComponent<RectTransform>().localScale = new Vector3(clickScale - 0.1f, clickScale - 0.1f, clickScale - 0.1f);
     }
 }

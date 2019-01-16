@@ -2865,6 +2865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: -270, y: -1487}
+  control: {fileID: 1580932542}
 --- !u!1 &869986051
 GameObject:
   m_ObjectHideFlags: 0
