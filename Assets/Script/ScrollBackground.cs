@@ -34,7 +34,7 @@ public class ScrollBackground : MonoBehaviour {
 
         pixelWhite.SetActive(true);
         pixelBlack.SetActive(false);
-        scrollSpeed = 0f;
+        scrollSpeed = stageManager.GetBgScrollSpeed();
     }
 	
 	// Update is called once per frame

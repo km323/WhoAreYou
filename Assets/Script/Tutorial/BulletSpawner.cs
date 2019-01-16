@@ -20,16 +20,14 @@ public class BulletSpawner : MonoBehaviour {
 
     IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(1f);
-
         while (true)
         {
             if (control.GetPlayerInput().TouchTime < control.timeNeedDodge)
                 yield return null;
             else
             {
-                Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(2f);
+                Instantiate(bulletPrefab, transform.position, Quaternion.identity);   
             }
         }
     }

@@ -10,9 +10,11 @@ public class SlowMotionTutorial : MonoBehaviour
     private GameObject postCamera;
     [SerializeField]
     private Transform player;
+    [SerializeField]
+    private GameObject linePrefab;
 
     private Vector3 distance;
-
+    private GameObject bulletNearPlayer;
     // Use this for initialization
     void Start()
     {
@@ -33,6 +35,9 @@ public class SlowMotionTutorial : MonoBehaviour
 
         if (collision.tag == "Bullet")
         {
+            Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+            bulletNearPlayer = collision.transform.GetChild(0).gameObject;
+            bulletNearPlayer.AddComponent<GhostSprites>();
             postCamera.SetActive(true);
             Time.timeScale = timeScale;
             Invoke("DelayResetTime", 0.2f);
@@ -46,7 +51,8 @@ public class SlowMotionTutorial : MonoBehaviour
         {
             Time.timeScale = 1f;
             postCamera.SetActive(false);
-
+            foreach(GhostSprites ghost in FindObjectsOfType<GhostSprites>())
+                Destroy(ghost);
         }
     }
 
@@ -54,5 +60,7 @@ public class SlowMotionTutorial : MonoBehaviour
     {
         Time.timeScale = 1f;
         postCamera.SetActive(false);
+        foreach (GhostSprites ghost in FindObjectsOfType<GhostSprites>())
+            Destroy(ghost);
     }
 }

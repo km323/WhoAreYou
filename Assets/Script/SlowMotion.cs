@@ -7,12 +7,15 @@ public class SlowMotion : MonoBehaviour {
     private float timeScale = 0.2f;
     [SerializeField]
     private Vector3 offset = new Vector3(0, 2, 0);
+    [SerializeField]
+    private GameObject linePrefab;
 
     private GameObject postCamera;
     private GameObject activePlayer;
     private int oldCurrentState;
     private StageManager stageManager;
     private BoxCollider2D boxCollider;
+    private GameObject bulletNearPlayer;
 
     // Use this for initialization
     void Start()
@@ -57,6 +60,9 @@ public class SlowMotion : MonoBehaviour {
 
         if (collision.tag == "Bullet")
         {
+            Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+            bulletNearPlayer = collision.transform.GetChild(0).gameObject;
+            bulletNearPlayer.AddComponent<GhostSprites>();
             postCamera.SetActive(true);
             Time.timeScale = timeScale;
             Invoke("DelayResetTime", 0.2f);
@@ -70,6 +76,8 @@ public class SlowMotion : MonoBehaviour {
         {
             Time.timeScale = 1f;
             postCamera.SetActive(false);
+            foreach (GhostSprites ghost in FindObjectsOfType<GhostSprites>())
+                Destroy(ghost);
         }
     }
 
@@ -83,5 +91,7 @@ public class SlowMotion : MonoBehaviour {
         Time.timeScale = 1f;
         boxCollider.enabled = false;
         postCamera.SetActive(false);
+        foreach (GhostSprites ghost in FindObjectsOfType<GhostSprites>())
+            Destroy(ghost);
     }
 }
