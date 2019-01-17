@@ -55,10 +55,7 @@ public class GameMain : MonoBehaviour
 
     private void Awake()
     {
-        //プレイヤーの初期化
-        activePlayer = Instantiate(blackPlayerPrefab);
-        activePlayer.transform.position = startBlackPlayerPos[0];
-        activePlayer.AddComponent<PlayerController>();
+
 
         OnNextGame = null;
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
@@ -67,6 +64,11 @@ public class GameMain : MonoBehaviour
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
 
         currentState = BLACK;
+
+        //プレイヤーの初期化
+        activePlayer = Instantiate(blackPlayerPrefab);
+        activePlayer.transform.position = startBlackPlayerPos[0];
+        activePlayer.AddComponent<PlayerController>();
     }
 
     private void Start()
@@ -76,6 +78,7 @@ public class GameMain : MonoBehaviour
 
         black = new List<GameObject>();
         white = new List<GameObject>();
+
 
         Instantiate(slowMotionPrefab, activePlayer.transform.position, Quaternion.identity);
 

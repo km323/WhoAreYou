@@ -51,7 +51,6 @@ public class PlayerEffect : MonoBehaviour {
 
     void Start () {
         
-
         GetComponent<PlayerCollision>().OnBulletHit += PlayVanishEffect;
         GetComponent<PlayerCollision>().OnBulletHit += DisableCollision;
 
