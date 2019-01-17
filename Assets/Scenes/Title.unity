@@ -225,10 +225,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.1237919
-    y: 0
-    width: 0.7524162
-    height: 1
+    x: 0
+    y: 0.0001977086
+    width: 1
+    height: 0.9996046
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1920075642}
   property: {fileID: 838033137}
-  camera: {fileID: 46258007}
+  glitchCamera: {fileID: 46258007}
   startBtnTargetPosY: 458
   tutorialBtnTargetPosY: 248
   titleTargetPosX: 0

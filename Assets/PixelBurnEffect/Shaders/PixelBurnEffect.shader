@@ -118,7 +118,9 @@ Shader "Unlit/PixelBurnEffect"
 				
 				float t = fmod(_Time.x * _Speed, 1);
 				float2 noise_uv = float2(i.noise_uv.x, i.noise_uv.y - t);
-				noise_uv = floor(_PixelLevel * noise_uv) / _PixelLevel;
+				float2 p_level = float2(_PixelLevel/8, _PixelLevel*8);
+				noise_uv = floor(p_level * noise_uv) / p_level;
+//				noise_uv = floor(_PixelLevel * noise_uv) / _PixelLevel;
 				float noise_alpha = tex_brightness(tex2D(_NoiseTex, noise_uv));
 
 				float brightness = clamp(noise_alpha + slope * y + offset, 0, 1);

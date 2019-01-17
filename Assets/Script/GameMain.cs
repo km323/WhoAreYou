@@ -81,8 +81,9 @@ public class GameMain : MonoBehaviour
 
         GameObject enemy = Instantiate(whitePlayerPrefab, startWhitePlayerPos[0], whitePlayerPrefab.transform.rotation);
         enemy.GetComponent<PlayerCollision>().OnBulletHit += () => WhiteEnemyHitHandler();
+        enemy.transform.position = new Vector3(-enemy.transform.position.x, enemy.transform.position.y);
 
-        foreach(SpriteRenderer s in enemy.GetComponentsInChildren<SpriteRenderer>())
+        foreach (SpriteRenderer s in enemy.GetComponentsInChildren<SpriteRenderer>())
         {
             if (s.sortingLayerName == "frame")
                 s.enabled = false;
