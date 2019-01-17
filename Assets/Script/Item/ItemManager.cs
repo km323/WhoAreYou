@@ -60,7 +60,7 @@ public class ItemManager : MonoBehaviour
             return;
 
 
-        item = items[Random.Range(0, items.Count)];
+        item = items[Random.Range(0, 3)];
 
         hasItemGameObject.GetComponent<PlayerCollision>().OnBulletHit += ActiveItem;
     }
