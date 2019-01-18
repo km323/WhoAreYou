@@ -147,6 +147,9 @@ public class PlayerController : MonoBehaviour {
         GameMain gameMain = FindObjectOfType<GameMain>();
         gameMain.DisableWhenActiveDie();
 
+        GameObject pauseObj= GameObject.Find("PauseObj");
+        Destroy(pauseObj);
+
         SoundManager.Instance.PlaySe(SE.PlayerDamage);
 
         SceneController.Instance.Additive(Scene.Result);

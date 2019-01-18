@@ -27,6 +27,7 @@ public class PauseManager : MonoBehaviour {
         Time.timeScale = 0;
         pauseObj = GameObject.Find("PauseObj");
         pauseObj.SetActive(false);
+        PlayerController.GetPlayerInput().DisableInput();
 
         if (GameMain.GetCurrentState() == GameMain.BLACK)
             color = FindObjectOfType<StageManager>().GetColorBlack();
@@ -47,6 +48,7 @@ public class PauseManager : MonoBehaviour {
 
         Time.timeScale = curTimeScale;
         pauseObj.SetActive(true);
+        PlayerController.GetPlayerInput().EnableInput();
 
         SceneController.Instance.UnLoad(Scene.Pause);
 
