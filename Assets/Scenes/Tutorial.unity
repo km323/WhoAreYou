@@ -322,7 +322,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u753B\u9762\u306B\u89E6\u308C\u3066\u3044\u308B\u9593\u3001\u5DE6\u4E0A\u3068\u53F3\u4E0B\u306E\u30A2\u30A4\u30B3\u30F3\u8272\u304C\u5909\u5316\u3059\u308B"
+  m_Text: "\u79FB\u52D5\u306E\u6307\u304C\u89E6\u308C\u3066\u3044\u308B\u3068\u304D\n\u5DE6\u4E0A\u3068\u53F3\u4E0B\u306E\u30A2\u30A4\u30B3\u30F3\u304C\u5149\u308B"
 --- !u!222 &94174472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -729,7 +729,7 @@ Transform:
   - {fileID: 1358989034}
   - {fileID: 591509017}
   - {fileID: 358748493}
-  - {fileID: 481594961}
+  - {fileID: 394160819}
   - {fileID: 1837144771}
   m_Father: {fileID: 232891869}
   m_RootOrder: 2
@@ -778,7 +778,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 707.5, y: -635}
+  m_AnchoredPosition: {x: 733.2, y: -635}
   m_SizeDelta: {x: 1101.4, y: 587.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &209603369
@@ -813,7 +813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30FB\u53CD\u8EE2\u3057\u305F\u3089\u3001\u6575\u304C\u524D\u306E\u81EA\u5206\u3000\u306E\u52D5\u304D\u3092\u30B3\u30D4\u30FC\u3059\u308B\n\n\u30FB\u6575\u306E\u5F3E\u306B\u5F53\u305F\u308B\u304B\u3001\u771F\u3093\u4E2D\u3000\u306E\u7DDA\u306B\u89E6\u308C\u308B\u3068\u6D88\u3048\u308B\n"
+  m_Text: "\u81EA\u5206\u306E\u79FB\u52D5\u3068\u653B\u6483\u304C\u30B3\u30D4\u30FC\u3055\u308C\n\u6575\u304C\u4F5C\u3089\u308C\u308B\n\n\u771F\u3093\u4E2D\u306E\u7DDA\u306B\u89E6\u308C\u308B\u304B\n\u6575\u306E\u5F3E\u306B\u5F53\u305F\u308B\u3068\u81EA\u5206\u306F\u6D88\u3048\u308B"
 --- !u!222 &209603370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1402,6 +1402,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14.39263, y: 0.014463574}
   m_EdgeRadius: 0
+--- !u!4 &394160819 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4374455194326954, guid: 4846a0f96a28f7a4eb4634e3d919f8b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1693539678}
 --- !u!1 &424008596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,11 +1631,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 468265880}
   m_CullTransparentMesh: 0
---- !u!4 &481594961 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4748729595377824, guid: 4846a0f96a28f7a4eb4634e3d919f8b3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1693539678}
 --- !u!1 &509239555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,9 +1760,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0001977086
+    y: 0.0003450513
     width: 1
-    height: 0.9996046
+    height: 0.9993099
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2150,7 +2150,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u753B\u9762\u306B\u89E6\u308C\u3001\u6307\u3092\u96E2\u3055\u305A\u306B\n\u30B9\u30E9\u30A4\u30C9\u3059\u308B\u3068\u79FB\u52D5"
+  m_Text: "\u753B\u9762\u306B\u89E6\u308C\n\u6307\u3092\u96E2\u3055\u305A\u306B\u30B9\u30E9\u30A4\u30C9\u3067\u79FB\u52D5"
 --- !u!222 &613289422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2771,7 +2771,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3059\u3079\u3066\u306E\u6575\u3092\u5012\u3057\u305F\u3089\u3001\n\u753B\u9762\u304C\u53CD\u8EE2\u3059\u308B\n"
+  m_Text: "\u3059\u3079\u3066\u306E\u6575\u3092\u5012\u3057\u305F\u3089\n\u753B\u9762\u304C\u53CD\u8EE2\u3059\u308B\n"
 --- !u!222 &774810466
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2826,9 +2826,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0001977086
+    y: 0.0003450513
     width: 1
-    height: 0.9996046
+    height: 0.9993099
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4191,9 +4191,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0001977086
+    y: 0.0003450513
     width: 1
-    height: 0.9996046
+    height: 0.9993099
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4891,7 +4891,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B9\u30E9\u30A4\u30C9\u3057\u3066\u3044\u308B\u6307\u3092\u96E2\u3055\u305A\u3082\u3046\u7247\u65B9\u306E\u6307\u3092\u30BF\u30C3\u30D7\u3067\u6483\u3064"
+  m_Text: "\u79FB\u52D5\u306E\u6307\u3092\u96E2\u3055\u305A\n\u3082\u3046\u7247\u65B9\u306E\u6307\u3092\u30BF\u30C3\u30D7\u3067\u6483\u3064"
 --- !u!222 &1811908503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4966,7 +4966,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3059\u3079\u3066\u306E\u8272\u304C\u5909\u308F\u3063\u305F\u6642\u306B\u3001\u6307\u3092\u96E2\u3059\u3068\u56DE\u907F\u3067\u304D\u308B"
+  m_Text: "\u3059\u3079\u3066\u306E\u8272\u304C\u5149\u3063\u305F\u6642\u306B\n\u6307\u3092\u96E2\u3059\u3068\u56DE\u907F"
 --- !u!222 &1827481963
 CanvasRenderer:
   m_ObjectHideFlags: 0
